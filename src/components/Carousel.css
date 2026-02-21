@@ -1,0 +1,320 @@
+/* Carousel Component Styles */
+
+.carousel {
+  position: relative;
+  width: 100%;
+  margin-bottom: var(--spacing-3xl);
+}
+
+/* Carousel Header */
+.carousel-header {
+  padding: 0 var(--carousel-container-padding, var(--spacing-xl));
+  margin-bottom: var(--spacing-lg);
+}
+
+.carousel-title {
+  color: var(--text-primary);
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.025em;
+}
+
+/* Horizontal Scrolling Container */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 0 var(--carousel-container-padding, var(--spacing-xl));
+}
+
+/* Ensure arrows sit above cards and ignore hover underneath */
+.carousel-container .carousel-arrow {
+  z-index: 20;
+  pointer-events: auto;
+}
+
+.carousel-track {
+  display: flex;
+  gap: var(--carousel-gap-size, var(--spacing-sm));
+  overflow-x: scroll;
+  overflow-y: hidden; /* Prevent vertical scrolling */
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  transition: gap var(--transition-normal);
+  position: relative;
+  /* Allow vertical page scroll while supporting horizontal pan */
+  touch-action: pan-y pan-x;
+  overscroll-behavior-inline: contain;
+  
+  /* Hide scrollbars for clean appearance */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none; /* WebKit browsers */
+}
+
+.carousel-track.is-user-scrolling {
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+
+/* Navigation Arrows */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateX(0);
+  z-index: 30;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition:
+    opacity var(--dur-slow, 300ms) var(--ease-standard, cubic-bezier(0.2, 0, 0, 1)),
+    visibility 0s linear,
+    transform var(--dur-slow, 300ms) var(--ease-standard, cubic-bezier(0.2, 0, 0, 1)),
+    background-color var(--dur-med, 200ms) var(--ease-standard, cubic-bezier(0.2, 0, 0, 1)),
+    box-shadow var(--dur-med, 200ms) var(--ease-standard, cubic-bezier(0.2, 0, 0, 1));
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.carousel-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+  transform: translateY(-50%) translateX(0) scale(1.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.carousel-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* Bounce animation for when button is clicked but can't scroll */
+@keyframes carousel-arrow-bounce-left {
+  0%, 100% {
+    transform: translateY(-50%) translateX(0);
+  }
+  50% {
+    transform: translateY(-50%) translateX(-8px);
+  }
+}
+
+@keyframes carousel-arrow-bounce-right {
+  0%, 100% {
+    transform: translateY(-50%) translateX(0);
+  }
+  50% {
+    transform: translateY(-50%) translateX(8px);
+  }
+}
+
+.carousel-arrow-left.bounce {
+  animation: carousel-arrow-bounce-left 0.4s ease-in-out;
+}
+
+.carousel-arrow-right.bounce {
+  animation: carousel-arrow-bounce-right 0.4s ease-in-out;
+}
+
+.carousel-arrow-left {
+  left: var(--spacing-sm);
+}
+
+.carousel-arrow-right {
+  right: var(--spacing-sm);
+}
+
+.carousel-arrow svg {
+  transition: transform 0.2s ease-out;
+}
+
+.carousel-arrow:hover svg {
+  transform: scale(1.1);
+}
+
+/* Show arrows when hovering the carousel row */
+.carousel-container:hover .carousel-arrow {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Subtle slide-in on hover */
+.carousel-container:hover .carousel-arrow-left { transform: translateY(-50%) translateX(4px); }
+.carousel-container:hover .carousel-arrow-right { transform: translateY(-50%) translateX(-4px); }
+
+/* Carousel Items */
+.carousel-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: var(--carousel-card-width, 300px);
+  transition: width var(--transition-normal);
+}
+
+/* Keep arrows visible while hovering cards under them */
+/* Prevent underlying card hover from hiding arrows (safeguard) */
+.carousel-arrow { pointer-events: auto; }
+
+/* Thumbnail Image */
+.carousel-item-thumbnail {
+  position: relative;
+  width: 100%;
+  height: calc(var(--carousel-card-width, 300px) * 0.5625); /* 16:9 aspect ratio (9/16 = 0.5625) */
+  background-color: var(--primary-dark);
+  overflow: hidden;
+  transition: height var(--transition-normal);
+}
+
+.carousel-item-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease-out;
+}
+
+.carousel-item-thumbnail img:hover {
+  opacity: 0.8;
+}
+
+/* Responsive Design - Now handled dynamically by useResponsiveCarousel hook */
+
+/* Header responsive padding */
+.carousel-header {
+  padding: 0 var(--carousel-container-padding, var(--spacing-md));
+}
+
+/* Arrow positioning based on dynamic padding */
+.carousel-arrow-left {
+  left: var(--carousel-container-padding, var(--spacing-sm));
+}
+
+.carousel-arrow-right {
+  right: var(--carousel-container-padding, var(--spacing-sm));
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 480px) {
+  .carousel-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* Lazy Loading Styles */
+.carousel-item.loaded {
+  opacity: 1;
+}
+
+/* Loading Placeholder */
+.carousel-item-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--surface-dark);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.carousel-item-skeleton {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.skeleton-thumbnail {
+  width: 100%;
+  height: calc(var(--carousel-card-width, 300px) * 0.5625);
+  background: linear-gradient(
+    90deg,
+    var(--primary-dark) 25%,
+    var(--surface-dark) 50%,
+    var(--primary-dark) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading-shimmer 1.5s infinite;
+}
+
+.skeleton-content {
+  padding: var(--spacing-md);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.skeleton-title {
+  height: 20px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-dark) 25%,
+    var(--surface-dark) 50%,
+    var(--primary-dark) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading-shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-description {
+  height: 16px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-dark) 25%,
+    var(--surface-dark) 50%,
+    var(--primary-dark) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading-shimmer 1.5s infinite;
+  border-radius: 4px;
+  width: 80%;
+}
+
+/* Performance Optimizations */
+.carousel-item img {
+  transition: opacity var(--transition-normal);
+}
+
+.carousel-item img.visible {
+  opacity: 1;
+}
+
+.carousel-item img:not(.visible) {
+  opacity: 0.8;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-item,
+  .carousel-item img,
+  .carousel-track {
+    transition: none;
+  }
+  
+  .skeleton-thumbnail,
+  .skeleton-title,
+  .skeleton-description {
+    animation: none;
+  }
+}
+
+/* Loading state placeholder */
+.carousel-item-thumbnail:empty {
+  background: linear-gradient(
+    90deg,
+    var(--primary-dark) 25%,
+    var(--surface-dark) 50%,
+    var(--primary-dark) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}

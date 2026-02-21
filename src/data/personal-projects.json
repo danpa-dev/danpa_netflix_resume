@@ -1,0 +1,56 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2024-08-03T05:35:08.558Z",
+    "author": "Dan Park",
+    "totalItems": {
+      "workExperience": 0,
+      "education": 0,
+      "skills": 0,
+      "personalProjects": 1,
+      "volunteerWork": 0
+    }
+  },
+  "items": [
+    {
+      "id": "pp-1",
+      "title": "Netflix-Style Portfolio",
+      "description": "Interactive portfolio website with Netflix-inspired UI and animations",
+      "thumbnailUrl": "/images/pipeline_eng.png",
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Framer Motion",
+        "Styled Components"
+      ],
+      "startDate": "2024-01-01",
+      "endDate": "2024-06-30",
+      "githubUrl": "https://github.com/danpa-dev",
+      "liveUrl": "https://danpark.dev",
+      "videoUrl": "/videos/we-3-clip.mp4",
+      "features": [
+        "Netflix-inspired carousel navigation",
+        "Smooth animations and transitions",
+        "Responsive design for all devices",
+        "Video integration with autoplay",
+        "Dark theme with professional styling"
+      ],
+      "challenges": [
+        "Implementing smooth carousel animations",
+        "Optimizing video loading and playback",
+        "Creating responsive design for mobile",
+        "Managing complex state for modal interactions"
+      ],
+      "solutions": [
+        "Used Framer Motion for optimized animations",
+        "Implemented lazy loading for video content",
+        "Created mobile-first responsive design",
+        "Used React Context for state management"
+      ],
+      "impact": "Created a memorable and engaging portfolio that stands out to recruiters",
+      "isActive": true,
+      "collaborators": [],
+      "videoPosterUrl": "/images/pipeline_eng.png"
+    }
+  ]
+}

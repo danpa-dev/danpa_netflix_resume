@@ -1,0 +1,39 @@
+/* Shared keyframe animations */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes shimmer-translate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Focus ring utility */
+.u-focus-ring:focus {
+  outline: 2px solid var(--netflix-red);
+  outline-offset: 2px;
+}
+
+.u-focus-ring:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.u-focus-ring:focus-visible {
+  outline: 2px solid var(--netflix-red);
+  outline-offset: 2px;
+}

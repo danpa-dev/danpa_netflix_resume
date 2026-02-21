@@ -1,0 +1,121 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2024-08-03T05:35:08.558Z",
+    "author": "Dan Park",
+    "totalItems": {
+      "workExperience": 0,
+      "education": 0,
+      "skills": 3,
+      "personalProjects": 0,
+      "volunteerWork": 0
+    }
+  },
+  "items": [
+    {
+      "id": "sk-1",
+      "title": "Languages & Libraries",
+      "description": "Programming languages and data libraries used in production.",
+      "thumbnailUrl": "/images/we-1-thumb.jpg",
+      "name": "Languages & Libraries",
+      "category": "languages",
+      "proficiency": "advanced",
+      "yearsOfExperience": 7,
+      "technologies": [
+        "Python (Proficient)",
+        "Java",
+        "SQL",
+        "JavaScript",
+        "Pandas",
+        "NumPy",
+        "Scikit-learn"
+      ],
+      "recentProjects": [
+        "Forecasting pipelines",
+        "Data processing workflows"
+      ],
+      "skillLevel": 8,
+      "seasons": [
+        {
+          "id": "sk-1-programming",
+          "title": "Programming Languages",
+          "description": "Python (Proficient), Java, SQL, JavaScript",
+          "technologies": ["Python (Proficient)", "Java", "SQL", "JavaScript"]
+        },
+        {
+          "id": "sk-1-libraries",
+          "title": "Libraries",
+          "description": "Pandas, NumPy, Scikit-learn",
+          "technologies": ["Pandas", "NumPy", "Scikit-learn"]
+        }
+      ]
+    },
+    {
+      "id": "sk-2",
+      "title": "Cloud & DevOps",
+      "description": "Cloud platforms, infrastructure, and delivery tooling.",
+      "thumbnailUrl": "/images/test.jpeg",
+      "name": "Cloud & DevOps",
+      "category": "devops",
+      "proficiency": "advanced",
+      "yearsOfExperience": 5,
+      "technologies": [
+        "AWS (EC2, S3, DynamoDB, Lambda)",
+        "Docker",
+        "CI/CD Pipelines",
+        "Git",
+        "Linux"
+      ],
+      "recentProjects": [
+        "Forecasting API platform",
+        "Datacenter metrics ETL"
+      ],
+      "skillLevel": 9,
+      "seasons": [
+        {
+          "id": "sk-2-cloud",
+          "title": "Cloud & DevOps",
+          "description": "AWS (EC2, S3, DynamoDB, Lambda), Docker, CI/CD pipelines, Git, Linux"
+        }
+      ]
+    },
+    {
+      "id": "sk-3",
+      "title": "Technical Knowledge",
+      "description": "Core systems concepts and agentic coding workflows.",
+      "thumbnailUrl": "/images/test.jpeg",
+      "name": "Technical Knowledge",
+      "category": "other",
+      "proficiency": "advanced",
+      "yearsOfExperience": 7,
+      "technologies": [
+        "Distributed Systems",
+        "Serverless Architecture",
+        "RESTful APIs",
+        "Data Structures & Algorithms",
+        "Codex",
+        "Claude",
+        "Cursor"
+      ],
+      "recentProjects": [
+        "Forecasting pipelines",
+        "Internal platform tooling"
+      ],
+      "skillLevel": 9,
+      "seasons": [
+        {
+          "id": "sk-3-concepts",
+          "title": "Core Concepts",
+          "description": "Distributed Systems, Serverless Architecture, RESTful APIs, Data Structures & Algorithms",
+          "technologies": ["Distributed Systems", "Serverless Architecture", "RESTful APIs", "Data Structures & Algorithms"]
+        },
+        {
+          "id": "sk-3-agentic",
+          "title": "Agentic Coding",
+          "description": "Codex, Claude, Cursor",
+          "technologies": ["Codex", "Claude", "Cursor"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2024-08-03T05:35:08.558Z",
+    "author": "Dan Park",
+    "totalItems": {
+      "workExperience": 0,
+      "education": 3,
+      "skills": 0,
+      "personalProjects": 0,
+      "volunteerWork": 0
+    }
+  },
+  "items": [
+    {
+      "id": "ed-2",
+      "title": "Bachelor of Arts in Computer Science",
+      "description": "Minor in Chemistry; Premed",
+      "thumbnailUrl": "https://www.swarthmore.edu/sites/default/files/assets/images/communications-office/swarthmore_logo.jpg",
+      "institution": "Swarthmore College",
+      "degree": "Bachelor of Arts",
+      "field": "Computer Science",
+      "startDate": "2014-09-01",
+      "endDate": "2018-06-01",
+      "location": "Swarthmore, PA",
+      "relevantCoursework": [
+        "Machine Learning",
+        "Statistics",
+        "Computer Vision",
+        "Artificial Intelligence",
+        "Bioinformatics",
+        "Parallel and Distributed Systems"
+      ],
+      "projects": [],
+      "institutionLogo": "/images/test.jpeg",
+      "institutionUrl": "https://www.swarthmore.edu/",
+      "isCurrent": false
+    },
+    {
+      "id": "ed-3",
+      "title": "Intro to Self-Driving Cars",
+      "description": "Udacity online certificate",
+      "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/en/3/3b/Udacity_logo.png",
+      "institution": "Udacity",
+      "degree": "Certificate",
+      "field": "Self-Driving Cars",
+      "startDate": "2019-01-01",
+      "endDate": "2019-12-31",
+      "location": "Remote",
+      "relevantCoursework": [],
+      "projects": [],
+      "institutionLogo": "https://upload.wikimedia.org/wikipedia/en/3/3b/Udacity_logo.png",
+      "institutionUrl": "https://www.udacity.com/",
+      "isCurrent": false
+    }
+  ]
+}

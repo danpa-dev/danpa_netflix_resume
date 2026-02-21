@@ -1,0 +1,176 @@
+/* Text Overlay Component Styles */
+
+.text-overlay {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  /* Remove full-width gray band and replace with Netflix-style gradient overlay */
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  backdrop-filter: none;
+}
+
+.text-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Stronger on left, fading to transparent across hero */
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.80) 0%,
+    rgba(0, 0, 0, 0.55) 28%,
+    rgba(0, 0, 0, 0.25) 55%,
+    rgba(0, 0, 0, 0.08) 72%,
+    rgba(0, 0, 0, 0.00) 85%
+  );
+  pointer-events: none;
+  z-index: -1; /* keep below content but above media */
+}
+
+.text-overlay-content {
+  text-align: left;
+  max-width: min(100%, 900px);
+  padding: 0 var(--spacing-2xl);
+  color: var(--text-primary);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.text-overlay-title {
+  font-size: clamp(1.75rem, 6.5vw, 4rem); /* Slightly smaller at narrow widths */
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  margin: 0 0 var(--spacing-lg) 0;
+  letter-spacing: var(--letter-spacing-tight);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7); /* Enhanced shadow for better contrast */
+  color: var(--text-primary);
+  animation: slideInUp 0.6s ease-out 0.2s both;
+  word-break: normal;
+  overflow-wrap: anywhere; /* ensure long words don't overflow on narrow widths */
+}
+
+.text-overlay-subtitle {
+  font-size: clamp(0.95rem, 3.5vw, 1.5rem);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  color: var(--text-secondary);
+  margin: 0 0 var(--spacing-md) 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7); /* Enhanced shadow for better contrast */
+  animation: slideInUp 0.6s ease-out 0.4s both;
+  overflow-wrap: anywhere;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .text-overlay-content {
+    padding: 0 var(--spacing-lg);
+  }
+  
+  .text-overlay-title {
+    margin-bottom: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .text-overlay-content {
+    padding: 0 var(--spacing-md);
+  }
+  
+  .text-overlay-title {
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .text-overlay-subtitle {
+    margin-bottom: var(--spacing-sm);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .text-overlay {
+    background: rgba(0, 0, 0, 0.7); /* Stronger overlay for high contrast */
+  }
+  
+  .text-overlay-title,
+  .text-overlay-subtitle {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+  }
+  
+  .text-overlay-title {
+    color: #ffffff;
+  }
+  
+  .text-overlay-subtitle {
+    color: #e0e0e0;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .text-overlay-content,
+  .text-overlay-title,
+  .text-overlay-subtitle {
+    animation: none;
+  }
+}
+
+/* Focus styles for accessibility */
+.text-overlay:focus-within {
+  outline: 2px solid var(--netflix-red);
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .text-overlay {
+    background: none;
+    backdrop-filter: none;
+  }
+  
+  .text-overlay-title,
+  .text-overlay-subtitle {
+    text-shadow: none;
+    color: #000000;
+  }
+}
+
+/* Performance optimizations */
+.text-overlay-content {
+  will-change: transform, opacity;
+}
+
+/* Ensure proper contrast ratios for WCAG AA compliance */
+.text-overlay-title {
+  /* White text on dark overlay provides >4.5:1 contrast ratio */
+  color: #ffffff;
+}
+
+.text-overlay-subtitle {
+  /* Light gray text on dark overlay provides >4.5:1 contrast ratio */
+  color: #e0e0e0;
+} 

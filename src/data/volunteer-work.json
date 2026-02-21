@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2024-08-03T05:35:08.558Z",
+    "author": "Dan Park",
+    "totalItems": {
+      "workExperience": 0,
+      "education": 0,
+      "skills": 0,
+      "personalProjects": 0,
+      "volunteerWork": 3
+    }
+  },
+  "items": [
+    {
+      "id": "vw-3",
+      "title": "Human Languages",
+      "description": "Language fluency and day-to-day bilingual communication.",
+      "thumbnailUrl": "/images/test.jpeg",
+      "organization": "Personal",
+      "role": "Language Skills",
+      "startDate": "2014-01-01",
+      "location": "Global",
+      "hoursPerWeek": 0,
+      "technologies": [
+        "English (Native)",
+        "Korean (Intermediate)"
+      ],
+      "achievements": [
+        "Professional communication across teams"
+      ],
+      "impact": "Supports collaboration across diverse teams and stakeholders.",
+      "isActive": true,
+      "skills": [
+        "Communication",
+        "Bilingual Fluency"
+      ]
+    }
+  ]
+}

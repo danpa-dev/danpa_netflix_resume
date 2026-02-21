@@ -1,0 +1,267 @@
+/* Import Typography System, tokens, and animations */
+@import './styles/typography.css';
+@import './styles/tokens.css';
+@import './styles/animations.css';
+
+/* Netflix-Inspired Resume Website Styles */
+
+/* CSS Custom Properties - Netflix-Inspired Color Palette */
+:root {
+  /* Colors */
+  --primary-dark: #141414;
+  --netflix-red: #E50914;
+  --text-primary: #FFFFFF;
+  --text-secondary: #B3B3B3;
+  --surface-dark: #1F1F1F;
+  --surface-darker: #0A0A0A;
+  --accent-gray: #808080;
+  --border-color: #333333;
+  
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 2rem;      /* 32px */
+  --font-size-4xl: 2.5rem;    /* 40px */
+  
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Spacing - 8px Grid System */
+  --spacing-unit: 8px;
+  --spacing-xs: calc(var(--spacing-unit) * 0.5);   /* 4px */
+  --spacing-sm: var(--spacing-unit);                /* 8px */
+  --spacing-md: calc(var(--spacing-unit) * 2);     /* 16px */
+  --spacing-lg: calc(var(--spacing-unit) * 3);     /* 24px */
+  --spacing-xl: calc(var(--spacing-unit) * 4);     /* 32px */
+  --spacing-2xl: calc(var(--spacing-unit) * 6);    /* 48px */
+  --spacing-3xl: calc(var(--spacing-unit) * 8);    /* 64px */
+  
+  /* Breakpoints */
+  --breakpoint-mobile: 320px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-large: 1440px;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 350ms ease;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Global Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--primary-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Main App Layout */
+.app {
+  min-height: 100vh;
+  display: grid;
+  grid-template-areas: 
+    "header"
+    "main"
+    "footer";
+  grid-template-rows: auto 1fr auto;
+  background-color: var(--primary-dark);
+}
+
+/* Header is now handled by the Header component */
+
+/* Button Styles */
+.btn {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary {
+  background-color: var(--netflix-red);
+  color: var(--text-primary);
+}
+
+.btn-primary:hover {
+  background-color: #f40612;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--text-primary);
+  color: var(--primary-dark);
+}
+
+/* Main Content Area */
+.main {
+  grid-area: main;
+  padding: var(--spacing-2xl) 0;
+  min-height: calc(100vh - 200px); /* Ensure minimum height for content */
+}
+
+.container {
+  max-width: var(--breakpoint-large);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* Content Sections */
+.hero-section {
+  text-align: center;
+  padding: var(--spacing-3xl) 0;
+  margin-bottom: var(--spacing-3xl);
+}
+
+.hero-section h1 {
+  margin-bottom: var(--spacing-lg);
+}
+
+.hero-section h2 {
+  margin-bottom: var(--spacing-md);
+}
+
+.hero-section p {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.content-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) 0;
+}
+
+.content-section h3 {
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-primary);
+}
+
+.content-section h4 {
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+.content-section p {
+  margin-bottom: var(--spacing-lg);
+  line-height: var(--line-height-relaxed);
+}
+
+/* Footer is now handled by the Footer component */
+
+/* Typography is now handled by the typography.css file */
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: var(--spacing-2xl) 0;
+    margin-bottom: var(--spacing-2xl);
+  }
+  
+  .content-section {
+    padding: var(--spacing-lg) 0;
+  }
+  
+  .hero-section p {
+    max-width: 100%;
+    padding: 0 var(--spacing-md);
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-lg);
+  }
+  
+  .social-links {
+    justify-content: center;
+    gap: var(--spacing-md);
+  }
+  
+  .copyright {
+    order: 2;
+  }
+  
+  .footer-section:last-child {
+    order: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .hero-section {
+    padding: var(--spacing-xl) 0;
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .content-section {
+    padding: var(--spacing-md) 0;
+  }
+  
+  .btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus styles for accessibility */
+.btn:focus,
+.navigation a:focus,
+.social-links a:focus {
+  outline: 2px solid var(--netflix-red);
+  outline-offset: 2px;
+}
+

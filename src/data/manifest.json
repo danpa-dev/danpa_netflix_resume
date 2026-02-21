@@ -1,0 +1,87 @@
+{
+  "version": "1.0.0",
+  "metadataSource": "work",
+  "sections": [
+    {
+      "id": "work",
+      "type": "workExperience",
+      "title": "Work Experience",
+      "enabled": true,
+      "path": "work.json",
+      "modal": {
+        "heading": "Details",
+        "fields": [
+          { "key": "company", "label": "Company" },
+          { "key": "role", "label": "Role" },
+          { "key": "dates", "label": "Dates" },
+          { "key": "location", "label": "Location" },
+          { "key": "achievements", "label": "Highlights" }
+        ]
+      }
+    },
+    {
+      "id": "education",
+      "type": "education",
+      "title": "Education",
+      "enabled": true,
+      "path": "education.json",
+      "modal": {
+        "heading": "Details",
+        "fields": [
+          { "key": "institution", "label": "Institution" },
+          { "key": "degree", "label": "Degree" },
+          { "key": "field", "label": "Field" },
+          { "key": "dates", "label": "Dates" },
+          { "key": "location", "label": "Location" },
+          { "key": "relevantCoursework", "label": "Coursework" }
+        ]
+      }
+    },
+    {
+      "id": "skills",
+      "type": "skills",
+      "title": "Skills & Technologies",
+      "enabled": true,
+      "path": "skills.json",
+      "modal": {
+        "heading": "Details",
+        "fields": [
+          { "key": "technologies", "label": "Skills" }
+        ]
+      }
+    },
+    {
+      "id": "personal",
+      "type": "personalProjects",
+      "title": "Personal Projects",
+      "enabled": true,
+      "path": "personal-projects.json",
+      "modal": {
+        "heading": "Details",
+        "fields": [
+          { "key": "dates", "label": "Dates" },
+          { "key": "technologies", "label": "Technologies" },
+          { "key": "features", "label": "Features" },
+          { "key": "challenges", "label": "Challenges" },
+          { "key": "solutions", "label": "Solutions" },
+          { "key": "impact", "label": "Impact" },
+          { "key": "githubUrl", "label": "GitHub" },
+          { "key": "liveUrl", "label": "Live URL" }
+        ]
+      }
+    },
+    {
+      "id": "volunteer",
+      "type": "volunteerWork",
+      "title": "Personal Interests / Other",
+      "enabled": true,
+      "path": "volunteer-work.json",
+      "modal": {
+        "heading": "Details",
+        "fields": [
+          { "key": "technologies", "label": "Languages" }
+        ]
+      }
+    }
+  ]
+}

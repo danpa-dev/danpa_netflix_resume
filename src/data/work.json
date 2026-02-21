@@ -1,0 +1,343 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2024-08-03T05:35:08.558Z",
+    "author": "Dan Park",
+    "resume": {
+      "localPath": "/DanParkResume.pdf",
+      "s3Url": "/DanParkResume.pdf",
+      "fileName": "DanParkResume.pdf"
+    },
+    "defaults": {
+      "videoUrlMp4": "/videos/test.mp4",
+      "thumbnailUrl": "/images/test.jpeg",
+      "videoPosterUrl": "/images/test.jpeg",
+      "hero": {
+        "imageUrl": "/images/test.jpeg"
+      }
+    },
+    "totalItems": {
+      "workExperience": 3,
+      "education": 0,
+      "skills": 0,
+      "personalProjects": 0,
+      "volunteerWork": 0
+    }
+  },
+  "items": [
+    {
+      "id": "we-3",
+      "title": "Fathom",
+      "description": "Software engineering at Fathom.",
+      "thumbnailUrl": "/images/we-2-thumb.jpg",
+      "company": "Fathom",
+      "role": "Software Engineer",
+      "startDate": "2025-01-01",
+      "location": "Remote, Seattle, WA",
+      "technologies": [
+        "TODO"
+      ],
+      "achievements": [
+        "TODO"
+      ],
+      "seasons": [
+        {
+          "id": "s3-1",
+          "title": "Software Engineer",
+          "company": "Fathom",
+          "role": "Software Engineer",
+          "description": "Fathom (Remote, Seattle, WA), 01/2025 - Present",
+          "episodes": [
+            {
+              "id": "e-fat-1",
+              "title": "TODO",
+              "description": "TODO",
+              "duration": "Jan 2025 - Present",
+              "technologies": [
+                "TODO"
+              ],
+              "achievements": [
+                "TODO"
+              ],
+              "impact": "TODO"
+            }
+          ],
+          "startDate": "2025-01-01",
+          "technologies": [
+            "TODO"
+          ],
+          "achievements": [
+            "TODO"
+          ]
+        }
+      ],
+      "companyUrl": "",
+      "isCurrent": true,
+      "_unsplashCredit": {
+        "photographer": "Jed Villejo",
+        "html": "https://unsplash.com/photos/man-using-computer-inside-room-975d70Ymjmw"
+      },
+      "videoUrl": "/videos/we-2-clip.mp4",
+      "videoPosterUrl": "/images/we-2-thumb.jpg"
+    },
+    {
+      "id": "we-1",
+      "title": "AWS",
+      "description": "Software development roles across AWS EC2 and Amazon, focused on forecasting platforms and data pipelines.",
+      "thumbnailUrl": "/images/we-1-thumb.jpg",
+      "company": "AWS",
+      "role": "Software Development Engineer",
+      "startDate": "2019-11-01",
+      "endDate": "2024-12-01",
+      "location": "Seattle, WA",
+      "technologies": [
+        "Python",
+        "Java",
+        "AWS",
+        "DynamoDB",
+        "EC2",
+        "S3",
+        "Pandas",
+        "SQL",
+        "CI/CD"
+      ],
+      "achievements": [
+        "EC2 metrics ETL pipeline: 100 GB throughput, data aggregation time from 1 hour to 15 minutes",
+        "Forecasting pipelines for EC2, S3, and EBS informing multi-billion-dollar CapEx decisions",
+        "Architected RESTful API on DynamoDB and EC2, streamlining hundreds of internal forecasting workflows",
+        "Automated ML job deployment and scheduling for economists, reducing deploy time from 2 days to 1 hour"
+      ],
+      "seasons": [
+        {
+          "id": "s1-aws-1",
+          "title": "Software Development Engineer II, AWS EC2",
+          "company": "AWS",
+          "role": "Software Development Engineer II",
+          "description": "AWS EC2 (Seattle, WA), 04/2021 - 12/2024",
+          "episodes": [
+            {
+              "id": "e-aws-1",
+              "title": "Global Datacenter Metrics ETL",
+              "description": "Designed and implemented next-generation metrics ETL for EC2",
+              "duration": "Apr 2021 - Dec 2024",
+              "technologies": [
+                "Python",
+                "Java",
+                "AWS",
+                "DynamoDB",
+                "EC2"
+              ],
+              "achievements": [
+                "100 GB throughput; aggregation time reduced from 1 hour to 15 minutes"
+              ],
+              "impact": "Improved global observability and capacity planning"
+            },
+            {
+              "id": "e-aws-2",
+              "title": "Time Series Forecasting Pipelines",
+              "description": "Built forecasting for EC2, S3, and EBS with GPU and CPU segmentation",
+              "duration": "Apr 2021 - Dec 2024",
+              "technologies": [
+                "AWS",
+                "Pandas",
+                "SQL"
+              ],
+              "achievements": [
+                "Delivered insights for multi-billion-dollar CapEx decisions"
+              ],
+              "impact": "Enabled targeted capacity investments by leadership"
+            },
+            {
+              "id": "e-aws-3",
+              "title": "Forecasting API Service",
+              "description": "Architected a RESTful API backed by DynamoDB and EC2",
+              "duration": "Apr 2021 - Dec 2024",
+              "technologies": [
+                "AWS",
+                "DynamoDB",
+                "EC2",
+                "Java"
+              ],
+              "achievements": [
+                "Streamlined hundreds of internal forecasting workflows"
+              ],
+              "impact": "Improved access to forecasting data across teams"
+            },
+            {
+              "id": "e-aws-4",
+              "title": "Intern Mentorship",
+              "description": "Mentored a student intern on an internal webpage with IAM permissions",
+              "duration": "Apr 2021 - Dec 2024",
+              "technologies": [
+                "AWS",
+                "IAM",
+                "Java",
+                "Python"
+              ],
+              "achievements": [
+                "Guided implementation to successful project completion"
+              ],
+              "impact": "Expanded team capacity and delivery"
+            }
+          ],
+          "startDate": "2021-04-01",
+          "endDate": "2024-12-01",
+          "technologies": [
+            "AWS",
+            "DynamoDB",
+            "EC2",
+            "S3",
+            "Python",
+            "Java"
+          ],
+          "achievements": [
+            "Designed and implemented EC2's next-generation global datacenter metrics ETL pipeline, achieving 100 GB throughput and reducing data aggregation time from 1 hour to 15 minutes",
+            "Developed time series forecasting pipelines for AWS EC2, S3, and EBS services, enhancing capabilities to separately forecast GPU and CPU demand",
+            "Provided leadership with actionable insights through visualizations and analyses, informing multi-billion dollar CapEx decisions",
+            "Architected a scalable RESTful API service using DynamoDB and EC2, streamlining hundreds of internal forecasting workflows",
+            "Mentored a student intern in developing an internal webpage, managing complex IAM permissions and guiding implementation"
+          ]
+        },
+        {
+          "id": "s1-aws-2",
+          "title": "Software Development Engineer I, Amazon",
+          "company": "Amazon",
+          "role": "Software Development Engineer I",
+          "description": "Amazon (Seattle, WA), 11/2019 - 04/2021",
+          "episodes": [
+            {
+              "id": "e-aws-5",
+              "title": "ML Job Deployment & Scheduling",
+              "description": "Built automated ML job deployment and scheduling for economists",
+              "duration": "Nov 2019 - Apr 2021",
+              "technologies": [
+                "AWS",
+                "Python",
+                "CI/CD"
+              ],
+              "achievements": [
+                "Reduced model deployment time from 2 days to 1 hour"
+              ],
+              "impact": "Enabled reproducible, versioned model releases"
+            },
+            {
+              "id": "e-aws-6",
+              "title": "ML Forecasting Collaboration",
+              "description": "Partnered with data scientists to optimize and deploy models",
+              "duration": "Nov 2019 - Apr 2021",
+              "technologies": [
+                "Python",
+                "AWS"
+              ],
+              "achievements": [
+                "Improved model deployment and iteration speed"
+              ],
+              "impact": "Accelerated research to production workflows"
+            }
+          ],
+          "startDate": "2019-11-01",
+          "endDate": "2021-04-01",
+          "technologies": [
+            "AWS",
+            "Python",
+            "CI/CD"
+          ],
+          "achievements": [
+            "Designed and implemented an automated ML job deployment and scheduling service from scratch for economists, reducing model deployment time from 2 days to 1 hour and enabling version control for reproducibility",
+            "Collaborated closely with data scientists to optimize and deploy forecasting ML models"
+          ]
+        }
+      ],
+      "companyLogo": "/images/we-1-thumb.jpg",
+      "companyUrl": "https://aws.amazon.com",
+      "isCurrent": false,
+      "_unsplashCredit": {
+        "photographer": "Jed Villejo",
+        "html": "https://unsplash.com/photos/man-using-computer-inside-room-975d70Ymjmw"
+      },
+      "videoUrl": "/videos/we-1-clip.mp4",
+      "videoPosterUrl": "/images/we-1-thumb.jpg"
+    },
+    {
+      "id": "we-2",
+      "title": "Yonder",
+      "description": "Data engineering for high-throughput scraping and async messaging systems.",
+      "thumbnailUrl": "/images/we-3-thumb.jpg",
+      "company": "Yonder",
+      "role": "Data Engineer",
+      "startDate": "2018-07-01",
+      "endDate": "2019-11-01",
+      "location": "Austin, TX",
+      "technologies": [
+        "Python",
+        "SQL",
+        "Distributed Systems",
+        "Async Processing"
+      ],
+      "achievements": [
+        "Implemented scraping infrastructure processing over 1M URLs per day",
+        "Built asynchronous queue-based messaging for internal applications"
+      ],
+      "seasons": [
+        {
+          "id": "s2-1",
+          "title": "Data Engineer",
+          "company": "Yonder",
+          "role": "Data Engineer",
+          "description": "Yonder (acquired by PrimerAI), 07/2018 - 11/2019",
+          "episodes": [
+            {
+              "id": "e-yon-1",
+              "title": "High-Throughput Web Scraping",
+              "description": "Built infrastructure to process 1M+ URLs daily",
+              "duration": "Jul 2018 - Nov 2019",
+              "technologies": [
+                "Python",
+                "Async Processing"
+              ],
+              "achievements": [
+                "Scaled data collection for the core analytics platform"
+              ],
+              "impact": "Expanded coverage and freshness of ingested data"
+            },
+            {
+              "id": "e-yon-2",
+              "title": "Async Messaging Service",
+              "description": "Developed a queue-based messaging service for internal apps",
+              "duration": "Jul 2018 - Nov 2019",
+              "technologies": [
+                "Python",
+                "SQL",
+                "Distributed Systems"
+              ],
+              "achievements": [
+                "Improved reliability and scalability across services"
+              ],
+              "impact": "Enabled resilient communication between systems"
+            }
+          ],
+          "startDate": "2018-07-01",
+          "endDate": "2019-11-01",
+          "technologies": [
+            "Python",
+            "SQL",
+            "Async Processing"
+          ],
+          "achievements": [
+            "1M+ URLs/day scraping capacity",
+            "Reliable async messaging for internal apps"
+          ]
+        }
+      ],
+      "companyLogo": "/images/we-3-thumb.jpg",
+      "companyUrl": "",
+      "isCurrent": false,
+      "_unsplashCredit": {
+        "photographer": "Pawel Czerwinski",
+        "html": "https://unsplash.com/photos/a-blurry-photo-of-a-plant-in-a-dark-room-e3RUKNgEt8I"
+      },
+      "videoUrl": "/videos/pipeline.mp4",
+      "videoPosterUrl": "/images/we-3-thumb.jpg"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+/* Global design tokens: spacing, motion, and utilities */
+
+:root {
+  /* Spacing scale (px) */
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --dur-fast: 120ms;
+  --dur-med: 200ms;
+  --dur-slow: 300ms;
+}
+
+/* Micro-interaction utilities */
+.u-hover-lift {
+  transition: transform var(--dur-med) var(--ease-standard),
+              box-shadow var(--dur-med) var(--ease-standard),
+              background-color var(--dur-med) var(--ease-standard);
+}
+
+.u-hover-lift:hover { transform: translateY(-2px) scale(1.03); }
+.u-hover-lift:active { transform: translateY(0) scale(0.99); }
+
+@media (prefers-reduced-motion: reduce) {
+  .u-hover-lift,
+  .u-hover-lift:hover,
+  .u-hover-lift:active {
+    transition: none;
+    transform: none;
+  }
+}
+

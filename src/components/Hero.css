@@ -1,0 +1,51 @@
+/* Hero Component Styles */
+
+.hero {
+  position: relative;
+  width: 100%;
+  /* Maintain media aspect ratio while scaling with width */
+  aspect-ratio: 16 / 9;
+  /* Reasonable bounds so text doesn't clip or the hero get too tall */
+  min-height: clamp(280px, 40vw, 70vh);
+  max-height: 88vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  /* Avoid clipping text when it wraps at narrower widths */
+  overflow: hidden; /* keep media and overlay aligned */
+  box-sizing: border-box;
+}
+
+/* Hero Background is now handled by BackgroundMedia component */
+
+/* Hero overlay and text content are now handled by TextOverlay component */
+
+/* Responsive design is now handled by TextOverlay component */
+
+/* Loading states are now handled by BackgroundMedia component */
+
+/* Focus styles for accessibility */
+.hero:focus-within {
+  outline: 2px solid var(--netflix-red);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .hero-overlay {
+    background: rgba(0, 0, 0, 0.7);
+  }
+  
+  .hero-title,
+  .hero-subtitle {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .hero-video,
+  .hero-image {
+    transition: none;
+  }
+} 

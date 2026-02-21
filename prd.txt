@@ -1,0 +1,351 @@
+# Product Requirements Document: Project "FlixFolio"
+
+**Version:** 1.0
+**Date:** October 26, 2023
+**Author:** [Your Name]
+**Status:** Inception
+
+---
+
+### 1. Introduction & Vision
+
+**1.1. Overview**
+"FlixFolio" is a personal portfolio website designed to function as an interactive, dynamic, and memorable digital resume. The project's core concept is to present a candidate's professional story—work experience, education, and skills—using the universally recognized user interface and interaction patterns of the Netflix streaming platform.
+
+**1.2. Problem Statement**
+In a competitive job market, traditional text-based resumes often fail to capture a recruiter's attention or effectively showcase the depth and impact of a candidate's work. They lack personality and can be difficult to scan for key achievements.
+
+**1.3. Vision & Goal**
+The vision is to create a "binge-worthy" resume experience. By leveraging a familiar and engaging UI, FlixFolio will immediately differentiate the candidate, encourage deeper exploration of their qualifications, and provide a sophisticated platform to showcase both technical skills (through the site's execution) and professional accomplishments (through its content).
+
+**The primary goal is to secure more high-quality interview opportunities by leaving a lasting, positive impression on recruiters and hiring managers.**
+
+### Core Value Proposition
+
+- **Memorable:** Distinctive presentation that stands out from traditional resumes
+- **Engaging:** Interactive exploration encourages deeper engagement with content
+- **Scalable:** Modular structure allows easy content updates and expansions
+- **Professional:** Sophisticated design maintains credibility while being innovative
+- **Intuitive:** I can intuitively navigate different sections of the candidate's background
+
+### 2. Target Audience
+
+1. **Technical Recruiters:** They are often the first point of contact. They need to quickly scan for key technologies, companies, and role durations. The website must be fast, clear, and easy to navigate.
+2. **Hiring Managers & Team Leads:** They dive deeper into the content. They want to understand the *impact* of projects, the candidate's role, and the technologies used. The detailed "expanded view" is for them.
+3. **Fellow Engineers & Network Contacts:** They may appreciate the technical execution of the website itself as a demonstration of skill.
+
+### 3. User Stories
+
+| ID | As a... | I want to... | So that I can... | Priority |
+| --- | --- | --- | --- | --- |
+| US-01 | Recruiter | See a high-level overview of the candidate's experience in organized, scannable rows. | Quickly determine if their background aligns with the job requirements.
+
+I can intuitively navigate different sections of the candidate's background | Must-Have |
+| US-02 | Hiring Manager | Click on a specific job role to get more details about the projects and accomplishments within that role. | Understand the depth and impact of their work, not just the job title.
+
+I can dive deep into specific roles and projects that interest me | Must-Have |
+| US-03 | Hiring Manager | Watch a short, engaging video clip for a project. | Get a quick, dynamic summary of the project before reading the text. | Must-Have |
+| US-04 | User (any) | Easily navigate between different sections of the resume, like "Work Experience" and "Skills." | Find the specific information I'm looking for without getting lost.
+
+I can quickly assess skills and experience levels | Must-Have |
+| US-05 | User (any) | Experience a polished and responsive interface that works on my desktop, tablet, or phone. | Have a professional and high-quality experience regardless of my device. | Must-Have |
+| US-06 | Website Owner | Easily add, remove, or edit work experiences, projects, and skills without modifying the core application code. | Keep my resume up-to-date with minimal effort. | Must-Have |
+
+### 4. Features & Requirements
+
+### 4.1. Core Experience & Shell
+
+- **FE-01: Netflix-inspired UI:** The overall aesthetic shall mimic the Netflix web application, utilizing a dark theme, specific fonts (or close web-safe alternatives like Lato or Montserrat), and the iconic red brand color for accents.
+- **FE-02: Single-Page Application (SPA) feel:** Transitions between views and content expansions should be smooth and animated, without full page reloads, to maintain a fluid, app-like experience.
+- **FE-03: Header/Navigation:**
+    - A persistent header at the top of the page.
+    - Left side: A stylized logo or [Your Name].
+    - Right side: Links to professional profiles (e.g., LinkedIn, GitHub) and a "Contact" or "Download Resume" button.
+- **FE-04: Footer:** A simple footer with copyright information and repeat links to professional profiles.
+
+### 4.2. Homepage / Main View
+
+- **FE-05: Hero Section:** The area "above the fold" will feature a large, cinematic background image or subtle video loop. Overlay text will present a compelling headline, e.g., "[Your Name] - Featured Roles" or a personal mission statement.
+- **FE-06: Carousel Structure:** The main body of the page will consist of multiple horizontally-scrolling carousels. Each carousel represents a top-level section of the resume. Netflix-style navigation header with section shortcuts
+
+### 4.3. Carousel Component
+
+- **FE-07: Carousel Title:** Each carousel must have a clear, bold title preceding it (e.g., "Work Experience," "Education").
+- **FE-08: Horizontal Scrolling:** Users can scroll the carousel's content horizontally using a mouse wheel, trackpad, or by clicking/dragging. Horizontal scrolling with smooth momentum.
+- **FE-09a: Navigation Arrows:** On mouse hover over the carousel, "Next" and "Previous" chevron arrows shall appear on the right and left edges to allow for click-based navigation.
+- **FE-09b: Additional Carousel Details:** Responsive card sizing (3-5 visible items depending on screen size). Hover effects with subtle animations
+
+### 4.4. Item Card Component ("The Poster")
+
+- **FE-10: Visual Representation:** Each item within a carousel will be represented by a "poster"-style card with a defined aspect ratio (e.g., 16:9).
+- **FE-11: Card Content:**
+    - A high-quality thumbnail image relevant to the item.
+    - The title of the item (e.g., Job Title, University Name, Skill Name) may be overlaid subtly at the bottom or revealed on hover.
+- **FE-12: Hover Interaction:** On mouse hover, the card shall have a subtle animation, such as a slight scale-up (e.g., `transform: scale(1.05)`) and perhaps a faint glow, to indicate interactivity. A "More Info" chevron icon should appear.
+
+### 4.5. Expanded Detail View
+
+This is the core interactive element, triggered by clicking an Item Card.
+
+- **FE-13: Smooth Expansion Animation:** The selected Item Card should animate smoothly from its position in the carousel, expanding to a larger, centered modal-style view. The background of the page should dim to bring focus to the expanded view.
+- **FE-14: Layout:**
+    - **Top:** A widescreen container for an autoplaying video.
+    - **Middle:** A content area with:
+        - The primary title (e.g., "Software Development Engineer II at Amazon").
+        - Metadata: Dates, Location.
+    - **Bottom:** A description area.
+- **FE-15: Autoplaying Video:**
+    - A video file will autoplay on load.
+    - It **must be muted** by default, with user controls to unmute.
+    - It should loop seamlessly.
+    - **Placeholder Required:** A placeholder system must be in place to use a standard looping graphic or animation until final AI-generated videos are ready.
+- **FE-16: Close Mechanism:** A clear "X" icon or clicking on the dimmed background area will close the expanded view, smoothly animating the element back to its Item Card state in the carousel. escape key functionality
+
+### 4.6. Content Sections & Data Structure
+
+The site's content must be driven by a structured data file (e.g., a single JSON or YAML file) to facilitate easy updates.
+
+- **FE-17: Work Experience Carousel:**
+    - Each **card** in this carousel represents a specific **Job Title at a Company** (e.g., "SDE II at Amazon", "SDE I at Amazon").
+    - **FE-17a: "Seasons" for Projects:** Inside the Expanded Detail View for a work item, there will be a "Season Selector," styled like a dropdown menu.
+        - Each "Season" corresponds to a major project undertaken during that role.
+        - Selecting a new "Season" will dynamically update the description text and potentially the video clip to be relevant to that specific project.
+- **FE-18: Education Carousel:**
+    - Each card represents a degree or certification.
+    - Expanded view will show the institution, degree name, graduation date, and relevant coursework or honors.
+- **FE-19: Skills Carousel:**
+    - Each card represents a specific skill or technology (e.g., "React," "Python," "AWS," "System Design").
+    - Expanded view can provide a short description of your expertise or links to projects where that skill was applied.
+- **FE-20: Personal Projects / About Me Carousel:**
+    - A flexible carousel for other content, like significant personal projects, volunteer work, or hobbies that add character.
+- **FE-21: Easy content update:**
+    - JSON-based configuration files
+    - Clear folder structure for media assets
+    - Validation for required fields
+    - Preview mode for testing changes
+
+### 4.6.1. Example Section Structure (`work.json`)
+
+```json
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2024-01-01T00:00:00.000Z",
+    "author": "Dan Park"
+  },
+  "items": [
+    {
+      "id": "work-amzn-sde2",
+      "title": "Software Development Engineer II",
+      "company": "Amazon",
+      "dates": "2021 - Present",
+      "thumbnailUrl": "/images/posters/amazon-sde2.jpg",
+      "seasons": [
+        {
+          "season": 1,
+          "projectTitle": "Project Phoenix: Checkout Service Migration",
+          "videoUrl": "/videos/phoenix-loop.mp4",
+          "description": "Led the end-to-end migration of the legacy checkout service to a new serverless architecture using AWS Lambda and DynamoDB, reducing latency by 40% and infrastructure costs by 25%.",
+          "techStack": ["AWS Lambda", "DynamoDB", "TypeScript", "CDK"]
+        },
+        {
+          "season": 2,
+          "projectTitle": "Project Atlas: International Expansion",
+          "videoUrl": "/videos/atlas-loop.mp4",
+          "description": "Architected and implemented the internationalization (i18n) framework for the payments platform, enabling launch in 5 new European markets.",
+          "techStack": ["Java", "Spring Boot", "React", "i18n"]
+        }
+      ]
+    }
+  ]
+}
+
+```
+
+### 5. Non-Functional Requirements
+
+| ID | Requirement | Description |
+| --- | --- | --- |
+| NFR-01 | **Performance** | The site must achieve a Google Lighthouse score of 90+ for Performance. Images and videos must be optimized (e.g., WEBP for images, compressed MP4 for video) and lazy-loaded. |
+| NFR-02 | **Responsiveness** | The layout must be fully responsive and tested on major breakpoints for mobile, tablet, and desktop. Carousels may stack vertically on mobile screens. |
+| NFR-03 | **Accessibility (a11y)** | The site must be navigable via keyboard (tabbing). All interactive elements must have appropriate ARIA labels for screen reader support. |
+| NFR-04 | **Browser Compatibility** | The site must render and function correctly on the latest two versions of major browsers (Chrome, Firefox, Safari, Edge). |
+| NFR-05 | **Maintainability** | Code must be well-structured, component-based (e.g., React, Vue, Svelte), and documented. The content structure (JSON/YAML) must be strictly adhered to. |
+
+### 6. Assumptions & Dependencies
+
+- **Content Creation:** All text copy, thumbnail images, and AI-generated videos will be created and provided by the project owner.
+- **Hosting:** A hosting solution (e.g., Vercel, Netlify, AWS S3/CloudFront) will be chosen to support a modern front-end application.
+- **Domain:** A custom domain will be procured for the website.
+
+### 7. Future Enhancements (V2 - Out of Scope for V1)
+
+- **Analytics Integration:** Add analytics (e.g., Plausible, Google Analytics) to track visitor engagement, such as which projects are viewed most often.
+- **Interactive Contact Form:** Implement a contact form within the site instead of a simple `mailto:` link.
+- **CMS Integration:** Migrate the content from a JSON file to a headless CMS (e.g., Sanity, Contentful) for an even friendlier editing experience.
+- **Search Functionality:** A search bar to quickly find projects or skills by keyword.
+
+### 8. Success Metrics
+
+- **Primary:** Increase in the number of responses from job applications where the portfolio link is included.
+- **Secondary:** Direct, unsolicited outreach from recruiters who discovered the site.
+- **Qualitative:** Positive verbal/written feedback on the portfolio's creativity and professionalism during interviews.
+- Engagement Metrics
+    - **Time on Site:** Target 3+ minutes average
+    - **Interaction Rate:** 70%+ of visitors interact with carousels
+    - **Modal Open Rate:** 40%+ of carousel interactions result in modal opens
+    - **Video Completion Rate:** 60%+ watch at least 50% of videos
+- Professional Metrics
+    - **Contact Form Submissions:** Baseline to establish
+    - **Interview Conversion Rate:** Track referrals from website
+    - **Social Sharing:** Monitor organic sharing and mentions
+- Technical Metrics
+    - **Page Load Speed:** Sub-3 second first contentful paint
+    - **Accessibility Score:** 95%+ Lighthouse accessibility score
+    - **Error Rate:** <1% JavaScript errors
+    - **Mobile Performance:** 90%+ mobile PageSpeed score
+
+## Technical Requirements
+
+### 1. Technology Stack
+
+**Frontend Framework:** React.js with TypeScript
+**Styling:** Styled Components or Emotion CSS-in-JS
+**Animation Library:** Framer Motion for smooth transitions
+**Video Handling:** Custom HTML5 video player with fallbacks
+**Build Tool:** Vite or Next.js for optimized performance
+**Deployment:** Vercel or Netlify with CDN integration
+
+### 2. Performance Requirements
+
+**TR-2.1 Loading Performance**
+
+- Initial page load under 3 seconds
+- Lazy loading for carousel items
+- Progressive video loading with quality adaptation
+- Image optimization with WebP/AVIF support
+
+**TR-2.2 Animation Performance**
+
+- 60fps animations using hardware acceleration
+- Intersection Observer for trigger optimizations
+- Debounced scroll and resize handlers
+
+### 3. Browser Support
+
+- Modern browsers (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
+- Progressive enhancement for older browsers
+- Mobile Safari and Chrome mobile optimization
+
+## UI/UX Requirements
+
+### 1. Visual Design System
+
+**UR-1.1 Color Palette**
+
+- Primary: Netflix-inspired dark theme (#141414, #E50914)
+- Secondary: Professional grays and whites
+- Accent: Subtle brand colors for personality
+- Status: Success/warning colors for metrics
+
+**UR-1.2 Typography**
+
+- Primary: Modern sans-serif (Inter, Roboto, or system fonts)
+- Hierarchy: Clear heading scales (H1-H6)
+- Body text: Optimized for readability on dark backgrounds
+
+**UR-1.3 Spacing and Layout**
+
+- 8px grid system for consistent spacing
+- Responsive breakpoints: 320px, 768px, 1024px, 1440px+
+- Container max-width: 1200px on desktop
+
+### 2. Interactive Elements
+
+**UR-2.1 Hover States**
+
+- Card scaling (1.05x) with shadow elevation
+- Subtle glow effects on interactive elements
+- Smooth color transitions (200ms ease-out)
+
+**UR-2.2 Loading States**
+
+- Skeleton loaders for content
+- Progressive image/video loading indicators
+- Smooth transition between loading and loaded states
+
+### 3. Responsive Design
+
+**UR-3.1 Mobile Optimization**
+
+- Touch-friendly carousel navigation
+- Simplified modal layouts for small screens
+- Optimized video controls for mobile
+
+**UR-3.2 Tablet Adaptation**
+
+- Hybrid navigation patterns
+- Adjusted carousel item counts
+- Optimized modal sizing
+
+---
+
+## Content Strategy
+
+### 1. Video Content Guidelines
+
+**CS-1.1 AI Video Generation**
+
+- Duration: 30-60 seconds per clip
+- Style: Professional, abstract, or work-relevant visuals
+- Quality: 1080p minimum, 4K preferred
+- Format: MP4 with H.264 encoding
+- Fallback: High-quality static images
+
+**CS-1.2 Placeholder Strategy**
+
+- Professional stock video during development
+- Consistent aspect ratios (16:9)
+- Branded placeholder graphics
+
+### 2. Content Organization
+
+**CS-2.1 Work Experience Hierarchy**
+
+```
+Company > Position > Projects (Seasons)
+└── Amazon
+    ├── SDE II (2022-2024)
+    │   ├── Season 1: Infrastructure Migration
+    │   ├── Season 2: Performance Optimization
+    │   └── Season 3: Team Leadership Initiative
+    └── SDE I (2020-2022)
+        ├── Season 1: Feature Development
+        └── Season 2: Bug Fix Sprint Leadership
+
+```
+
+**CS-2.2 Content Requirements**
+
+- **Work Items:** Title, company, duration, 2-3 key achievements, tech stack
+- **Education Items:** Institution, degree, relevant coursework, projects
+- **Skills Items:** Proficiency levels, years of experience, recent projects
+- **Personal Items:** Interests, volunteer work, side projects
+
+## Appendices
+
+### A. Technical Architecture Diagram
+
+```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   React App     │    │   Content JSON   │    │   Media Assets  │
+│   (Frontend)    │◄──►│   (Data Layer)   │◄──►│   (Videos/Imgs) │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+         │                        │                       │
+         ▼                        ▼                       ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    CDN Deployment Layer                         │
+│                  (Vercel/Netlify + AWS S3)                     │
+└─────────────────────────────────────────────────────────────────┘
+
+```

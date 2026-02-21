@@ -1,0 +1,62 @@
+/* Performance Monitor Styles */
+
+.performance-monitor {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(0, 0, 0, 0.9);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: var(--spacing-md);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+  min-width: 200px;
+}
+
+.performance-monitor h4 {
+  margin: 0 0 var(--spacing-sm) 0;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--netflix-red);
+}
+
+.metrics-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-xs) 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.metric:last-child {
+  border-bottom: none;
+}
+
+.metric-label {
+  color: var(--text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.metric-value {
+  color: var(--text-primary);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-xs);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .performance-monitor {
+    position: static;
+    margin: var(--spacing-md);
+    min-width: auto;
+  }
+} 
