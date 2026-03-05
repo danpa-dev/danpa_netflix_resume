@@ -13,14 +13,14 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>
 );
 
-// Register a basic service worker for offline caching and faster reloads
-// Register SW only in production to avoid dev-cache issues during frequent refresh
-if (import.meta.env.PROD && 'serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker
-      .register('/sw.js')
-      .catch((err) => console.warn('Service worker registration failed:', err));
+// Unregister any existing service worker to clear stale caches
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then((registrations) => {
+    registrations.forEach((r) => r.unregister());
   });
+  if ('caches' in window) {
+    caches.keys().then((keys) => keys.forEach((k) => caches.delete(k)));
+  }
 }
 
 // Initialize Web Vitals reporter only in production

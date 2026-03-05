@@ -139,18 +139,9 @@ const Modal: React.FC<ModalProps> = ({
 
   // Animation variants
   const overlayVariants = {
-    hidden: { 
-      opacity: 0,
-      backdropFilter: 'blur(0px)'
-    },
-    visible: { 
-      opacity: 1,
-      backdropFilter: 'blur(4px)'
-    },
-    exit: {
-      opacity: 0,
-      backdropFilter: 'blur(0px)'
-    }
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+    exit: { opacity: 0 }
   };
 
   const modalVariants = {

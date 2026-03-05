@@ -16,7 +16,7 @@
       "id": "pp-1",
       "title": "Netflix-Style Portfolio",
       "description": "Interactive portfolio website with Netflix-inspired UI and animations",
-      "thumbnailUrl": "/images/pipeline_eng.png",
+      "thumbnailUrl": "/images/pipeline_eng.webp",
       "technologies": [
         "React",
         "TypeScript",
@@ -50,7 +50,7 @@
       "impact": "Created a memorable and engaging portfolio that stands out to recruiters",
       "isActive": true,
       "collaborators": [],
-      "videoPosterUrl": "/images/pipeline_eng.png"
+      "videoPosterUrl": "/images/pipeline_eng.webp"
     }
   ]
 }

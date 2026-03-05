@@ -84,7 +84,7 @@
       "id": "we-1",
       "title": "AWS",
       "description": "Software development roles across AWS EC2 and Amazon, focused on forecasting platforms and data pipelines.",
-      "thumbnailUrl": "/images/danhp.png",
+      "thumbnailUrl": "/images/danhp.webp",
       "company": "AWS",
       "role": "Software Development Engineer",
       "startDate": "2019-11-01",
@@ -249,7 +249,7 @@
           ]
         }
       ],
-      "companyLogo": "/images/danhp.png",
+      "companyLogo": "/images/danhp.webp",
       "companyUrl": "https://aws.amazon.com",
       "isCurrent": false,
       "_unsplashCredit": {
@@ -257,13 +257,13 @@
         "html": "https://unsplash.com/photos/man-using-computer-inside-room-975d70Ymjmw"
       },
       "videoUrl": "/videos/we-1-clip.mp4",
-      "videoPosterUrl": "/images/danhp.png"
+      "videoPosterUrl": "/images/danhp.webp"
     },
     {
       "id": "we-2",
       "title": "Yonder",
       "description": "Data engineering for high-throughput scraping and async messaging systems.",
-      "thumbnailUrl": "/images/pipeline_eng.png",
+      "thumbnailUrl": "/images/pipeline_eng.webp",
       "company": "Yonder",
       "role": "Data Engineer",
       "startDate": "2018-07-01",
@@ -330,7 +330,7 @@
           ]
         }
       ],
-      "companyLogo": "/images/pipeline_eng.png",
+      "companyLogo": "/images/pipeline_eng.webp",
       "companyUrl": "",
       "isCurrent": false,
       "_unsplashCredit": {
@@ -338,7 +338,7 @@
         "html": "https://unsplash.com/photos/a-blurry-photo-of-a-plant-in-a-dark-room-e3RUKNgEt8I"
       },
       "videoUrl": "/videos/pipeline.mp4",
-      "videoPosterUrl": "/images/pipeline_eng.png"
+      "videoPosterUrl": "/images/pipeline_eng.webp"
     }
   ]
 }

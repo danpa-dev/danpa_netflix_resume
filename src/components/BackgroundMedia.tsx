@@ -85,13 +85,13 @@ const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
           loop
           muted
           playsInline
+          preload="auto"
           poster={posterSrc || imageSrc}
           onLoadedData={handleVideoLoad}
           onError={handleVideoError}
           onCanPlay={handleVideoCanPlay}
         >
           <source src={videoSrc} type="video/mp4" />
-          <source src={videoSrc} type="video/webm" />
           {imageSrc && (
             <img src={imageSrc} alt="" className="video-fallback" />
           )}

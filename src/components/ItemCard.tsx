@@ -283,17 +283,9 @@ const ItemCard: React.FC<ItemCardProps> = ({
 
   // Animation variants
   const cardVariants = {
-    initial: { 
-      scale: 1,
-      boxShadow: "0 0 0 rgba(0, 0, 0, 0)"
-    },
-    hover: { 
-      scale: 1.05,
-      boxShadow: "0 8px 25px rgba(0, 0, 0, 0.3)"
-    },
-    tap: {
-      scale: 1.02
-    }
+    initial: { scale: 1 },
+    hover: { scale: 1.05 },
+    tap: { scale: 1.02 }
   };
 
   const overlayVariants = {
@@ -339,6 +331,17 @@ const ItemCard: React.FC<ItemCardProps> = ({
 
 
 
+  const [videoReady, setVideoReady] = useState(false);
+
+  // Defer video mount until after modal animation completes
+  useEffect(() => {
+    if (isOpen) {
+      const timer = setTimeout(() => setVideoReady(true), 350);
+      return () => clearTimeout(timer);
+    }
+    setVideoReady(false);
+  }, [isOpen]);
+
   const handleCardClick = () => {
     if (cardRef.current) {
       const rect = cardRef.current.getBoundingClientRect();
@@ -383,7 +386,6 @@ const ItemCard: React.FC<ItemCardProps> = ({
           duration: 0.2,
           ease: "easeOut"
         }}
-        layout
       >
       {/* 16:9 Aspect Ratio Container */}
       <div className="item-card-container" ref={containerRef}>
@@ -481,7 +483,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              {effectiveVideoUrl || videoWebmUrl ? (
+              {videoReady && (effectiveVideoUrl || videoWebmUrl) ? (
                 <Suspense fallback={<div className="modal-video-placeholder" /> }>
                   <VideoPlayer
                     srcMp4={effectiveVideoUrl}

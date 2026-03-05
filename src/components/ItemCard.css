@@ -8,8 +8,23 @@
   border-radius: 8px;
   overflow: hidden;
   background: #1a1a1a;
-  transition: transform var(--dur-med) var(--ease-standard), box-shadow var(--dur-med) var(--ease-standard);
-  will-change: transform;
+  transition: transform var(--dur-med) var(--ease-standard);
+}
+
+.item-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity var(--dur-med) var(--ease-standard);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.item-card:hover::after {
+  opacity: 1;
 }
 
 /* Apply micro‑interaction utility */
@@ -20,7 +35,10 @@
   transition: z-index 0s;
 }
 
-.item-card:hover { z-index: 10; }
+.item-card:hover {
+  z-index: 10;
+  will-change: transform;
+}
 
 /* Removed :focus style - only show outline for keyboard navigation via :focus-visible */
 
