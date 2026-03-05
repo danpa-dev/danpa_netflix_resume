@@ -47,7 +47,7 @@ App.tsx
 - **Defaults cascade:** Global defaults from `metadata` in each JSON file are merged into every item so missing media fields degrade gracefully rather than crashing.
 - **Type guards over discriminated unions:** `isWorkExperience()`, `isEducation()`, etc. check for characteristic fields (e.g., `company`, `seasons`) instead of a `type` tag. See `src/types/content.ts`.
 - **CSS custom properties for responsive layout:** `--carousel-card-width`, `--carousel-gap`, `--carousel-padding` are written by `useResponsiveCarousel` and read by CSS — no JS layout calculations in render.
-- **Prod-only features:** Service worker registration and Web Vitals reporting (`initWebVitalsReporter`) are gated on `import.meta.env.PROD` / `isProdRuntime()`. Header also switches between local PDF and S3 URL.
+- **Prod-only features:** Service worker registration and Web Vitals reporting (`initWebVitalsReporter`) are gated on `import.meta.env.PROD` / `isProdRuntime()`. Header picks resume PDF URL from content metadata (`localPath` or `s3Url` fields — both now point to the local `/DanParkResume.pdf`).
 - **Path aliases:** `@/*`, `@components/*`, `@types/*`, `@utils/*`, `@data/*`, `@assets/*` — configured in `tsconfig.app.json` and `vite.config.ts`.
 - **Manual chunk splitting:** Vendor bundles are split by concern (React/DOM, Framer Motion, Styled Components, React Router) for cache efficiency.
 
@@ -65,6 +65,10 @@ npx vitest run src/path/to/file.test.ts
 
 ### Deployment
 
-- **AWS:** Site → S3 `danpa-resume-site-prod` + CloudFront (`EM35NER047NYG`); media assets → S3 `danpa-resume-assets-prod` + CloudFront (`E1ENJ0IO0Z0R7B`).
-- **Netlify:** `netlify.toml` is configured; `npm run build` output in `dist/`.
-- Detailed steps in `instructions/deploy-aws-s3-cloudfront.md` and `instructions/deploy-netlify-vite.md`.
+- **GitHub Pages** (active): Push to `main` triggers GitHub Actions → `npm ci && npm run build` → deploy to Pages. Live at `https://resume.danpa.dev`.
+- **Netlify** (alternative): `netlify.toml` is configured; `npm run build` output in `dist/`.
+- AWS deployment guides in `instructions/` are deprecated — all AWS resources were decommissioned 2026-03-03.
+
+### Workspace Memory
+
+Cross-project knowledge, decisions, and processes are stored in `../memory/`. See `../memory/BOOTSTRAP.md` for current state and `../memory/knowledge/dan-resume/` for project-specific knowledge. Follow the session protocol in `../memory/process/agent-workflow.md`.

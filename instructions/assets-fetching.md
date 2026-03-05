@@ -74,6 +74,21 @@ This creates `*.webp` and `*.avif` files alongside JPG/PNG in `public/images/`. 
 - Keep usage under provider rate limits. Add `--type=images` when you don’t need videos.
 - Unsplash documentation and requirements: see [Unsplash API docs](https://unsplash.com/documentation) — use `Authorization: Client-ID <ACCESS_KEY>`, respect hotlinking guidance, and register a download via the `download_location` URL returned with each photo.
 
+### Default / fallback images
+
+Each section data file (`src/data/*.json`) can declare a `metadata.defaults` block. When `contentLoader.ts` merges content, any item missing a media field inherits the default value. This prevents broken thumbnails, posters, and hero backgrounds.
+
+Currently only `src/data/work.json` defines defaults:
+
+| Field | Default path | File in `public/` |
+|---|---|---|
+| `thumbnailUrl` | `/images/test.jpeg` | `public/images/test.jpeg` |
+| `videoPosterUrl` | `/images/test.jpeg` | `public/images/test.jpeg` |
+| `videoUrlMp4` | `/videos/test.mp4` | `public/videos/test.mp4` |
+| `hero.imageUrl` | `/images/test.jpeg` | `public/images/test.jpeg` |
+
+The other section files (`skills.json`, `education.json`, `personal-projects.json`, `volunteer-work.json`) do not define defaults — items in those sections must have their own media URLs or they will render without media.
+
 ### Placeholder detection (why the script may update an item that already has a URL)
 
 The script treats obvious placeholders as “missing” and will fetch replacements unless you disable it:

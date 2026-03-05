@@ -84,7 +84,7 @@
       "id": "we-1",
       "title": "AWS",
       "description": "Software development roles across AWS EC2 and Amazon, focused on forecasting platforms and data pipelines.",
-      "thumbnailUrl": "/images/we-1-thumb.jpg",
+      "thumbnailUrl": "/images/danhp.png",
       "company": "AWS",
       "role": "Software Development Engineer",
       "startDate": "2019-11-01",
@@ -204,6 +204,7 @@
           "company": "Amazon",
           "role": "Software Development Engineer I",
           "description": "Amazon (Seattle, WA), 11/2019 - 04/2021",
+          "videoUrl": "/videos/hp1.mp4",
           "episodes": [
             {
               "id": "e-aws-5",
@@ -248,7 +249,7 @@
           ]
         }
       ],
-      "companyLogo": "/images/we-1-thumb.jpg",
+      "companyLogo": "/images/danhp.png",
       "companyUrl": "https://aws.amazon.com",
       "isCurrent": false,
       "_unsplashCredit": {
@@ -256,13 +257,13 @@
         "html": "https://unsplash.com/photos/man-using-computer-inside-room-975d70Ymjmw"
       },
       "videoUrl": "/videos/we-1-clip.mp4",
-      "videoPosterUrl": "/images/we-1-thumb.jpg"
+      "videoPosterUrl": "/images/danhp.png"
     },
     {
       "id": "we-2",
       "title": "Yonder",
       "description": "Data engineering for high-throughput scraping and async messaging systems.",
-      "thumbnailUrl": "/images/we-3-thumb.jpg",
+      "thumbnailUrl": "/images/pipeline_eng.png",
       "company": "Yonder",
       "role": "Data Engineer",
       "startDate": "2018-07-01",
@@ -329,7 +330,7 @@
           ]
         }
       ],
-      "companyLogo": "/images/we-3-thumb.jpg",
+      "companyLogo": "/images/pipeline_eng.png",
       "companyUrl": "",
       "isCurrent": false,
       "_unsplashCredit": {
@@ -337,7 +338,7 @@
         "html": "https://unsplash.com/photos/a-blurry-photo-of-a-plant-in-a-dark-room-e3RUKNgEt8I"
       },
       "videoUrl": "/videos/pipeline.mp4",
-      "videoPosterUrl": "/images/we-3-thumb.jpg"
+      "videoPosterUrl": "/images/pipeline_eng.png"
     }
   ]
 }
