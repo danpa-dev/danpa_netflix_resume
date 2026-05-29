@@ -9,11 +9,12 @@
       "fileName": "DanParkResume.pdf"
     },
     "defaults": {
-      "videoUrlMp4": "/videos/test.mp4",
-      "thumbnailUrl": "/images/test.jpeg",
-      "videoPosterUrl": "/images/test.jpeg",
+      "videoUrlMp4": "test.mp4",
+      "thumbnailUrl": "test.jpeg",
+      "videoPosterUrl": "test.jpeg",
       "hero": {
-        "imageUrl": "/images/test.jpeg"
+        "imageUrl": "test.jpeg",
+        "objectPosition": "50% 30%"
       }
     },
     "totalItems": {
@@ -29,7 +30,8 @@
       "id": "we-3",
       "title": "Fathom",
       "description": "Software engineering at Fathom.",
-      "thumbnailUrl": "/images/we-2-thumb.jpg",
+      "thumbnailUrl": "FathomImage.jpeg",
+      "thumbnailObjectPosition": "50% 50%",
       "company": "Fathom",
       "role": "Software Engineer",
       "startDate": "2025-01-01",
@@ -77,14 +79,15 @@
         "photographer": "Jed Villejo",
         "html": "https://unsplash.com/photos/man-using-computer-inside-room-975d70Ymjmw"
       },
-      "videoUrl": "/videos/we-2-clip.mp4",
-      "videoPosterUrl": "/images/we-2-thumb.jpg"
+      "videoUrl": "FathomVid.mp4",
+      "videoPosterUrl": "FathomImage.jpeg"
     },
     {
       "id": "we-1",
       "title": "AWS",
       "description": "Software development roles across AWS EC2 and Amazon, focused on forecasting platforms and data pipelines.",
-      "thumbnailUrl": "/images/danhp.png",
+      "thumbnailUrl": "danhp.webp",
+      "thumbnailObjectPosition": "50% 28%",
       "company": "AWS",
       "role": "Software Development Engineer",
       "startDate": "2019-11-01",
@@ -114,6 +117,7 @@
           "company": "AWS",
           "role": "Software Development Engineer II",
           "description": "AWS EC2 (Seattle, WA), 04/2021 - 12/2024",
+          "videoUrl": "hps2.mp4",
           "episodes": [
             {
               "id": "e-aws-1",
@@ -204,7 +208,7 @@
           "company": "Amazon",
           "role": "Software Development Engineer I",
           "description": "Amazon (Seattle, WA), 11/2019 - 04/2021",
-          "videoUrl": "/videos/hp1.mp4",
+          "videoUrl": "hp1.mp4",
           "episodes": [
             {
               "id": "e-aws-5",
@@ -249,21 +253,22 @@
           ]
         }
       ],
-      "companyLogo": "/images/danhp.png",
+      "companyLogo": "danhp.webp",
       "companyUrl": "https://aws.amazon.com",
       "isCurrent": false,
       "_unsplashCredit": {
         "photographer": "Jed Villejo",
         "html": "https://unsplash.com/photos/man-using-computer-inside-room-975d70Ymjmw"
       },
-      "videoUrl": "/videos/we-1-clip.mp4",
-      "videoPosterUrl": "/images/danhp.png"
+      "videoUrl": "we-1-clip.mp4",
+      "videoPosterUrl": "danhp.webp"
     },
     {
       "id": "we-2",
       "title": "Yonder",
       "description": "Data engineering for high-throughput scraping and async messaging systems.",
-      "thumbnailUrl": "/images/pipeline_eng.png",
+      "thumbnailUrl": "pipeline_eng.webp",
+      "thumbnailObjectPosition": "50% 12%",
       "company": "Yonder",
       "role": "Data Engineer",
       "startDate": "2018-07-01",
@@ -330,15 +335,15 @@
           ]
         }
       ],
-      "companyLogo": "/images/pipeline_eng.png",
+      "companyLogo": "pipeline_eng.webp",
       "companyUrl": "",
       "isCurrent": false,
       "_unsplashCredit": {
         "photographer": "Pawel Czerwinski",
         "html": "https://unsplash.com/photos/a-blurry-photo-of-a-plant-in-a-dark-room-e3RUKNgEt8I"
       },
-      "videoUrl": "/videos/pipeline.mp4",
-      "videoPosterUrl": "/images/pipeline_eng.png"
+      "videoUrl": "pipeline.mp4",
+      "videoPosterUrl": "pipeline_eng.webp"
     }
   ]
 }

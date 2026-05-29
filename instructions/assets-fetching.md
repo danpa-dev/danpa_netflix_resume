@@ -1,6 +1,6 @@
 ## Royalty‑Free Asset Fetching (Local)
 
-This script pulls cinematic/sophisticated images and (optionally) short videos from royalty‑free providers for items in section files referenced by `src/data/manifest.json` that are missing assets, then updates the section JSON files with local paths and saves files under `public/`.
+This script pulls cinematic/sophisticated images and (optionally) short videos from royalty‑free providers for items in section files referenced by `src/data/manifest.json` that are missing assets, then updates the section JSON files with bare filenames and saves files under `src/assets/`.
 
 ### Providers
 - Images: Pexels (preferred), Unsplash (fallback or primary)
@@ -36,10 +36,11 @@ UNSPLASH_ACCESS_KEY=... UNSPLASH_SECRET_KEY=... npm run assets:fetch -- --provid
 ```
 
 The script will:
-- Build a query from `title`, `company`, `role`, etc. and bias with “cinematic”/“sophisticated” terms
-- Save downloads to `public/images/ID-thumb.jpg` and `public/videos/ID-clip.mp4` (when using Pexels/local mode)
+- Build a query from `title`, `company`, `role`, etc. and bias with "cinematic"/"sophisticated" terms
+- Save downloads to `src/assets/images/ID-thumb.jpg` and `src/assets/videos/ID-clip.mp4` (when using Pexels/local mode)
+- **After downloading, add the file to `src/assets/assetMap.ts`** (import + map entry) so Vite content-hashes it
 - For Unsplash with `--hotlink=true`, set `thumbnailUrl` to the Unsplash CDN URL and automatically register the download (per API)
-- Update `thumbnailUrl`/`videoUrl` in section files when assets were missing or when replacement is requested
+- Update `thumbnailUrl`/`videoUrl` in section files with bare filenames (e.g. `"ID-thumb.jpg"` not `/images/ID-thumb.jpg`) when assets were missing or when replacement is requested
 - Print a summary
 
 ### Flags
@@ -66,26 +67,26 @@ Single-format baseline is fine: JPEG/PNG + MP4 only. If you later want modern va
 npm run generate:images
 ```
 
-This creates `*.webp` and `*.avif` files alongside JPG/PNG in `public/images/`. The app will use them only when the URLs are supplied in section files.
+This creates `*.webp` and `*.avif` files alongside JPG/PNG in `src/assets/images/`. The app will use them only when the URLs are supplied in section files.
 
 ### Notes & tips
 - Use the fetcher to bootstrap placeholders; replace with curated assets later.
-- For local-only demos, paths like `/images/...` and `/videos/...` are fine. For production, host on your assets CDN (see the AWS deploy guide) and update URLs in section files.
-- Keep usage under provider rate limits. Add `--type=images` when you don’t need videos.
+- **Asset architecture (2026-05-27):** JSON files use bare filenames (e.g. `"FathomImage.jpeg"`), resolved to Vite-hashed URLs at build time via `src/assets/assetMap.ts`. New assets go in `src/assets/images/` or `src/assets/videos/` and must be added to assetMap. See `memory/knowledge/dan-resume/content-system.md`.
+- Keep usage under provider rate limits. Add `--type=images` when you don't need videos.
 - Unsplash documentation and requirements: see [Unsplash API docs](https://unsplash.com/documentation) — use `Authorization: Client-ID <ACCESS_KEY>`, respect hotlinking guidance, and register a download via the `download_location` URL returned with each photo.
 
 ### Default / fallback images
 
-Each section data file (`src/data/*.json`) can declare a `metadata.defaults` block. When `contentLoader.ts` merges content, any item missing a media field inherits the default value. This prevents broken thumbnails, posters, and hero backgrounds.
+Each section data file (`src/data/*.json`) can declare a `metadata.defaults` block. When `contentLoader.ts` merges content, any item missing a media field inherits the default value. These defaults are resolved through `src/assets/assetMap.ts` at build time, so they also get content-hashed filenames.
 
 Currently only `src/data/work.json` defines defaults:
 
-| Field | Default path | File in `public/` |
+| Field | Default key | Resolves via assetMap |
 |---|---|---|
-| `thumbnailUrl` | `/images/test.jpeg` | `public/images/test.jpeg` |
-| `videoPosterUrl` | `/images/test.jpeg` | `public/images/test.jpeg` |
-| `videoUrlMp4` | `/videos/test.mp4` | `public/videos/test.mp4` |
-| `hero.imageUrl` | `/images/test.jpeg` | `public/images/test.jpeg` |
+| `thumbnailUrl` | `test.jpeg` | hashed URL |
+| `videoPosterUrl` | `test.jpeg` | hashed URL |
+| `videoUrlMp4` | `test.mp4` | hashed URL |
+| `hero.imageUrl` | `test.jpeg` | hashed URL |
 
 The other section files (`skills.json`, `education.json`, `personal-projects.json`, `volunteer-work.json`) do not define defaults — items in those sections must have their own media URLs or they will render without media.
 

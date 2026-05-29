@@ -6,6 +6,7 @@ interface MainLayoutProps {
   heroTitle: string;
   heroSubtitle?: string;
   heroBackgroundImage?: string;
+  heroBackgroundObjectPosition?: string;
   heroBackgroundVideo?: string;
   children?: React.ReactNode;
   className?: string;
@@ -15,6 +16,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
   heroTitle,
   heroSubtitle,
   heroBackgroundImage,
+  heroBackgroundObjectPosition,
   heroBackgroundVideo,
   children,
   className = ''
@@ -28,6 +30,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
         title={heroTitle}
         subtitle={heroSubtitle}
         backgroundImage={heroBackgroundImage}
+        backgroundObjectPosition={heroBackgroundObjectPosition}
         backgroundVideo={heroBackgroundVideo}
       />
       
@@ -42,4 +45,4 @@ const MainLayout: React.FC<MainLayoutProps> = ({
   );
 };
 
-export default MainLayout; 
+export default MainLayout;

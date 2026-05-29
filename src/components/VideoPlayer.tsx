@@ -127,6 +127,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           muted={isMuted}
           loop={loop}
           playsInline
+          preload="auto"
           {...({ 'webkit-playsinline': 'true' } as Record<string, unknown>)}
           poster={poster}
           controls={false}

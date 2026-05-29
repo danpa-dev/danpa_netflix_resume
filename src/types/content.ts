@@ -80,7 +80,9 @@ export interface BaseContent {
   title: string;
   description: string;
   thumbnailUrl: string;
+  thumbnailObjectPosition?: string;
   videoUrl?: string;
+  videoPosterUrl?: string;
 }
 
 // Season interface for work experience projects
@@ -225,6 +227,7 @@ export interface IContentMetadata {
     thumbnailUrl?: string;   // global card thumbnail (applies to all items when set)
     hero?: {
       imageUrl?: string;
+      objectPosition?: string;
       videoUrlMp4?: string;
       videoUrlWebm?: string;
       posterUrl?: string;

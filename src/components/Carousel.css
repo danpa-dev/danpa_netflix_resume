@@ -83,7 +83,6 @@
     transform var(--dur-slow, 300ms) var(--ease-standard, cubic-bezier(0.2, 0, 0, 1)),
     background-color var(--dur-med, 200ms) var(--ease-standard, cubic-bezier(0.2, 0, 0, 1)),
     box-shadow var(--dur-med, 200ms) var(--ease-standard, cubic-bezier(0.2, 0, 0, 1));
-  backdrop-filter: blur(8px);
   opacity: 0;
   visibility: hidden;
 }

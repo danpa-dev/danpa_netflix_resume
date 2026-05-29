@@ -18,6 +18,7 @@ import type {
 import { validateContent, getValidationSummary } from './contentValidation';
 import type { ValidationResult } from './contentValidation';
 import manifestData from '../data/manifest.json';
+import { resolveAsset } from '../assets/assetMap';
 
 // Content loading result interface
 export interface ContentLoadResult {
@@ -51,6 +52,56 @@ const ERROR_MESSAGES = {
 };
 
 const sectionModules = import.meta.glob('../data/*.json');
+const resolveRequiredAsset = (key: string): string => resolveAsset(key) ?? key;
+
+/**
+ * Walk the entire IContent tree and resolve bare filenames to Vite-hashed URLs.
+ * Passes through external URLs (http...) and absolute paths (/) unchanged.
+ */
+function resolveAssetsInContent(content: IContent): void {
+  // Metadata defaults
+  const d = content.metadata?.defaults;
+  if (d) {
+    if (d.thumbnailUrl) d.thumbnailUrl = resolveRequiredAsset(d.thumbnailUrl);
+    if (d.videoPosterUrl) d.videoPosterUrl = resolveRequiredAsset(d.videoPosterUrl);
+    if (d.videoUrlMp4) d.videoUrlMp4 = resolveRequiredAsset(d.videoUrlMp4);
+    if (d.hero?.imageUrl) d.hero.imageUrl = resolveRequiredAsset(d.hero.imageUrl);
+    if (d.hero?.posterUrl) d.hero.posterUrl = resolveRequiredAsset(d.hero.posterUrl);
+    if (d.hero?.videoUrlMp4) d.hero.videoUrlMp4 = resolveRequiredAsset(d.hero.videoUrlMp4);
+  }
+
+  // Walk all content items
+  const contentGroups: ContentItem[][] = [
+    content.workExperience,
+    content.education,
+    content.skills,
+    content.personalProjects,
+    content.volunteerWork
+  ];
+
+  for (const arr of contentGroups) {
+    for (const item of arr) {
+      if (item.thumbnailUrl) item.thumbnailUrl = resolveRequiredAsset(item.thumbnailUrl);
+      if (item.videoUrl) item.videoUrl = resolveRequiredAsset(item.videoUrl);
+      if (item.videoPosterUrl) item.videoPosterUrl = resolveRequiredAsset(item.videoPosterUrl);
+      if ('companyLogo' in item && item.companyLogo) item.companyLogo = resolveRequiredAsset(item.companyLogo);
+      if ('institutionLogo' in item && item.institutionLogo) item.institutionLogo = resolveRequiredAsset(item.institutionLogo);
+      if ('seasons' in item) {
+        for (const season of item.seasons || []) {
+          if (season.videoUrl) season.videoUrl = resolveRequiredAsset(season.videoUrl);
+          for (const ep of season.episodes || []) {
+            if (ep.videoUrl) ep.videoUrl = resolveRequiredAsset(ep.videoUrl);
+          }
+        }
+      }
+      if ('projects' in item) {
+        for (const proj of item.projects || []) {
+          if (proj.videoUrl) proj.videoUrl = resolveRequiredAsset(proj.videoUrl);
+        }
+      }
+    }
+  }
+}
 
 /**
  * Load content from the JSON file with caching and validation
@@ -188,6 +239,9 @@ export const loadContent = async (forceRefresh: boolean = false): Promise<Conten
         thumbnailUrl: vw.thumbnailUrl || defaultThumb || vw.thumbnailUrl
       }));
     }
+
+    // Resolve bare asset filenames to Vite-hashed URLs
+    resolveAssetsInContent(withDefaults);
 
     // Cache the validated content
     contentCache = withDefaults;

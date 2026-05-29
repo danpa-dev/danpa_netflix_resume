@@ -16,7 +16,7 @@
       "id": "pp-1",
       "title": "Netflix-Style Portfolio",
       "description": "Interactive portfolio website with Netflix-inspired UI and animations",
-      "thumbnailUrl": "/images/pipeline_eng.png",
+      "thumbnailUrl": "pipeline_eng.webp",
       "technologies": [
         "React",
         "TypeScript",
@@ -27,7 +27,7 @@
       "endDate": "2024-06-30",
       "githubUrl": "https://github.com/danpa-dev",
       "liveUrl": "https://danpark.dev",
-      "videoUrl": "/videos/we-3-clip.mp4",
+      "videoUrl": "we-3-clip.mp4",
       "features": [
         "Netflix-inspired carousel navigation",
         "Smooth animations and transitions",
@@ -50,7 +50,7 @@
       "impact": "Created a memorable and engaging portfolio that stands out to recruiters",
       "isActive": true,
       "collaborators": [],
-      "videoPosterUrl": "/images/pipeline_eng.png"
+      "videoPosterUrl": "pipeline_eng.webp"
     }
   ]
 }
