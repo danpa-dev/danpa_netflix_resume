@@ -11,6 +11,7 @@ interface CarouselItem {
   title: string;
   description?: string;
   thumbnailUrl?: string;
+  thumbnailObjectPosition?: string;
   videoUrl?: string;
   seasons?: Array<{ id?: string; title?: string; name?: string; description?: string; videoUrl?: string }>;
 }
@@ -358,6 +359,7 @@ const Carousel: React.FC<CarouselProps> = ({
                     title={item.title}
                     description={item.description}
                     thumbnailUrl={item.thumbnailUrl}
+                    thumbnailObjectPosition={item.thumbnailObjectPosition}
                     videoMp4Url={item.videoUrl as string | undefined}
                     videoPosterUrl={item.thumbnailUrl}
                     seasons={item.seasons as SeasonLite[] | undefined}

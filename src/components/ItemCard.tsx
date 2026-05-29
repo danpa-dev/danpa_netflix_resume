@@ -13,6 +13,7 @@ interface ItemCardProps {
   title: string;
   description?: string;
   thumbnailUrl?: string;
+  thumbnailObjectPosition?: string;
   className?: string;
   onClick?: () => void;
   videoMp4Url?: string;
@@ -36,6 +37,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
   title,
   description,
   thumbnailUrl,
+  thumbnailObjectPosition,
   className = '',
   onClick,
   videoMp4Url,
@@ -269,6 +271,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
         src={imageState.currentSrc as string}
         alt={`${title} thumbnail`}
         className={`item-card-image ${imageState.isLoaded ? 'loaded' : ''} ${imageState.isLoading ? 'loading' : ''}`}
+        style={thumbnailObjectPosition ? { objectPosition: thumbnailObjectPosition } : undefined}
         loading="lazy"
         onLoad={handleImageLoad}
         onError={handleImageError}

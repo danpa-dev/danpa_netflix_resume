@@ -17,6 +17,7 @@ function App() {
         heroTitle="Dan Park - Featured Roles"
         heroSubtitle="Software Engineer & Developer"
         heroBackgroundImage={content?.metadata?.defaults?.hero?.imageUrl}
+        heroBackgroundObjectPosition={content?.metadata?.defaults?.hero?.objectPosition}
         heroBackgroundVideo={content?.metadata?.defaults?.hero?.videoUrlMp4}
       >
 

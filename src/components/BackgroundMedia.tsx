@@ -4,6 +4,7 @@ import './BackgroundMedia.css';
 interface BackgroundMediaProps {
   videoSrc?: string;
   imageSrc?: string;
+  objectPosition?: string;
   posterSrc?: string;
   className?: string;
   onLoad?: () => void;
@@ -13,6 +14,7 @@ interface BackgroundMediaProps {
 const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
   videoSrc,
   imageSrc,
+  objectPosition,
   posterSrc,
   className = '',
   onLoad,
@@ -87,6 +89,7 @@ const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
           playsInline
           preload="auto"
           poster={posterSrc || imageSrc}
+          style={objectPosition ? { objectPosition } : undefined}
           onLoadedData={handleVideoLoad}
           onError={handleVideoError}
           onCanPlay={handleVideoCanPlay}
@@ -105,6 +108,7 @@ const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
           src={imageSrc}
           alt=""
           className="background-image"
+          style={objectPosition ? { objectPosition } : undefined}
           loading="lazy"
           onLoad={handleImageLoad}
           onError={handleImageError}
@@ -126,4 +130,4 @@ const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
   );
 };
 
-export default BackgroundMedia; 
+export default BackgroundMedia;

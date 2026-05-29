@@ -7,6 +7,7 @@ interface HeroProps {
   title: string;
   subtitle?: string;
   backgroundImage?: string;
+  backgroundObjectPosition?: string;
   backgroundVideo?: string;
   className?: string;
 }
@@ -15,6 +16,7 @@ const Hero: React.FC<HeroProps> = ({
   title,
   subtitle,
   backgroundImage,
+  backgroundObjectPosition,
   backgroundVideo,
   className = ''
 }) => {
@@ -23,6 +25,7 @@ const Hero: React.FC<HeroProps> = ({
       <BackgroundMedia
         videoSrc={backgroundVideo}
         imageSrc={backgroundImage}
+        objectPosition={backgroundObjectPosition}
         posterSrc={backgroundImage}
       />
       
@@ -35,4 +38,4 @@ const Hero: React.FC<HeroProps> = ({
   );
 };
 
-export default Hero; 
+export default Hero;

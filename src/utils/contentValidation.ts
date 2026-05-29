@@ -49,14 +49,28 @@ export const isValidUrl = (url: string): boolean => {
 };
 
 export const isValidImageUrl = (url: string): boolean => {
-  if (!url.startsWith('/') && !isValidUrl(url)) return false;
+  // Asset keys: bare filenames with a valid image extension
   const validExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'];
+  if (url.startsWith('/')) {
+    return validExtensions.some(ext => url.toLowerCase().includes(ext));
+  }
+  if (!url.startsWith('http')) {
+    return validExtensions.some(ext => url.toLowerCase().includes(ext));
+  }
+  if (!isValidUrl(url)) return false;
   return validExtensions.some(ext => url.toLowerCase().includes(ext));
 };
 
 export const isValidVideoUrl = (url: string): boolean => {
-  if (!url.startsWith('/') && !isValidUrl(url)) return false;
+  // Asset keys: bare filenames with a valid video extension
   const validExtensions = ['.mp4', '.webm', '.ogg', '.mov'];
+  if (url.startsWith('/')) {
+    return validExtensions.some(ext => url.toLowerCase().includes(ext));
+  }
+  if (!url.startsWith('http')) {
+    return validExtensions.some(ext => url.toLowerCase().includes(ext));
+  }
+  if (!isValidUrl(url)) return false;
   return validExtensions.some(ext => url.toLowerCase().includes(ext));
 };
 
@@ -623,5 +637,3 @@ export const isValidContent = (content: unknown): content is IContent => {
   const result = validateContent(content as IContent);
   return result.isValid;
 };
-
- 
