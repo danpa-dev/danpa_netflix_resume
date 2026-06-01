@@ -15,7 +15,11 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
     // Prefer local public assets so the app is hosting-provider agnostic.
     const chosen = resume?.localPath || resume?.s3Url;
     const fileName = resume?.fileName || 'DanParkResume.pdf';
-    return { href: chosen || '/DanParkResume.pdf', downloadName: fileName };
+    const resumePath = chosen || '/DanParkResume.pdf';
+    const cacheSuffix = resume?.cacheVersion
+      ? `${resumePath.includes('?') ? '&' : '?'}v=${encodeURIComponent(resume.cacheVersion)}`
+      : '';
+    return { href: `${resumePath}${cacheSuffix}`, downloadName: fileName };
   }, [content]);
 
   const toggleMobileMenu = () => {

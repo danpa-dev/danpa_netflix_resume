@@ -219,6 +219,8 @@ export interface IContentMetadata {
     s3Url?: string;
     // Optional file name hint for the browser download attribute
     fileName?: string;
+    // Change when the PDF changes so browsers request the latest file.
+    cacheVersion?: string;
   };
   defaults?: {
     videoUrlMp4?: string;

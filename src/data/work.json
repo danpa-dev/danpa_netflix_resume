@@ -6,7 +6,8 @@
     "resume": {
       "localPath": "/DanParkResume.pdf",
       "s3Url": "/DanParkResume.pdf",
-      "fileName": "DanParkResume.pdf"
+      "fileName": "DanParkResume.pdf",
+      "cacheVersion": "44c39007"
     },
     "defaults": {
       "videoUrlMp4": "test.mp4",
