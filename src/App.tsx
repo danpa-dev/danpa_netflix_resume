@@ -14,8 +14,8 @@ function App() {
       <Header />
       
       <MainLayout
-        heroTitle="Dan Park - Featured Roles"
-        heroSubtitle="Software Engineer & Developer"
+        heroTitle="Dan Park"
+        heroSubtitle="Software Engineer & Technical Consultant"
         heroBackgroundImage={content?.metadata?.defaults?.hero?.imageUrl}
         heroBackgroundObjectPosition={content?.metadata?.defaults?.hero?.objectPosition}
         heroBackgroundVideo={content?.metadata?.defaults?.hero?.videoUrlMp4}
