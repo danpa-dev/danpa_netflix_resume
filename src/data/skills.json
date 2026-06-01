@@ -16,7 +16,8 @@
       "id": "sk-1",
       "title": "Languages & Libraries",
       "description": "Programming languages and data libraries used in production.",
-      "thumbnailUrl": "we-1-thumb.jpg",
+      "thumbnailUrl": "language.jpeg",
+      "videoUrl": "language.mp4",
       "name": "Languages & Libraries",
       "category": "languages",
       "proficiency": "advanced",
@@ -40,6 +41,7 @@
           "id": "sk-1-programming",
           "title": "Programming Languages",
           "description": "Python (Proficient), Java, SQL, JavaScript",
+          "videoUrl": "language.mp4",
           "technologies": [
             "Python (Proficient)",
             "Java",
@@ -51,6 +53,7 @@
           "id": "sk-1-libraries",
           "title": "Libraries",
           "description": "Pandas, NumPy, Scikit-learn",
+          "videoUrl": "language.mp4",
           "technologies": [
             "Pandas",
             "NumPy",
