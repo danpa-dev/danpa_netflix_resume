@@ -66,7 +66,8 @@
       "id": "sk-2",
       "title": "Cloud & DevOps",
       "description": "Cloud platforms, infrastructure, and delivery tooling.",
-      "thumbnailUrl": "test.jpeg",
+      "thumbnailUrl": "infra.jpeg",
+      "videoUrl": "infra.mp4",
       "name": "Cloud & DevOps",
       "category": "devops",
       "proficiency": "advanced",
@@ -87,7 +88,8 @@
         {
           "id": "sk-2-cloud",
           "title": "Cloud & DevOps",
-          "description": "AWS (EC2, S3, DynamoDB, Lambda), Docker, CI/CD pipelines, Git, Linux"
+          "description": "AWS (EC2, S3, DynamoDB, Lambda), Docker, CI/CD pipelines, Git, Linux",
+          "videoUrl": "infra.mp4"
         }
       ]
     },

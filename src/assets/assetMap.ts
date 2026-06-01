@@ -7,6 +7,7 @@
 // Images
 import danhp from './images/danhp.webp';
 import FathomImage from './images/FathomImage.jpeg';
+import infra from './images/infra.jpeg';
 import language from './images/language.jpeg';
 import pipelineEng from './images/pipeline_eng.webp';
 import testBac from './images/test_bac.jpeg';
@@ -23,6 +24,7 @@ import FathomVid from './videos/FathomVid.mp4';
 import graduation from './videos/graduation.mp4';
 import hp1 from './videos/hp1.mp4';
 import hps2 from './videos/hps2.mp4';
+import infraVideo from './videos/infra.mp4';
 import languageVideo from './videos/language.mp4';
 import mason from './videos/mason.mp4';
 import pipeline from './videos/pipeline.mp4';
@@ -38,6 +40,7 @@ export const assetMap: Record<string, string> = {
   // images
   'danhp.webp':           danhp,
   'FathomImage.jpeg':     FathomImage,
+  'infra.jpeg':           infra,
   'language.jpeg':        language,
   'pipeline_eng.webp':    pipelineEng,
   'test_bac.jpeg':        testBac,
@@ -53,6 +56,7 @@ export const assetMap: Record<string, string> = {
   'graduation.mp4':       graduation,
   'hp1.mp4':              hp1,
   'hps2.mp4':             hps2,
+  'infra.mp4':            infraVideo,
   'language.mp4':         languageVideo,
   'mason.mp4':            mason,
   'pipeline.mp4':         pipeline,
