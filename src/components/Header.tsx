@@ -35,7 +35,7 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
       <div className="header-container">
         {/* Brand/Logo Section */}
         <div className="brand-section">
-          <a href="/" className="brand">
+          <a href="https://danpa.dev" className="brand">
             Dan Park
           </a>
         </div>
