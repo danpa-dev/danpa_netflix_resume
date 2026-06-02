@@ -5,6 +5,7 @@ import React, {
   useState,
   useCallback,
 } from 'react';
+import useVideoPreferences from '../hooks/useVideoPreferences';
 import './VideoPlayer.css';
 
 export interface VideoPlayerProps {
@@ -12,7 +13,6 @@ export interface VideoPlayerProps {
   srcWebm?: string;
   poster?: string;
   autoPlay?: boolean;
-  muted?: boolean;
   loop?: boolean;
   className?: string;
   onLoaded?: () => void;
@@ -29,17 +29,16 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   srcWebm,
   poster,
   autoPlay = true,
-  muted = true,
   loop = true,
   className = '',
   onLoaded,
   onError,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { isMuted, setIsMuted } = useVideoPreferences();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hasError, setHasError] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [isMuted, setIsMuted] = useState<boolean>(muted);
   const [autoplayBlocked, setAutoplayBlocked] = useState<boolean>(false);
 
   const canAutoplay = useMemo(
@@ -113,7 +112,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     if (!video) return;
     video.muted = !video.muted;
     setIsMuted(video.muted);
-  }, []);
+  }, [setIsMuted]);
 
   // native controls toggling disabled in this design
 

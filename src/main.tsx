@@ -4,11 +4,14 @@ import './index.css';
 import App from './App.tsx';
 import { initWebVitalsReporter } from './utils/webVitals';
 import ErrorBoundary from './components/ErrorBoundary';
+import VideoPreferencesProvider from './contexts/VideoPreferencesProvider';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ErrorBoundary>
-      <App />
+      <VideoPreferencesProvider>
+        <App />
+      </VideoPreferencesProvider>
     </ErrorBoundary>
   </StrictMode>
 );

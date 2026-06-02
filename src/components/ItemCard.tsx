@@ -544,7 +544,6 @@ const ItemCard: React.FC<ItemCardProps> = ({
                       srcWebm={videoWebmUrl}
                       poster={videoPosterUrl || thumbnailUrl}
                       autoPlay
-                      muted
                       loop
                     />
                   </Suspense>
