@@ -1,5 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { useIntersectionObserver, type IntersectionEntry } from './useIntersectionObserver';
+import {
+  useIntersectionObserver,
+  type IntersectionEntry,
+} from './useIntersectionObserver';
 
 /**
  * Lazy loading state for a carousel item
@@ -44,11 +47,13 @@ export const useLazyCarousel = (
 
   // Initialize lazy items state
   useEffect(() => {
-    setLazyItems(items.map(item => ({
-      id: item.id,
-      isVisible: false,
-      isLoaded: false
-    })));
+    setLazyItems(
+      items.map(item => ({
+        id: item.id,
+        isVisible: false,
+        isLoaded: false,
+      }))
+    );
   }, [items]);
 
   /**
@@ -72,49 +77,65 @@ export const useLazyCarousel = (
     setLazyItems(prev =>
       prev.map(item =>
         item.id === itemId
-          ? { ...item, isVisible: entry.isIntersecting, isLoaded: item.isLoaded || entry.isIntersecting }
+          ? {
+              ...item,
+              isVisible: entry.isIntersecting,
+              isLoaded: item.isLoaded || entry.isIntersecting,
+            }
           : item
       )
     );
   }, []);
 
   // Use intersection observer with preload margin
-  const { observeElement, unobserveElement } = useIntersectionObserver({
-    rootMargin: `${preloadDistance}px`,
-    threshold: 0.1
-  }, handleIntersectionChange);
+  const { observeElement, unobserveElement } = useIntersectionObserver(
+    {
+      rootMargin: `${preloadDistance}px`,
+      threshold: 0.1,
+    },
+    handleIntersectionChange
+  );
 
   /**
    * Observe a carousel item element
    */
-  const observeItem = useCallback((id: string, element: Element) => {
-    element.setAttribute('data-item-id', id);
-    itemRefs.current.set(id, element);
-    observeElement(element);
-  }, [observeElement]);
+  const observeItem = useCallback(
+    (id: string, element: Element) => {
+      element.setAttribute('data-item-id', id);
+      itemRefs.current.set(id, element);
+      observeElement(element);
+    },
+    [observeElement]
+  );
 
   /**
    * Unobserve a carousel item element
    */
-  const unobserveItem = useCallback((id: string) => {
-    const element = itemRefs.current.get(id);
-    if (element) {
-      unobserveElement(element);
-      itemRefs.current.delete(id);
-    }
-  }, [unobserveElement]);
+  const unobserveItem = useCallback(
+    (id: string) => {
+      const element = itemRefs.current.get(id);
+      if (element) {
+        unobserveElement(element);
+        itemRefs.current.delete(id);
+      }
+    },
+    [unobserveElement]
+  );
 
   /**
    * Force load an item immediately
    */
-  const forceLoadItem = useCallback((id: string) => {
-    markLoaded(id);
-  }, [markLoaded]);
+  const forceLoadItem = useCallback(
+    (id: string) => {
+      markLoaded(id);
+    },
+    [markLoaded]
+  );
 
   return {
     lazyItems,
     observeItem,
     unobserveItem,
-    forceLoadItem
+    forceLoadItem,
   };
 };

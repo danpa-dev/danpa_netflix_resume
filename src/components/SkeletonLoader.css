@@ -25,7 +25,7 @@
   .skeleton-loader {
     background: #2a2a2a;
   }
-  
+
   .skeleton-shimmer {
     background: linear-gradient(
       90deg,
@@ -41,14 +41,14 @@
   .skeleton-shimmer {
     animation: none;
   }
-  
+
   .skeleton-loader {
     background: #e0e0e0;
   }
-  
+
   @media (prefers-color-scheme: dark) {
     .skeleton-loader {
       background: #404040;
     }
   }
-} 
+}

@@ -9,7 +9,11 @@ const Footer: React.FC<FooterProps> = ({ className = '' }) => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className={`footer ${className}`} role="contentinfo" aria-label="Footer">
+    <footer
+      className={`footer ${className}`}
+      role="contentinfo"
+      aria-label="Footer"
+    >
       <div className="footer-container">
         <div className="footer-content">
           <div className="footer-section">
@@ -17,21 +21,21 @@ const Footer: React.FC<FooterProps> = ({ className = '' }) => {
               &copy; {currentYear} Dan Park. All rights reserved.
             </p>
           </div>
-          
+
           <div className="footer-section">
             <div className="social-links">
-              <a 
-                href="https://www.linkedin.com/in/dansdansrevolution/" 
-                target="_blank" 
+              <a
+                href="https://www.linkedin.com/in/dansdansrevolution/"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="social-link"
                 aria-label="LinkedIn Profile"
               >
                 LinkedIn
               </a>
-              <a 
-                href="https://github.com/danpa-dev" 
-                target="_blank" 
+              <a
+                href="https://github.com/danpa-dev"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="social-link"
                 aria-label="GitHub Profile"
@@ -48,4 +52,4 @@ const Footer: React.FC<FooterProps> = ({ className = '' }) => {
   );
 };
 
-export default Footer; 
+export default Footer;

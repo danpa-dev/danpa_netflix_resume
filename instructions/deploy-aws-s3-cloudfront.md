@@ -18,6 +18,7 @@ The rest of this guide uses the recommended subdomain approach.
 - Squarespace DNS hosts: add CNAMEs pointing subdomains to the CloudFront distributions
 
 ### Buckets
+
 - `danpa-resume-site-prod` (private; built files from `dist/`, region `us-west-2`)
 - `danpa-resume-assets-prod` (private; images/videos referenced by section files in `src/data/`, region `us-west-2`)
 
@@ -85,12 +86,14 @@ Create a certificate in `us-east-1` for `resume.danpa.dev` and `assets.danpa.dev
 ## 4) Create CloudFront distributions
 
 ### What CloudFront is (and why use it)
+
 - CloudFront is Amazon’s global Content Delivery Network (CDN). It runs edge locations worldwide that cache content closer to users, reducing latency and offloading S3.
 - Benefits: faster loads, TLS with ACM, fine-grained cache and headers, and secure private-bucket access via OAC.
 
 Create two distributions (one per bucket). Use **Origin Access Control (OAC)** and attach bucket policies so only CloudFront can read.
 
 Key settings for both (Console):
+
 - Origin domain: select the S3 bucket (not website endpoint)
 - Origin access: OAC (create new if needed)
 - Viewer protocol policy: Redirect HTTP to HTTPS
@@ -101,14 +104,17 @@ Key settings for both (Console):
 - Custom SSL: choose the ACM cert you issued (must be in us-east-1 for CloudFront)
 
 Site distribution specifics:
+
 - Default behavior: GET/HEAD
 - Custom error responses: map 403 and 404 to `/index.html` → HTTP 200 (SPA refresh/deep links)
 
 Assets distribution specifics:
+
 - Methods: GET/HEAD
 - Optional Response Headers Policy: add CORS if you ever fetch via XHR/canvas; not needed for simple <img>/<video>.
 
 Additional SPA setting for the site distribution:
+
 - Custom error responses: map 403 and 404 to `/index.html` with HTTP 200 (so client-side routing or refresh works).
 
 ### Bucket policy template (replace `<DISTRIBUTION_ID>` & bucket name)
@@ -123,10 +129,7 @@ Additional SPA setting for the site distribution:
       "Principal": {
         "Service": "cloudfront.amazonaws.com"
       },
-      "Action": [
-        "s3:GetObject",
-        "s3:ListBucket"
-      ],
+      "Action": ["s3:GetObject", "s3:ListBucket"],
       "Resource": [
         "arn:aws:s3:::danpa-resume-site-prod",
         "arn:aws:s3:::danpa-resume-site-prod/*"

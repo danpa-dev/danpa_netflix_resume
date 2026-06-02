@@ -86,19 +86,22 @@ const useModal = (initialState: boolean = false): UseModalReturn => {
     }
   }, [isOpen, open, close]);
 
-  const closeWithConfirmation = useCallback(async (confirmationMessage?: string): Promise<boolean> => {
-    if (confirmationMessage) {
-      const confirmed = window.confirm(confirmationMessage);
-      if (confirmed) {
+  const closeWithConfirmation = useCallback(
+    async (confirmationMessage?: string): Promise<boolean> => {
+      if (confirmationMessage) {
+        const confirmed = window.confirm(confirmationMessage);
+        if (confirmed) {
+          close();
+          return true;
+        }
+        return false;
+      } else {
         close();
         return true;
       }
-      return false;
-    } else {
-      close();
-      return true;
-    }
-  }, [close]);
+    },
+    [close]
+  );
 
   // Cleanup timeout on unmount
   useEffect(() => {
@@ -119,7 +122,7 @@ const useModal = (initialState: boolean = false): UseModalReturn => {
     triggerPosition,
     setTriggerPosition,
     isAnimating,
-    setIsAnimating
+    setIsAnimating,
   };
 };
 

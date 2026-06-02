@@ -22,13 +22,18 @@
 
 /* Micro-interaction utilities */
 .u-hover-lift {
-  transition: transform var(--dur-med) var(--ease-standard),
-              box-shadow var(--dur-med) var(--ease-standard),
-              background-color var(--dur-med) var(--ease-standard);
+  transition:
+    transform var(--dur-med) var(--ease-standard),
+    box-shadow var(--dur-med) var(--ease-standard),
+    background-color var(--dur-med) var(--ease-standard);
 }
 
-.u-hover-lift:hover { transform: translateY(-2px) scale(1.03); }
-.u-hover-lift:active { transform: translateY(0) scale(0.99); }
+.u-hover-lift:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+.u-hover-lift:active {
+  transform: translateY(0) scale(0.99);
+}
 
 @media (prefers-reduced-motion: reduce) {
   .u-hover-lift,
@@ -38,4 +43,3 @@
     transform: none;
   }
 }
-

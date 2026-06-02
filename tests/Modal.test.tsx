@@ -53,6 +53,17 @@ describe('Modal', () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
+  it('calls onClose once when Escape originates inside the modal', () => {
+    const onClose = vi.fn();
+    render(
+      <Modal isOpen={true} onClose={onClose}>
+        <p>Content</p>
+      </Modal>
+    );
+    fireEvent.keyDown(screen.getByLabelText('Close modal'), { key: 'Escape' });
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
   it('does not close on Escape when closeOnEscape is false', () => {
     const onClose = vi.fn();
     render(

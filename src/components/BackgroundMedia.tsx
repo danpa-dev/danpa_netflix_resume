@@ -18,11 +18,13 @@ const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
   posterSrc,
   className = '',
   onLoad,
-  onError
+  onError,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-  const [currentMedia, setCurrentMedia] = useState<'video' | 'image' | 'gradient'>('gradient');
+  const [currentMedia, setCurrentMedia] = useState<
+    'video' | 'image' | 'gradient'
+  >('gradient');
   const videoRef = useRef<HTMLVideoElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 
@@ -68,7 +70,7 @@ const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
   const handleVideoCanPlay = () => {
     // Video is ready to play
     if (videoRef.current) {
-      videoRef.current.play().catch((error) => {
+      videoRef.current.play().catch(error => {
         console.warn('Video autoplay failed:', error);
         // Fall back to image if autoplay fails
         setCurrentMedia('image');
@@ -77,7 +79,10 @@ const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
   };
 
   return (
-    <div className={`background-media ${className} ${isLoading ? 'loading' : ''} ${hasError ? 'error' : ''}`} aria-hidden="true">
+    <div
+      className={`background-media ${className} ${isLoading ? 'loading' : ''} ${hasError ? 'error' : ''}`}
+      aria-hidden="true"
+    >
       {/* Video Background */}
       {currentMedia === 'video' && videoSrc && (
         <video
@@ -95,9 +100,7 @@ const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
           onCanPlay={handleVideoCanPlay}
         >
           <source src={videoSrc} type="video/mp4" />
-          {imageSrc && (
-            <img src={imageSrc} alt="" className="video-fallback" />
-          )}
+          {imageSrc && <img src={imageSrc} alt="" className="video-fallback" />}
         </video>
       )}
 
@@ -116,9 +119,7 @@ const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
       )}
 
       {/* Gradient Fallback */}
-      {currentMedia === 'gradient' && (
-        <div className="background-gradient" />
-      )}
+      {currentMedia === 'gradient' && <div className="background-gradient" />}
 
       {/* Loading Overlay */}
       {isLoading && (

@@ -11,75 +11,64 @@ import galaxy from './images/galaxy.jpeg';
 import infra from './images/infra.jpeg';
 import language from './images/language.jpeg';
 import pipelineEng from './images/pipeline_eng.webp';
-import testBac from './images/test_bac.jpeg';
 import testJpeg from './images/test.jpeg';
-import we1Thumb from './images/we-1-thumb.jpg';
-import we2Thumb from './images/we-2-thumb.jpg';
-import we3Thumb from './images/we-3-thumb.jpg';
 
 // Videos
-import cloud from './videos/cloud.mp4';
 import car from './videos/car.mp4';
 import danpardy from './videos/danpardy.mp4';
-import dataBender from './videos/data_bender.mp4';
 import FathomVid from './videos/FathomVid.mp4';
-import graduation from './videos/graduation.mp4';
 import hp1 from './videos/hp1.mp4';
 import hps2 from './videos/hps2.mp4';
 import infraVideo from './videos/infra.mp4';
 import languageVideo from './videos/language.mp4';
-import mason from './videos/mason.mp4';
 import pipeline from './videos/pipeline.mp4';
 import spar from './videos/spar.mp4';
 import swat from './videos/swat.mp4';
 import testMp4 from './videos/test.mp4';
 import we1Clip from './videos/we-1-clip.mp4';
-import we2Clip from './videos/we-2-clip.mp4';
 import we3Clip from './videos/we-3-clip.mp4';
 
 /** Maps plain filename to Vite-hashed URL. Keys are the exact filenames
  *  (e.g. "FathomImage.jpeg", "hp1.mp4"). */
 export const assetMap: Record<string, string> = {
   // images
-  'danhp.webp':           danhp,
-  'FathomImage.jpeg':     FathomImage,
-  'galaxy.jpeg':          galaxy,
-  'infra.jpeg':           infra,
-  'language.jpeg':        language,
-  'pipeline_eng.webp':    pipelineEng,
-  'test_bac.jpeg':        testBac,
-  'test.jpeg':            testJpeg,
-  'we-1-thumb.jpg':       we1Thumb,
-  'we-2-thumb.jpg':       we2Thumb,
-  'we-3-thumb.jpg':       we3Thumb,
+  'danhp.webp': danhp,
+  'FathomImage.jpeg': FathomImage,
+  'galaxy.jpeg': galaxy,
+  'infra.jpeg': infra,
+  'language.jpeg': language,
+  'pipeline_eng.webp': pipelineEng,
+  'test.jpeg': testJpeg,
   // videos
-  'car.mp4':              car,
-  'danpardy.mp4':         danpardy,
-  'cloud.mp4':            cloud,
-  'data_bender.mp4':      dataBender,
-  'FathomVid.mp4':        FathomVid,
-  'graduation.mp4':       graduation,
-  'hp1.mp4':              hp1,
-  'hps2.mp4':             hps2,
-  'infra.mp4':            infraVideo,
-  'language.mp4':         languageVideo,
-  'mason.mp4':            mason,
-  'pipeline.mp4':         pipeline,
-  'spar.mp4':             spar,
-  'swat.mp4':             swat,
-  'test.mp4':             testMp4,
-  'we-1-clip.mp4':        we1Clip,
-  'we-2-clip.mp4':        we2Clip,
-  'we-3-clip.mp4':        we3Clip,
+  'car.mp4': car,
+  'danpardy.mp4': danpardy,
+  'FathomVid.mp4': FathomVid,
+  'hp1.mp4': hp1,
+  'hps2.mp4': hps2,
+  'infra.mp4': infraVideo,
+  'language.mp4': languageVideo,
+  'pipeline.mp4': pipeline,
+  'spar.mp4': spar,
+  'swat.mp4': swat,
+  'test.mp4': testMp4,
+  'we-1-clip.mp4': we1Clip,
+  'we-3-clip.mp4': we3Clip,
 };
 
 /**
- * Resolve an asset key to its hashed URL. Returns the original value if it
- * doesn't look like an asset key (starts with / or http).
+ * Resolve an asset key to its hashed URL. External URLs and absolute public
+ * paths pass through unchanged. Unknown bare asset keys are rejected.
  */
 export function resolveAsset(key: string | undefined): string | undefined {
   if (!key) return key;
   // External URLs and absolute public/ paths pass through
-  if (key.startsWith('/') || key.startsWith('http')) return key;
-  return assetMap[key] || key;
+  if (
+    key.startsWith('/') ||
+    key.startsWith('http://') ||
+    key.startsWith('https://')
+  )
+    return key;
+  const resolved = assetMap[key];
+  if (!resolved) throw new Error(`Unknown asset key: ${key}`);
+  return resolved;
 }

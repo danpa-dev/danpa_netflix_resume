@@ -11,7 +11,12 @@ if (!fs.existsSync(pdfPath)) {
   process.exit(1);
 }
 
-const outPath = path.resolve(process.cwd(), '.taskmaster', 'docs', 'resume-text.txt');
+const outPath = path.resolve(
+  process.cwd(),
+  '.taskmaster',
+  'docs',
+  'resume-text.txt'
+);
 fs.mkdirSync(path.dirname(outPath), { recursive: true });
 
 try {
@@ -23,4 +28,3 @@ try {
   console.error('Failed to extract PDF text:', err?.message || err);
   process.exit(2);
 }
-

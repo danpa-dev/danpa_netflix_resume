@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState, useCallback } from 'react';
+import React, {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
 import './VideoPlayer.css';
 
 export interface VideoPlayerProps {
@@ -27,7 +33,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   loop = true,
   className = '',
   onLoaded,
-  onError
+  onError,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -36,7 +42,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [isMuted, setIsMuted] = useState<boolean>(muted);
   const [autoplayBlocked, setAutoplayBlocked] = useState<boolean>(false);
 
-  const canAutoplay = useMemo(() => autoPlay && !prefersReducedMotion(), [autoPlay]);
+  const canAutoplay = useMemo(
+    () => autoPlay && !prefersReducedMotion(),
+    [autoPlay]
+  );
 
   // Attempt autoplay on mount when allowed
   useEffect(() => {
@@ -145,7 +154,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             onClick={togglePlay}
             aria-label={isPlaying ? 'Pause video' : 'Play video'}
           >
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
               <path d="M8 5v14l11-7z" fill="currentColor" />
             </svg>
           </button>
@@ -167,13 +182,18 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         {hasError && (
           <div className="video-error" role="alert">
             <p>Unable to load video.</p>
-            <button className="video-control-btn" onClick={() => {
-              setHasError(false);
-              const v = videoRef.current;
-              if (!v) return;
-              v.load();
-              setTimeout(() => togglePlay(), 0);
-            }}>Retry</button>
+            <button
+              className="video-control-btn"
+              onClick={() => {
+                setHasError(false);
+                const v = videoRef.current;
+                if (!v) return;
+                v.load();
+                setTimeout(() => togglePlay(), 0);
+              }}
+            >
+              Retry
+            </button>
           </div>
         )}
       </div>
@@ -182,4 +202,3 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 };
 
 export default VideoPlayer;
-

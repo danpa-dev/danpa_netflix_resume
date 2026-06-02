@@ -7,8 +7,8 @@ import { mkdirSync, existsSync } from 'fs';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
 
-const INPUT_DIR = join(root, 'public', 'images');
-const OUT_DIR = join(root, 'public', 'images');
+const INPUT_DIR = join(root, 'src', 'assets', 'images');
+const OUT_DIR = join(root, 'src', 'assets', 'images');
 
 async function processImage(file) {
   const name = basename(file).replace(/\.(jpg|jpeg|png)$/i, '');
@@ -25,7 +25,7 @@ async function processImage(file) {
 async function run() {
   const files = await glob(`${INPUT_DIR}/**/*.{jpg,jpeg,png}`);
   if (files.length === 0) {
-    console.log('No source images found in public/images');
+    console.log('No source images found in src/assets/images');
     return;
   }
   for (const f of files) {
@@ -38,4 +38,3 @@ async function run() {
 }
 
 run();
-

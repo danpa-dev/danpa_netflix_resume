@@ -46,7 +46,7 @@
   /* Allow vertical page scroll while supporting horizontal pan */
   touch-action: pan-y pan-x;
   overscroll-behavior-inline: contain;
-  
+
   /* Hide scrollbars for clean appearance */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -78,11 +78,15 @@
   color: var(--text-primary);
   cursor: pointer;
   transition:
-    opacity var(--dur-slow, 300ms) var(--ease-standard, cubic-bezier(0.2, 0, 0, 1)),
+    opacity var(--dur-slow, 300ms)
+      var(--ease-standard, cubic-bezier(0.2, 0, 0, 1)),
     visibility 0s linear,
-    transform var(--dur-slow, 300ms) var(--ease-standard, cubic-bezier(0.2, 0, 0, 1)),
-    background-color var(--dur-med, 200ms) var(--ease-standard, cubic-bezier(0.2, 0, 0, 1)),
-    box-shadow var(--dur-med, 200ms) var(--ease-standard, cubic-bezier(0.2, 0, 0, 1));
+    transform var(--dur-slow, 300ms)
+      var(--ease-standard, cubic-bezier(0.2, 0, 0, 1)),
+    background-color var(--dur-med, 200ms)
+      var(--ease-standard, cubic-bezier(0.2, 0, 0, 1)),
+    box-shadow var(--dur-med, 200ms)
+      var(--ease-standard, cubic-bezier(0.2, 0, 0, 1));
   opacity: 0;
   visibility: hidden;
 }
@@ -99,7 +103,8 @@
 
 /* Bounce animation for when button is clicked but can't scroll */
 @keyframes carousel-arrow-bounce-left {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(-50%) translateX(0);
   }
   50% {
@@ -108,7 +113,8 @@
 }
 
 @keyframes carousel-arrow-bounce-right {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(-50%) translateX(0);
   }
   50% {
@@ -147,8 +153,12 @@
 }
 
 /* Subtle slide-in on hover */
-.carousel-container:hover .carousel-arrow-left { transform: translateY(-50%) translateX(4px); }
-.carousel-container:hover .carousel-arrow-right { transform: translateY(-50%) translateX(-4px); }
+.carousel-container:hover .carousel-arrow-left {
+  transform: translateY(-50%) translateX(4px);
+}
+.carousel-container:hover .carousel-arrow-right {
+  transform: translateY(-50%) translateX(-4px);
+}
 
 /* Carousel Items */
 .carousel-item {
@@ -160,13 +170,17 @@
 
 /* Keep arrows visible while hovering cards under them */
 /* Prevent underlying card hover from hiding arrows (safeguard) */
-.carousel-arrow { pointer-events: auto; }
+.carousel-arrow {
+  pointer-events: auto;
+}
 
 /* Thumbnail Image */
 .carousel-item-thumbnail {
   position: relative;
   width: 100%;
-  height: calc(var(--carousel-card-width, 300px) * 0.5625); /* 16:9 aspect ratio (9/16 = 0.5625) */
+  height: calc(
+    var(--carousel-card-width, 300px) * 0.5625
+  ); /* 16:9 aspect ratio (9/16 = 0.5625) */
   background-color: var(--primary-dark);
   overflow: hidden;
   transition: height var(--transition-normal);
@@ -298,7 +312,7 @@
   .carousel-track {
     transition: none;
   }
-  
+
   .skeleton-thumbnail,
   .skeleton-title,
   .skeleton-description {

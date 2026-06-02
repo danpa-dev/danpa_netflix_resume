@@ -20,11 +20,11 @@
   /* Stronger on left, fading to transparent across hero */
   background: linear-gradient(
     90deg,
-    rgba(0, 0, 0, 0.80) 0%,
+    rgba(0, 0, 0, 0.8) 0%,
     rgba(0, 0, 0, 0.55) 28%,
     rgba(0, 0, 0, 0.25) 55%,
     rgba(0, 0, 0, 0.08) 72%,
-    rgba(0, 0, 0, 0.00) 85%
+    rgba(0, 0, 0, 0) 85%
   );
   pointer-events: none;
   z-index: -1; /* keep below content but above media */
@@ -39,7 +39,11 @@
 }
 
 .text-overlay-title {
-  font-size: clamp(1.75rem, 6.5vw, 4rem); /* Slightly smaller at narrow widths */
+  font-size: clamp(
+    1.75rem,
+    6.5vw,
+    4rem
+  ); /* Slightly smaller at narrow widths */
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
   margin: 0 0 var(--spacing-lg) 0;
@@ -90,7 +94,7 @@
   .text-overlay-content {
     padding: 0 var(--spacing-lg);
   }
-  
+
   .text-overlay-title {
     margin-bottom: var(--spacing-md);
   }
@@ -100,11 +104,11 @@
   .text-overlay-content {
     padding: 0 var(--spacing-md);
   }
-  
+
   .text-overlay-title {
     margin-bottom: var(--spacing-sm);
   }
-  
+
   .text-overlay-subtitle {
     margin-bottom: var(--spacing-sm);
   }
@@ -115,16 +119,16 @@
   .text-overlay {
     background: rgba(0, 0, 0, 0.7); /* Stronger overlay for high contrast */
   }
-  
+
   .text-overlay-title,
   .text-overlay-subtitle {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
   }
-  
+
   .text-overlay-title {
     color: #ffffff;
   }
-  
+
   .text-overlay-subtitle {
     color: #e0e0e0;
   }
@@ -151,7 +155,7 @@
     background: none;
     backdrop-filter: none;
   }
-  
+
   .text-overlay-title,
   .text-overlay-subtitle {
     text-shadow: none;
@@ -173,4 +177,4 @@
 .text-overlay-subtitle {
   /* Light gray text on dark overlay provides >4.5:1 contrast ratio */
   color: #e0e0e0;
-} 
+}

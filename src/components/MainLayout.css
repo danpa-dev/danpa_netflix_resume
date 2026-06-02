@@ -23,27 +23,37 @@
 }
 
 /* Section Spacing */
-.carousel-sections > * + * { margin-top: var(--space-48); }
+.carousel-sections > * + * {
+  margin-top: var(--space-48);
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .carousel-sections { padding: var(--space-32) 0; }
-  
+  .carousel-sections {
+    padding: var(--space-32) 0;
+  }
+
   .carousel-sections-container {
     padding: 0 var(--spacing-sm);
   }
-  
-  .carousel-sections > * + * { margin-top: var(--space-32); }
+
+  .carousel-sections > * + * {
+    margin-top: var(--space-32);
+  }
 }
 
 @media (max-width: 480px) {
-  .carousel-sections { padding: var(--space-24) 0; }
-  
+  .carousel-sections {
+    padding: var(--space-24) 0;
+  }
+
   .carousel-sections-container {
     padding: 0 var(--spacing-xs);
   }
-  
-  .carousel-sections > * + * { margin-top: var(--space-24); }
+
+  .carousel-sections > * + * {
+    margin-top: var(--space-24);
+  }
 }
 
 /* Performance optimizations */
@@ -62,8 +72,8 @@
   .carousel-sections {
     padding: var(--spacing-lg) 0;
   }
-  
+
   .carousel-sections-container {
     padding: 0 var(--spacing-sm);
   }
-} 
+}

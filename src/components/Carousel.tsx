@@ -13,7 +13,13 @@ interface CarouselItem {
   thumbnailUrl?: string;
   thumbnailObjectPosition?: string;
   videoUrl?: string;
-  seasons?: Array<{ id?: string; title?: string; name?: string; description?: string; videoUrl?: string }>;
+  seasons?: Array<{
+    id?: string;
+    title?: string;
+    name?: string;
+    description?: string;
+    videoUrl?: string;
+  }>;
 }
 
 interface CarouselProps {
@@ -24,12 +30,12 @@ interface CarouselProps {
   modalConfig?: ISectionModalConfig;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ 
-  title, 
-  items, 
+const Carousel: React.FC<CarouselProps> = ({
+  title,
+  items,
   className = '',
   defaultThumbnailUrl,
-  modalConfig
+  modalConfig,
 }) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -48,18 +54,14 @@ const Carousel: React.FC<CarouselProps> = ({
   const { dimensions, getCSSProperties } = useResponsiveCarousel({
     containerRef,
     minCardWidth: 200,
-    maxCardWidth: 400
+    maxCardWidth: 400,
   });
 
   // Use lazy loading hook for intersection-based visibility
-  const {
-    lazyItems,
-    observeItem,
-    unobserveItem,
-    forceLoadItem
-  } = useLazyCarousel(items, {
-    preloadDistance: 150
-  });
+  const { lazyItems, observeItem, unobserveItem, forceLoadItem } =
+    useLazyCarousel(items, {
+      preloadDistance: 150,
+    });
 
   // Check scroll position to enable/disable arrows
   const checkScrollPosition = () => {
@@ -215,10 +217,15 @@ const Carousel: React.FC<CarouselProps> = ({
   }, [items, forceLoadItem]);
 
   // State for bounce animation
-  const [bouncingArrow, setBouncingArrow] = useState<'left' | 'right' | null>(null);
+  const [bouncingArrow, setBouncingArrow] = useState<'left' | 'right' | null>(
+    null
+  );
 
   // Scroll functions
-  const scrollToDirection = (direction: 'left' | 'right', event?: React.MouseEvent) => {
+  const scrollToDirection = (
+    direction: 'left' | 'right',
+    event?: React.MouseEvent
+  ) => {
     if (!trackRef.current) return;
 
     // Always prevent click-through to items underneath
@@ -231,9 +238,10 @@ const Carousel: React.FC<CarouselProps> = ({
     const { scrollLeft, scrollWidth, clientWidth } = track;
 
     // Check if we can actually scroll in this direction (with small threshold for precision)
-    const canScroll = direction === 'left' 
-      ? scrollLeft > 1
-      : scrollLeft < scrollWidth - clientWidth - 1;
+    const canScroll =
+      direction === 'left'
+        ? scrollLeft > 1
+        : scrollLeft < scrollWidth - clientWidth - 1;
 
     if (!canScroll) {
       // Already at the limit - trigger bounce animation and prevent any action
@@ -245,9 +253,10 @@ const Carousel: React.FC<CarouselProps> = ({
     // Use dynamic dimensions for accurate scroll calculation
     const scrollDistance = dimensions.cardWidth + dimensions.gapSize;
 
-    const targetScrollLeft = direction === 'left' 
-      ? track.scrollLeft - scrollDistance
-      : track.scrollLeft + scrollDistance;
+    const targetScrollLeft =
+      direction === 'left'
+        ? track.scrollLeft - scrollDistance
+        : track.scrollLeft + scrollDistance;
 
     // Clamp to valid scroll range
     const maxScroll = scrollWidth - clientWidth;
@@ -255,49 +264,63 @@ const Carousel: React.FC<CarouselProps> = ({
 
     track.scrollTo({
       left: clampedScroll,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   };
 
   // Arrows are shown via CSS hover on the container; disabled state still applies
 
   // Ref callback to observe carousel items
-  const itemRefCallback = useCallback((element: HTMLDivElement | null, itemId: string) => {
-    if (element) {
-      observeItem(itemId, element);
-    } else {
-      unobserveItem(itemId);
-    }
-  }, [observeItem, unobserveItem]);
+  const itemRefCallback = useCallback(
+    (element: HTMLDivElement | null, itemId: string) => {
+      if (element) {
+        observeItem(itemId, element);
+      } else {
+        unobserveItem(itemId);
+      }
+    },
+    [observeItem, unobserveItem]
+  );
 
   return (
-    <section 
+    <section
       className={`carousel ${className}`}
       role="region"
       aria-labelledby={`carousel-${title.replace(/\s+/g, '-').toLowerCase()}`}
     >
       {/* Section Title */}
       <div className="carousel-header">
-        <h2 id={`carousel-${title.replace(/\s+/g, '-').toLowerCase()}`} className="carousel-title">{title}</h2>
-      </div>
-      
-              {/* Horizontal Scrolling Container */}
-        <div 
-          ref={containerRef}
-          className="carousel-container"
-          style={getCSSProperties() as React.CSSProperties}
+        <h2
+          id={`carousel-${title.replace(/\s+/g, '-').toLowerCase()}`}
+          className="carousel-title"
         >
+          {title}
+        </h2>
+      </div>
+
+      {/* Horizontal Scrolling Container */}
+      <div
+        ref={containerRef}
+        className="carousel-container"
+        style={getCSSProperties() as React.CSSProperties}
+      >
         {/* Left Arrow - Only show when scrolling left is possible */}
         {canScrollLeft && (
           <motion.button
             className={`carousel-arrow carousel-arrow-left ${bouncingArrow === 'left' ? 'bounce' : ''}`}
-            onClick={(e) => scrollToDirection('left', e)}
+            onClick={e => scrollToDirection('left', e)}
             aria-label="Previous items"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path
+                d="M15 18L9 12L15 6"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </motion.button>
         )}
@@ -306,13 +329,19 @@ const Carousel: React.FC<CarouselProps> = ({
         {canScrollRight && (
           <motion.button
             className={`carousel-arrow carousel-arrow-right ${bouncingArrow === 'right' ? 'bounce' : ''}`}
-            onClick={(e) => scrollToDirection('right', e)}
+            onClick={e => scrollToDirection('right', e)}
             aria-label="Next items"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path
+                d="M9 18L15 12L9 6"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </motion.button>
         )}
@@ -328,15 +357,15 @@ const Carousel: React.FC<CarouselProps> = ({
           onPointerCancel={handlePointerCancel}
           onClickCapture={handleClickCapture}
         >
-          {items.map((item) => {
+          {items.map(item => {
             const lazyItem = lazyItems.find(li => li.id === item.id);
             const isLoaded = lazyItem?.isLoaded || false;
 
             return (
-              <div 
-                key={item.id} 
+              <div
+                key={item.id}
                 className={`carousel-item ${isLoaded ? 'loaded' : ''}`}
-                ref={(element) => itemRefCallback(element, item.id)}
+                ref={element => itemRefCallback(element, item.id)}
                 role="listitem"
               >
                 {/* Loading Placeholder */}

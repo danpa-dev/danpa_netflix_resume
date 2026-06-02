@@ -45,9 +45,7 @@
       "path": "skills.json",
       "modal": {
         "heading": "Details",
-        "fields": [
-          { "key": "technologies", "label": "Skills" }
-        ]
+        "fields": [{ "key": "technologies", "label": "Skills" }]
       }
     },
     {
@@ -78,9 +76,7 @@
       "path": "volunteer-work.json",
       "modal": {
         "heading": "Details",
-        "fields": [
-          { "key": "technologies", "label": "Languages" }
-        ]
+        "fields": [{ "key": "technologies", "label": "Languages" }]
       }
     }
   ]

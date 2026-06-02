@@ -17,6 +17,7 @@ The goal is to ensure the modal is fully accessible (keyboard-only and screen re
 - `Modal.css` has responsive padding, border-radius adjustments, and safe-area support.
 
 Gaps for 7.4–7.5:
+
 - No explicit background content `aria-hidden`/`inert` management.
 - No `aria-describedby` wiring for modal content summary.
 - Missing `role="document"` on the inner content container for some ATs.
@@ -25,6 +26,7 @@ Gaps for 7.4–7.5:
 ## Design Overview
 
 ### Accessibility (7.4)
+
 - Background isolation
   - Toggle `aria-hidden="true"` (and `inert` when available) on `#root` while modal is open; remove on close.
   - Ensure the modal overlay itself is not hidden/inert.
@@ -39,6 +41,7 @@ Gaps for 7.4–7.5:
   - Respect `prefers-reduced-motion` (already partially handled in CSS) and maintain high-contrast outlines.
 
 ### Responsive & Mobile (7.5)
+
 - Layout
   - On small screens, modal uses near full-height with content scrollable (no background scroll).
   - Ensure `overscroll-behavior: contain` on the scrollable region to prevent scroll chaining.
@@ -49,6 +52,7 @@ Gaps for 7.4–7.5:
   - Swipe-to-close is out of scope for now; can be added later if needed.
 
 ### Documentation (7.6)
+
 - Create `docs/architecture/modal.md` with:
   - Overview, component hierarchy, interfaces
   - Accessibility strategy (focus trapping, ARIA patterns, background inerting)
@@ -58,6 +62,7 @@ Gaps for 7.4–7.5:
 ## Implementation Plan
 
 Files:
+
 - `src/components/Modal.tsx`
   - Add effect to toggle `aria-hidden` (and `inert` where supported) on `#root` while open.
   - Wire `aria-describedby` to a content region id (generated or provided via prop), defaulting to container’s first paragraph.
@@ -69,6 +74,7 @@ Files:
   - Author architecture doc per above.
 
 Testing:
+
 - Keyboard-only
   - Tab/Shift+Tab cycles within modal; Escape closes when enabled.
   - Focus returns to trigger after close.
@@ -80,6 +86,7 @@ Testing:
   - Close button reachable and large enough.
 
 Out of Scope / Non-Goals:
+
 - Complex gestures (swipe-to-close) and video player work (Task 8).
 
 ## Rollout Plan
@@ -88,4 +95,3 @@ Out of Scope / Non-Goals:
 2. Add `docs/architecture/modal.md` for 7.6.
 3. Verify locally with keyboard and a screen reader (VoiceOver).
 4. Land via PR.
-

@@ -42,17 +42,17 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
 
         {/* Desktop Navigation */}
         <nav className="nav-desktop" aria-label="Primary">
-          <a 
-            href="https://www.linkedin.com/in/dansdansrevolution/" 
-            target="_blank" 
+          <a
+            href="https://www.linkedin.com/in/dansdansrevolution/"
+            target="_blank"
             rel="noopener noreferrer"
             className="nav-link"
           >
             LinkedIn
           </a>
-          <a 
-            href="https://github.com/danpa-dev" 
-            target="_blank" 
+          <a
+            href="https://github.com/danpa-dev"
+            target="_blank"
             rel="noopener noreferrer"
             className="nav-link"
           >
@@ -60,13 +60,19 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
           </a>
           <span className="nav-text">(832) 494-0669</span>
           <span className="nav-text">parkdanws@gmail.com</span>
-          <a className="btn btn-primary nav-btn" href={href} download={downloadName} target={href?.startsWith('http') ? '_blank' : undefined} rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}>
+          <a
+            className="btn btn-primary nav-btn"
+            href={href}
+            download={downloadName}
+            target={href?.startsWith('http') ? '_blank' : undefined}
+            rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+          >
             Download Resume
           </a>
         </nav>
 
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className={`mobile-menu-btn ${isMobileMenuOpen ? 'active' : ''}`}
           onClick={toggleMobileMenu}
           aria-label="Toggle mobile menu"
@@ -79,19 +85,23 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
         </button>
 
         {/* Mobile Navigation */}
-        <nav id="nav-mobile" className={`nav-mobile ${isMobileMenuOpen ? 'open' : ''}`} aria-label="Mobile">
-          <a 
-            href="https://www.linkedin.com/in/dansdansrevolution/" 
-            target="_blank" 
+        <nav
+          id="nav-mobile"
+          className={`nav-mobile ${isMobileMenuOpen ? 'open' : ''}`}
+          aria-label="Mobile"
+        >
+          <a
+            href="https://www.linkedin.com/in/dansdansrevolution/"
+            target="_blank"
             rel="noopener noreferrer"
             className="nav-link"
             onClick={closeMobileMenu}
           >
             LinkedIn
           </a>
-          <a 
-            href="https://github.com/danpa-dev" 
-            target="_blank" 
+          <a
+            href="https://github.com/danpa-dev"
+            target="_blank"
             rel="noopener noreferrer"
             className="nav-link"
             onClick={closeMobileMenu}
@@ -100,7 +110,14 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
           </a>
           <span className="nav-text">(832) 494-0669</span>
           <span className="nav-text">parkdanws@gmail.com</span>
-          <a className="btn btn-primary nav-btn" href={href} download={downloadName} target={href?.startsWith('http') ? '_blank' : undefined} rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined} onClick={closeMobileMenu}>
+          <a
+            className="btn btn-primary nav-btn"
+            href={href}
+            download={downloadName}
+            target={href?.startsWith('http') ? '_blank' : undefined}
+            rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+            onClick={closeMobileMenu}
+          >
             Download Resume
           </a>
         </nav>
@@ -109,4 +126,4 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
   );
 };
 
-export default Header; 
+export default Header;

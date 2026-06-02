@@ -16,15 +16,17 @@ const SeasonSelector: React.FC<SeasonSelectorProps> = ({
   seasons,
   selectedIndex,
   onChange,
-  className = ''
+  className = '',
 }) => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const selected = seasons[selectedIndex];
-  const selectedLabel = (
-    selected?.title || selected?.name || selected?.id || `Season ${selectedIndex + 1}`
-  );
+  const selectedLabel =
+    selected?.title ||
+    selected?.name ||
+    selected?.id ||
+    `Season ${selectedIndex + 1}`;
 
   useEffect(() => {
     const onDocClick = (e: MouseEvent) => {
@@ -37,7 +39,7 @@ const SeasonSelector: React.FC<SeasonSelectorProps> = ({
     return () => document.removeEventListener('mousedown', onDocClick);
   }, []);
 
-  const toggle = () => setOpen((v) => !v);
+  const toggle = () => setOpen(v => !v);
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
@@ -54,7 +56,7 @@ const SeasonSelector: React.FC<SeasonSelectorProps> = ({
       onChange(prev);
     } else if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      setOpen((v) => !v);
+      setOpen(v => !v);
     }
   };
 
@@ -77,7 +79,13 @@ const SeasonSelector: React.FC<SeasonSelectorProps> = ({
         <span className="season-trigger-caret" aria-hidden>
           {/* down chevron */}
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-            <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path
+              d="M6 9l6 6 6-6"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </span>
       </button>
@@ -102,7 +110,7 @@ const SeasonSelector: React.FC<SeasonSelectorProps> = ({
                   aria-selected={idx === selectedIndex}
                   className={`season-option ${idx === selectedIndex ? 'selected' : ''}`}
                   onClick={() => handleSelect(idx)}
-                  onKeyDown={(e) => {
+                  onKeyDown={e => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
                       handleSelect(idx);
@@ -122,4 +130,3 @@ const SeasonSelector: React.FC<SeasonSelectorProps> = ({
 };
 
 export default SeasonSelector;
-

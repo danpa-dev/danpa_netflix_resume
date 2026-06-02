@@ -2,7 +2,7 @@
 /*
 Fetch images/videos from royalty-free providers (Pexels/Unsplash/Pixabay) for items
 in section JSON files referenced by src/data/manifest.json that lack thumbnails or videos.
-Saves assets under public/.
+	Saves assets under src/assets/.
 
 Usage:
   PEXELS_API_KEY=... UNSPLASH_ACCESS_KEY=... node scripts/fetch-assets.mjs --provider=pexels --type=all
@@ -19,13 +19,15 @@ import https from 'https';
 const ROOT = path.join(path.dirname(new URL(import.meta.url).pathname), '..');
 const DATA_DIR = path.join(ROOT, 'src', 'data');
 const MANIFEST_PATH = path.join(DATA_DIR, 'manifest.json');
-const IMAGES_DIR = path.join(ROOT, 'public', 'images');
-const VIDEOS_DIR = path.join(ROOT, 'public', 'videos');
+const IMAGES_DIR = path.join(ROOT, 'src', 'assets', 'images');
+const VIDEOS_DIR = path.join(ROOT, 'src', 'assets', 'videos');
 
-const argv = Object.fromEntries(process.argv.slice(2).map(a => {
-  const [k, v] = a.split('=');
-  return [k.replace(/^--/, ''), v ?? true];
-}));
+const argv = Object.fromEntries(
+  process.argv.slice(2).map(a => {
+    const [k, v] = a.split('=');
+    return [k.replace(/^--/, ''), v ?? true];
+  })
+);
 
 const provider = (argv.provider || 'pexels').toLowerCase();
 const type = (argv.type || 'all').toLowerCase(); // images|videos|all
@@ -51,13 +53,13 @@ function ensureDir(dir) {
 
 function httpsGet(url, headers = {}) {
   return new Promise((resolve, reject) => {
-    const req = https.get(url, { headers }, (res) => {
+    const req = https.get(url, { headers }, res => {
       if (res.statusCode && res.statusCode >= 400) {
         reject(new Error(`HTTP ${res.statusCode} for ${url}`));
         return;
       }
       const chunks = [];
-      res.on('data', (d) => chunks.push(d));
+      res.on('data', d => chunks.push(d));
       res.on('end', () => resolve(Buffer.concat(chunks)));
     });
     req.on('error', reject);
@@ -75,7 +77,7 @@ function buildQuery(item) {
     .slice(0, 3)
     .join(' ');
   // Cinematic/sophisticated bias words
-  return `${phrases} cinematic sophisticated professional film still bokeh`; 
+  return `${phrases} cinematic sophisticated professional film still bokeh`;
 }
 
 async function searchPexelsImages(q) {
@@ -85,9 +87,15 @@ async function searchPexelsImages(q) {
   const data = JSON.parse(buf.toString('utf8'));
   const hits = data.photos || [];
   // Prefer wider images
-  const best = hits.sort((a, b) => (b.width * b.height) - (a.width * a.height))[0];
+  const best = hits.sort((a, b) => b.width * b.height - a.width * a.height)[0];
   if (!best) return null;
-  return best.src?.large2x || best.src?.large || best.src?.original || best.src?.medium || null;
+  return (
+    best.src?.large2x ||
+    best.src?.large ||
+    best.src?.original ||
+    best.src?.medium ||
+    null
+  );
 }
 
 async function searchPexelsVideos(q) {
@@ -99,7 +107,9 @@ async function searchPexelsVideos(q) {
   const best = hits[0];
   if (!best) return null;
   // Pick a 720p-ish file if available
-  const file = (best.video_files || []).find(v => v.height >= 720 && v.quality === 'hd') || best.video_files?.[0];
+  const file =
+    (best.video_files || []).find(v => v.height >= 720 && v.quality === 'hd') ||
+    best.video_files?.[0];
   return file?.link || null;
 }
 
@@ -107,25 +117,29 @@ async function searchUnsplashImages(q) {
   if (!UNSPLASH_KEY) return null;
   const url = `https://api.unsplash.com/search/photos?per_page=10&query=${encodeURIComponent(q)}`;
   const buf = await httpsGet(url, {
-    'Authorization': `Client-ID ${UNSPLASH_KEY}`,
-    'Accept-Version': 'v1'
+    Authorization: `Client-ID ${UNSPLASH_KEY}`,
+    'Accept-Version': 'v1',
   });
   const data = JSON.parse(buf.toString('utf8'));
-  const best = (data.results || []).sort((a, b) => (b.width * b.height) - (a.width * a.height))[0];
+  const best = (data.results || []).sort(
+    (a, b) => b.width * b.height - a.width * a.height
+  )[0];
   if (!best) return null;
   return {
     url: best.urls?.regular || best.urls?.full || best.urls?.small || null,
     download_location: best.links?.download_location,
     credit: {
       photographer: best.user?.name,
-      html: best.links?.html
-    }
+      html: best.links?.html,
+    },
   };
 }
 
 async function getImageURL(q) {
-  if (provider === 'pexels') return (await searchPexelsImages(q)) || (await searchUnsplashImages(q));
-  if (provider === 'unsplash') return (await searchUnsplashImages(q)) || (await searchPexelsImages(q));
+  if (provider === 'pexels')
+    return (await searchPexelsImages(q)) || (await searchUnsplashImages(q));
+  if (provider === 'unsplash')
+    return (await searchUnsplashImages(q)) || (await searchPexelsImages(q));
   return null;
 }
 
@@ -145,7 +159,8 @@ async function run() {
 
   const manifest = readJSON(MANIFEST_PATH);
   const sections = Array.isArray(manifest.sections) ? manifest.sections : [];
-  const metadataSourceId = manifest.metadataSource || sections.find(s => s.enabled)?.id;
+  const metadataSourceId =
+    manifest.metadataSource || sections.find(s => s.enabled)?.id;
   const metadataSourceSection = sections.find(s => s.id === metadataSourceId);
   const metadataSourceContent = metadataSourceSection
     ? readJSON(path.join(DATA_DIR, metadataSourceSection.path))
@@ -156,7 +171,12 @@ async function run() {
 
   for (const section of sections) {
     if (!section.enabled) continue;
-    if (onlySection && section.type !== onlySection && section.id !== onlySection) continue;
+    if (
+      onlySection &&
+      section.type !== onlySection &&
+      section.id !== onlySection
+    )
+      continue;
     const sectionPath = path.join(DATA_DIR, section.path);
     const sectionContent = readJSON(sectionPath);
     if (!Array.isArray(sectionContent.items)) continue;
@@ -183,14 +203,18 @@ async function run() {
       };
 
       // Images
-      if ((type === 'images' || type === 'all') && (replace || isPlaceholderThumb())) {
+      if (
+        (type === 'images' || type === 'all') &&
+        (replace || isPlaceholderThumb())
+      ) {
         try {
           const result = await getImageURL(q);
           if (result) {
             if (provider === 'unsplash' || hotlink) {
               // Unsplash hotlinking: set direct URL and register download event
               const url = typeof result === 'string' ? result : result.url;
-              const downloadLoc = typeof result === 'object' ? result.download_location : null;
+              const downloadLoc =
+                typeof result === 'object' ? result.download_location : null;
               if (url) {
                 item.thumbnailUrl = url;
                 // Optionally store credit fields for UI display later
@@ -201,8 +225,8 @@ async function run() {
               if (downloadLoc) {
                 try {
                   await httpsGet(downloadLoc, {
-                    'Authorization': `Client-ID ${UNSPLASH_KEY}`,
-                    'Accept-Version': 'v1'
+                    Authorization: `Client-ID ${UNSPLASH_KEY}`,
+                    'Accept-Version': 'v1',
                   });
                 } catch {}
               }
@@ -211,8 +235,12 @@ async function run() {
               if (url) {
                 const name = normalizeFilename(baseId, 'thumb', 'jpg');
                 const outPath = path.join(IMAGES_DIR, name);
-                await downloadTo(url, outPath, provider === 'pexels' ? { Authorization: PEXELS_KEY } : {});
-                item.thumbnailUrl = `/images/${name}`;
+                await downloadTo(
+                  url,
+                  outPath,
+                  provider === 'pexels' ? { Authorization: PEXELS_KEY } : {}
+                );
+                item.thumbnailUrl = name;
                 updates++;
                 sectionUpdated = true;
               }
@@ -224,14 +252,17 @@ async function run() {
       }
 
       // Videos (best-effort via Pexels)
-      if ((type === 'videos' || type === 'all') && (replace || isPlaceholderVideo())) {
+      if (
+        (type === 'videos' || type === 'all') &&
+        (replace || isPlaceholderVideo())
+      ) {
         try {
           const url = await getVideoURL(q);
           if (url) {
             const name = normalizeFilename(baseId, 'clip', 'mp4');
             const outPath = path.join(VIDEOS_DIR, name);
             await downloadTo(url, outPath, { Authorization: PEXELS_KEY });
-            item.videoUrl = `/videos/${name}`;
+            item.videoUrl = name;
             updates++;
             sectionUpdated = true;
           }
@@ -247,12 +278,16 @@ async function run() {
   }
 
   if (updates > 0) {
-    console.log(`Updated ${updatedFiles} section file(s) with ${updates} asset reference(s).`);
+    console.log(
+      `Updated ${updatedFiles} section file(s) with ${updates} asset reference(s).`
+    );
   } else {
     console.log('No updates made. Assets likely already present.');
   }
 
-  console.log('Done. Remember to run: npm run generate:images to create WebP/AVIF variants.');
+  console.log(
+    'Done. Remember to run: npm run generate:images to create WebP/AVIF variants.'
+  );
 }
 
 run();

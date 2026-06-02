@@ -15,7 +15,7 @@ import {
   filterContent,
   getSections,
   getContentStats,
-  formatContentForDisplay
+  formatContentForDisplay,
 } from '../utils/contentLoader';
 import type { ContentLoadResult } from '../utils/contentLoader';
 
@@ -42,7 +42,9 @@ export interface UseContentReturn extends UseContentState {
 
   // Search and filter
   searchContent: (searchTerm: string, caseSensitive?: boolean) => ContentItem[];
-  filterContent: (filters: Parameters<typeof filterContent>[1]) => ContentItem[];
+  filterContent: (
+    filters: Parameters<typeof filterContent>[1]
+  ) => ContentItem[];
 
   // Actions
   refresh: () => Promise<void>;
@@ -65,7 +67,7 @@ export const useContent = (autoLoad: boolean = true): UseContentReturn => {
     error: null,
     isValid: false,
     stats: null,
-    lastUpdated: null
+    lastUpdated: null,
   });
 
   // Load content function
@@ -85,20 +87,21 @@ export const useContent = (autoLoad: boolean = true): UseContentReturn => {
           error: null,
           isValid: formatted.isValid,
           stats,
-          lastUpdated: result.data.metadata.lastUpdated
+          lastUpdated: result.data.metadata.lastUpdated,
         });
       } else {
         setState(prev => ({
           ...prev,
           loading: false,
-          error: result.error || 'Failed to load content'
+          error: result.error || 'Failed to load content',
         }));
       }
     } catch (error) {
       setState(prev => ({
         ...prev,
         loading: false,
-        error: error instanceof Error ? error.message : 'Unknown error occurred'
+        error:
+          error instanceof Error ? error.message : 'Unknown error occurred',
       }));
     }
   }, []);
@@ -116,13 +119,14 @@ export const useContent = (autoLoad: boolean = true): UseContentReturn => {
     ...state,
 
     // Content getters
-    getWorkExperience: () => content ? getWorkExperience(content) : [],
-    getEducation: () => content ? getEducation(content) : [],
-    getSkills: () => content ? getSkills(content) : [],
-    getPersonalProjects: () => content ? getPersonalProjects(content) : [],
-    getVolunteerWork: () => content ? getVolunteerWork(content) : [],
-    getContentById: (id: string) => content ? getContentById(content, id) : undefined,
-    getSections: () => content ? getSections(content) : [],
+    getWorkExperience: () => (content ? getWorkExperience(content) : []),
+    getEducation: () => (content ? getEducation(content) : []),
+    getSkills: () => (content ? getSkills(content) : []),
+    getPersonalProjects: () => (content ? getPersonalProjects(content) : []),
+    getVolunteerWork: () => (content ? getVolunteerWork(content) : []),
+    getContentById: (id: string) =>
+      content ? getContentById(content, id) : undefined,
+    getSections: () => (content ? getSections(content) : []),
 
     // Search and filter
     searchContent: (searchTerm: string, caseSensitive: boolean = false) =>
@@ -136,6 +140,7 @@ export const useContent = (autoLoad: boolean = true): UseContentReturn => {
 
     // Utilities
     getStats: () => state.stats,
-    getFormattedContent: () => content ? formatContentForDisplay(content) : null
+    getFormattedContent: () =>
+      content ? formatContentForDisplay(content) : null,
   };
 };

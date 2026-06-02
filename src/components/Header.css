@@ -51,10 +51,12 @@
   /* Critical: allow flex item to shrink and not force page width */
   min-width: 0;
   max-width: 100%;
-  flex: 0 1 auto; 
+  flex: 0 1 auto;
 }
 
-.nav-desktop::-webkit-scrollbar { display: none; }
+.nav-desktop::-webkit-scrollbar {
+  display: none;
+}
 
 .nav-link {
   color: var(--text-secondary);
@@ -65,7 +67,9 @@
   position: relative;
 }
 
-.nav-link:hover { color: var(--text-primary); }
+.nav-link:hover {
+  color: var(--text-primary);
+}
 
 .nav-link::after {
   content: '';
@@ -78,7 +82,9 @@
   transition: width var(--dur-med) var(--ease-standard);
 }
 
-.nav-link:hover::after { width: 100%; }
+.nav-link:hover::after {
+  width: 100%;
+}
 
 .nav-btn {
   margin-left: var(--spacing-sm);
@@ -179,11 +185,11 @@
   .brand {
     font-size: var(--font-size-lg);
   }
-  
+
   .nav-mobile .nav-link {
     font-size: var(--font-size-base);
   }
-  
+
   .nav-mobile .nav-btn {
     min-width: 180px;
     font-size: var(--font-size-sm);
@@ -226,4 +232,4 @@
 .nav-mobile.open .nav-link:nth-child(2),
 .nav-mobile.open .nav-btn:nth-child(4) {
   animation-delay: 0.2s;
-} 
+}

@@ -38,10 +38,18 @@
       "startDate": "2025-01-01",
       "location": "Remote, Seattle, WA",
       "technologies": [
-        "TODO"
+        "SFTP",
+        "dbt",
+        "Airflow",
+        "GCP",
+        "Epic HL7",
+        "CLI Automation",
+        "HIPAA"
       ],
       "achievements": [
-        "TODO"
+        "Built customer-specific healthcare integrations across 8 medical coding automation accounts representing ~$3M ARR, spanning SFTP data feeds, dbt transformations, coding rules, Airflow/GCP workflows, testing, and production data-flow support in a HIPAA environment.",
+        "Delivered a zero-downtime Epic HL7 upgrade cutover by running parallel Airflow DAG pipelines for legacy and upgraded formats, validating outputs before go-live, and coordinating the timed production switch with customer-facing teams.",
+        "Developed internal CLI audit automation and agentic engineering workflows, reducing ops burden and improving engineer productivity."
       ],
       "seasons": [
         {
@@ -53,24 +61,40 @@
           "episodes": [
             {
               "id": "e-fat-1",
-              "title": "TODO",
-              "description": "TODO",
+              "title": "Healthcare Coding Automation Integrations",
+              "description": "Built and supported customer-specific healthcare integrations across medical coding automation accounts.",
               "duration": "Jan 2025 - Present",
               "technologies": [
-                "TODO"
+                "SFTP",
+                "dbt",
+                "Airflow",
+                "GCP",
+                "Epic HL7",
+                "CLI Automation",
+                "HIPAA"
               ],
               "achievements": [
-                "TODO"
+                "Built integrations across 8 customer accounts representing ~$3M ARR.",
+                "Delivered a zero-downtime Epic HL7 upgrade cutover using parallel Airflow DAG pipelines.",
+                "Developed CLI audit automation and agentic engineering workflows."
               ],
-              "impact": "TODO"
+              "impact": "Reduced operational burden while supporting healthcare automation workflows in a HIPAA environment."
             }
           ],
           "startDate": "2025-01-01",
           "technologies": [
-            "TODO"
+            "SFTP",
+            "dbt",
+            "Airflow",
+            "GCP",
+            "Epic HL7",
+            "CLI Automation",
+            "HIPAA"
           ],
           "achievements": [
-            "TODO"
+            "Built customer-specific healthcare integrations across 8 medical coding automation accounts representing ~$3M ARR, spanning SFTP data feeds, dbt transformations, coding rules, Airflow/GCP workflows, testing, and production data-flow support in a HIPAA environment.",
+            "Delivered a zero-downtime Epic HL7 upgrade cutover by running parallel Airflow DAG pipelines for legacy and upgraded formats, validating outputs before go-live, and coordinating the timed production switch with customer-facing teams.",
+            "Developed internal CLI audit automation and agentic engineering workflows, reducing ops burden and improving engineer productivity."
           ]
         }
       ],
@@ -125,13 +149,7 @@
               "title": "Global Datacenter Metrics ETL",
               "description": "Designed and implemented next-generation metrics ETL for EC2",
               "duration": "Apr 2021 - Dec 2024",
-              "technologies": [
-                "Python",
-                "Java",
-                "AWS",
-                "DynamoDB",
-                "EC2"
-              ],
+              "technologies": ["Python", "Java", "AWS", "DynamoDB", "EC2"],
               "achievements": [
                 "100 GB throughput; aggregation time reduced from 1 hour to 15 minutes"
               ],
@@ -142,11 +160,7 @@
               "title": "Time Series Forecasting Pipelines",
               "description": "Built forecasting for EC2, S3, and EBS with GPU and CPU segmentation",
               "duration": "Apr 2021 - Dec 2024",
-              "technologies": [
-                "AWS",
-                "Pandas",
-                "SQL"
-              ],
+              "technologies": ["AWS", "Pandas", "SQL"],
               "achievements": [
                 "Delivered insights for multi-billion-dollar CapEx decisions"
               ],
@@ -157,12 +171,7 @@
               "title": "Forecasting API Service",
               "description": "Architected a RESTful API backed by DynamoDB and EC2",
               "duration": "Apr 2021 - Dec 2024",
-              "technologies": [
-                "AWS",
-                "DynamoDB",
-                "EC2",
-                "Java"
-              ],
+              "technologies": ["AWS", "DynamoDB", "EC2", "Java"],
               "achievements": [
                 "Streamlined hundreds of internal forecasting workflows"
               ],
@@ -173,12 +182,7 @@
               "title": "Intern Mentorship",
               "description": "Mentored a student intern on an internal webpage with IAM permissions",
               "duration": "Apr 2021 - Dec 2024",
-              "technologies": [
-                "AWS",
-                "IAM",
-                "Java",
-                "Python"
-              ],
+              "technologies": ["AWS", "IAM", "Java", "Python"],
               "achievements": [
                 "Guided implementation to successful project completion"
               ],
@@ -187,14 +191,7 @@
           ],
           "startDate": "2021-04-01",
           "endDate": "2024-12-01",
-          "technologies": [
-            "AWS",
-            "DynamoDB",
-            "EC2",
-            "S3",
-            "Python",
-            "Java"
-          ],
+          "technologies": ["AWS", "DynamoDB", "EC2", "S3", "Python", "Java"],
           "achievements": [
             "Designed and implemented EC2's next-generation global datacenter metrics ETL pipeline, achieving 100 GB throughput and reducing data aggregation time from 1 hour to 15 minutes",
             "Developed time series forecasting pipelines for AWS EC2, S3, and EBS services, enhancing capabilities to separately forecast GPU and CPU demand",
@@ -216,11 +213,7 @@
               "title": "ML Job Deployment & Scheduling",
               "description": "Built automated ML job deployment and scheduling for economists",
               "duration": "Nov 2019 - Apr 2021",
-              "technologies": [
-                "AWS",
-                "Python",
-                "CI/CD"
-              ],
+              "technologies": ["AWS", "Python", "CI/CD"],
               "achievements": [
                 "Reduced model deployment time from 2 days to 1 hour"
               ],
@@ -231,23 +224,14 @@
               "title": "ML Forecasting Collaboration",
               "description": "Partnered with data scientists to optimize and deploy models",
               "duration": "Nov 2019 - Apr 2021",
-              "technologies": [
-                "Python",
-                "AWS"
-              ],
-              "achievements": [
-                "Improved model deployment and iteration speed"
-              ],
+              "technologies": ["Python", "AWS"],
+              "achievements": ["Improved model deployment and iteration speed"],
               "impact": "Accelerated research to production workflows"
             }
           ],
           "startDate": "2019-11-01",
           "endDate": "2021-04-01",
-          "technologies": [
-            "AWS",
-            "Python",
-            "CI/CD"
-          ],
+          "technologies": ["AWS", "Python", "CI/CD"],
           "achievements": [
             "Designed and implemented an automated ML job deployment and scheduling service from scratch for economists, reducing model deployment time from 2 days to 1 hour and enabling version control for reproducibility",
             "Collaborated closely with data scientists to optimize and deploy forecasting ML models"
@@ -298,10 +282,7 @@
               "title": "High-Throughput Web Scraping",
               "description": "Built infrastructure to process 1M+ URLs daily",
               "duration": "Jul 2018 - Nov 2019",
-              "technologies": [
-                "Python",
-                "Async Processing"
-              ],
+              "technologies": ["Python", "Async Processing"],
               "achievements": [
                 "Scaled data collection for the core analytics platform"
               ],
@@ -312,11 +293,7 @@
               "title": "Async Messaging Service",
               "description": "Developed a queue-based messaging service for internal apps",
               "duration": "Jul 2018 - Nov 2019",
-              "technologies": [
-                "Python",
-                "SQL",
-                "Distributed Systems"
-              ],
+              "technologies": ["Python", "SQL", "Distributed Systems"],
               "achievements": [
                 "Improved reliability and scalability across services"
               ],
@@ -325,11 +302,7 @@
           ],
           "startDate": "2018-07-01",
           "endDate": "2019-11-01",
-          "technologies": [
-            "Python",
-            "SQL",
-            "Async Processing"
-          ],
+          "technologies": ["Python", "SQL", "Async Processing"],
           "achievements": [
             "1M+ URLs/day scraping capacity",
             "Reliable async messaging for internal apps"

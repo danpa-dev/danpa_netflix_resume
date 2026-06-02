@@ -24,7 +24,7 @@
     "noUncheckedSideEffectImports": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    
+
     /* Path Mapping */
     "baseUrl": ".",
     "paths": {

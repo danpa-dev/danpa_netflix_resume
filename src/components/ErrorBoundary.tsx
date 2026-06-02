@@ -4,7 +4,10 @@ interface ErrorBoundaryState {
   hasError: boolean;
 }
 
-class ErrorBoundary extends React.Component<React.PropsWithChildren<object>, ErrorBoundaryState> {
+class ErrorBoundary extends React.Component<
+  React.PropsWithChildren<object>,
+  ErrorBoundaryState
+> {
   constructor(props: React.PropsWithChildren<object>) {
     super(props);
     this.state = { hasError: false };
@@ -24,7 +27,10 @@ class ErrorBoundary extends React.Component<React.PropsWithChildren<object>, Err
       return (
         <div role="alert" aria-live="assertive" style={{ padding: 16 }}>
           <h2>Something went wrong.</h2>
-          <p>Please refresh the page. If the problem persists, contact the site owner.</p>
+          <p>
+            Please refresh the page. If the problem persists, contact the site
+            owner.
+          </p>
         </div>
       );
     }
@@ -33,4 +39,3 @@ class ErrorBoundary extends React.Component<React.PropsWithChildren<object>, Err
 }
 
 export default ErrorBoundary;
-

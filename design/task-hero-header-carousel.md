@@ -23,22 +23,26 @@ Modernize the hero, carousels, and header to better match the Netflix-inspired d
 ## Proposed Approach
 
 ### 1) Hero Overlay
+
 - Remove the flat background from `.text-overlay` and introduce a `::before` pseudo-element with a linear gradient overlay.
 - Gradient: `linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 35%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0) 80%)`.
 - Ensure overlay sits above media but below text (z-index stacking within the hero).
 - Left-align the overlay content (title/subtitle) and provide a max-width container for readability.
 
 ### 2) Hero Aspect Ratio
+
 - Apply `aspect-ratio: 16 / 9` on `.hero` so height follows width.
 - Use `min-height: clamp(280px, 40vw, 70vh)` to prevent clipping on small devices and avoid excessive height on large displays.
 - Remove/minimize `min-height` constraints from `.text-overlay`; rely on padding and flex alignment instead.
 
 ### 3) Full-Bleed Carousels
+
 - Remove the page-level `max-width` constraint around carousel sections (`.carousel-sections-container`).
 - Keep inner horizontal padding via `--carousel-container-padding` so titles/arrows don’t touch edges.
 - Validate arrows remain positioned using the existing CSS variables.
 
 ### 4) Header “Hug Right”
+
 - Make `.header-container` full width (remove `max-width`).
 - Keep `.nav-desktop` visible across widths; right-align it with `margin-left: auto` and `white-space: nowrap`.
 - Use `clamp()` for nav gaps, font sizes, and button paddings to compress gracefully.
@@ -66,4 +70,3 @@ Modernize the hero, carousels, and header to better match the Netflix-inspired d
 - Check hero media keeps 16:9 and overlay text remains readable.
 - Carousels render edge-to-edge with consistent arrow offsets.
 - Header stays visible; items right-aligned with no wrapping until ultra-narrow, where a small horizontal scroll appears.
-

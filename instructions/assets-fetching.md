@@ -3,15 +3,18 @@
 This script pulls cinematic/sophisticated images and (optionally) short videos from royalty‑free providers for items in section files referenced by `src/data/manifest.json` that are missing assets, then updates the section JSON files with bare filenames and saves files under `src/assets/`.
 
 ### Providers
+
 - Images: Pexels (preferred), Unsplash (fallback or primary)
 - Videos: Pexels only (Unsplash video API not supported)
 
 ### Environment variables
+
 - `PEXELS_API_KEY`: required for Pexels search/downloads
 - `UNSPLASH_ACCESS_KEY`: Unsplash Access Key (required when using Unsplash)
 - `UNSPLASH_SECRET_KEY`: Unsplash Secret Key (not needed for basic search, reserved for future flows)
 
 Create keys at:
+
 - Pexels: https://www.pexels.com/api/
 - Unsplash: https://unsplash.com/developers
 
@@ -36,6 +39,7 @@ UNSPLASH_ACCESS_KEY=... UNSPLASH_SECRET_KEY=... npm run assets:fetch -- --provid
 ```
 
 The script will:
+
 - Build a query from `title`, `company`, `role`, etc. and bias with "cinematic"/"sophisticated" terms
 - Save downloads to `src/assets/images/ID-thumb.jpg` and `src/assets/videos/ID-clip.mp4` (when using Pexels/local mode)
 - **After downloading, add the file to `src/assets/assetMap.ts`** (import + map entry) so Vite content-hashes it
@@ -70,6 +74,7 @@ npm run generate:images
 This creates `*.webp` and `*.avif` files alongside JPG/PNG in `src/assets/images/`. The app will use them only when the URLs are supplied in section files.
 
 ### Notes & tips
+
 - Use the fetcher to bootstrap placeholders; replace with curated assets later.
 - **Asset architecture (2026-05-27):** JSON files use bare filenames (e.g. `"FathomImage.jpeg"`), resolved to Vite-hashed URLs at build time via `src/assets/assetMap.ts`. New assets go in `src/assets/images/` or `src/assets/videos/` and must be added to assetMap. See `memory/knowledge/dan-resume/content-system.md`.
 - Keep usage under provider rate limits. Add `--type=images` when you don't need videos.
@@ -81,19 +86,20 @@ Each section data file (`src/data/*.json`) can declare a `metadata.defaults` blo
 
 Currently only `src/data/work.json` defines defaults:
 
-| Field | Default key | Resolves via assetMap |
-|---|---|---|
-| `thumbnailUrl` | `test.jpeg` | hashed URL |
-| `videoPosterUrl` | `test.jpeg` | hashed URL |
-| `videoUrlMp4` | `test.mp4` | hashed URL |
-| `hero.imageUrl` | `test.jpeg` | hashed URL |
+| Field            | Default key | Resolves via assetMap |
+| ---------------- | ----------- | --------------------- |
+| `thumbnailUrl`   | `test.jpeg` | hashed URL            |
+| `videoPosterUrl` | `test.jpeg` | hashed URL            |
+| `videoUrlMp4`    | `test.mp4`  | hashed URL            |
+| `hero.imageUrl`  | `test.jpeg` | hashed URL            |
 
 The other section files (`skills.json`, `education.json`, `personal-projects.json`, `volunteer-work.json`) do not define defaults — items in those sections must have their own media URLs or they will render without media.
 
 ### Placeholder detection (why the script may update an item that already has a URL)
 
 The script treats obvious placeholders as “missing” and will fetch replacements unless you disable it:
+
 - Matches `metadata.defaults.thumbnailUrl`, `metadata.defaults.videoUrlMp4`
 - Filenames like `test.jpg`, `test.png`, `test.mp4`
 - Logos (heuristic: filenames containing `logo`)
-Use `--replace=false` (default) to only replace placeholders, or add `--replace=true` to force updates.
+  Use `--replace=false` (default) to only replace placeholders, or add `--replace=true` to force updates.

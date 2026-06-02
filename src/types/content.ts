@@ -21,14 +21,14 @@ export const SkillCategory = {
   FRAMEWORKS: 'frameworks',
   LIBRARIES: 'libraries',
   TESTING: 'testing',
-  OTHER: 'other'
+  OTHER: 'other',
 } as const;
 
 export const SkillProficiency = {
   BEGINNER: 'beginner',
   INTERMEDIATE: 'intermediate',
   ADVANCED: 'advanced',
-  EXPERT: 'expert'
+  EXPERT: 'expert',
 } as const;
 
 export const ContentType = {
@@ -36,12 +36,14 @@ export const ContentType = {
   EDUCATION: 'education',
   SKILLS: 'skills',
   PERSONAL_PROJECTS: 'personalProjects',
-  VOLUNTEER_WORK: 'volunteerWork'
+  VOLUNTEER_WORK: 'volunteerWork',
 } as const;
 
-export type SkillCategoryType = typeof SkillCategory[keyof typeof SkillCategory];
-export type SkillProficiencyType = typeof SkillProficiency[keyof typeof SkillProficiency];
-export type ContentTypeType = typeof ContentType[keyof typeof ContentType];
+export type SkillCategoryType =
+  (typeof SkillCategory)[keyof typeof SkillCategory];
+export type SkillProficiencyType =
+  (typeof SkillProficiency)[keyof typeof SkillProficiency];
+export type ContentTypeType = (typeof ContentType)[keyof typeof ContentType];
 export type ContentSectionType = ContentTypeType;
 
 export interface IModalFieldConfig {
@@ -226,7 +228,7 @@ export interface IContentMetadata {
     videoUrlMp4?: string;
     videoUrlWebm?: string;
     videoPosterUrl?: string; // poster for videos if per-item missing
-    thumbnailUrl?: string;   // global card thumbnail (applies to all items when set)
+    thumbnailUrl?: string; // global card thumbnail (applies to all items when set)
     hero?: {
       imageUrl?: string;
       objectPosition?: string;
@@ -245,7 +247,12 @@ export interface IContentMetadata {
 }
 
 // Utility types for filtering and searching
-export type ContentItem = IWorkExperience | IEducation | ISkill | IPersonalProject | IVolunteerWork;
+export type ContentItem =
+  | IWorkExperience
+  | IEducation
+  | ISkill
+  | IPersonalProject
+  | IVolunteerWork;
 
 export interface ContentFilters {
   category?: SkillCategoryType;
@@ -259,7 +266,9 @@ export interface ContentFilters {
 }
 
 // Type guards for runtime type checking
-export const isWorkExperience = (item: ContentItem): item is IWorkExperience => {
+export const isWorkExperience = (
+  item: ContentItem
+): item is IWorkExperience => {
   return 'company' in item && 'role' in item && 'seasons' in item;
 };
 
@@ -268,10 +277,14 @@ export const isEducation = (item: ContentItem): item is IEducation => {
 };
 
 export const isSkill = (item: ContentItem): item is ISkill => {
-  return 'category' in item && 'proficiency' in item && 'yearsOfExperience' in item;
+  return (
+    'category' in item && 'proficiency' in item && 'yearsOfExperience' in item
+  );
 };
 
-export const isPersonalProject = (item: ContentItem): item is IPersonalProject => {
+export const isPersonalProject = (
+  item: ContentItem
+): item is IPersonalProject => {
   return 'technologies' in item && 'features' in item && 'isActive' in item;
 };
 
@@ -279,4 +292,4 @@ export const isVolunteerWork = (item: ContentItem): item is IVolunteerWork => {
   return 'organization' in item && 'role' in item && 'hoursPerWeek' in item;
 };
 
-// All interfaces and types are already exported above 
+// All interfaces and types are already exported above

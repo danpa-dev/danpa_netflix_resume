@@ -69,10 +69,20 @@ describe('useModal', () => {
     expect(result.current.triggerPosition).toBeNull();
 
     act(() => {
-      result.current.setTriggerPosition({ x: 100, y: 200, width: 300, height: 150 });
+      result.current.setTriggerPosition({
+        x: 100,
+        y: 200,
+        width: 300,
+        height: 150,
+      });
     });
 
-    expect(result.current.triggerPosition).toEqual({ x: 100, y: 200, width: 300, height: 150 });
+    expect(result.current.triggerPosition).toEqual({
+      x: 100,
+      y: 200,
+      width: 300,
+      height: 150,
+    });
   });
 
   it('tracks animation state', () => {

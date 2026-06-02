@@ -1,8 +1,8 @@
-name: Mirror to Public Repo (code-only)
+name: Mirror to Public Repo
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   mirror:
@@ -11,7 +11,9 @@ jobs:
       - name: Checkout private repo
         uses: actions/checkout@v4
 
-      - name: Build clean export (code-only)
+      # The public mirror intentionally includes deployable local assets and the
+      # public resume PDF. It excludes private workspace and operations notes.
+      - name: Build clean public export
         run: |
           mkdir -p /tmp/public
           rsync -av --delete \
@@ -45,4 +47,3 @@ jobs:
           git branch -M main
           git remote add origin https://x-access-token:${GH_TOKEN}@github.com/${PUBLIC_REPO_SLUG}.git
           git push -f origin main
-

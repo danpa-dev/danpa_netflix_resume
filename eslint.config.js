@@ -12,12 +12,17 @@ export default tseslint.config([
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
-      reactHooks.configs['recommended-latest'],
+      reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
     ],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+    },
+    rules: {
+      // Existing media and lazy-loading effects intentionally synchronize
+      // derived UI state after prop changes.
+      'react-hooks/set-state-in-effect': 'off',
     },
   },
 ]);

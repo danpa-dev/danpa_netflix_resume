@@ -18,7 +18,7 @@ const Hero: React.FC<HeroProps> = ({
   backgroundImage,
   backgroundObjectPosition,
   backgroundVideo,
-  className = ''
+  className = '',
 }) => {
   return (
     <section className={`hero ${className}`} aria-label="Hero">
@@ -28,7 +28,7 @@ const Hero: React.FC<HeroProps> = ({
         objectPosition={backgroundObjectPosition}
         posterSrc={backgroundImage}
       />
-      
+
       <TextOverlay
         title={title}
         subtitle={subtitle}

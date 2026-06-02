@@ -3,6 +3,7 @@
 This guide explains what Amazon CloudFront is, why you’d use it, and the major settings you’ll see when creating a distribution. It ties into the deployment steps in `instructions/deploy-aws-s3-cloudfront.md` and CI/CD in `instructions/github-actions-deploy.md`.
 
 ### What is CloudFront?
+
 - CloudFront is Amazon’s global Content Delivery Network (CDN). It has many “edge locations” around the world that cache your content closer to users.
 - Why it matters: lower latency (faster loads), fewer origin hits (S3 does less work), and easy HTTPS with AWS Certificate Manager (ACM).
 - Typical setup for a static site:
@@ -11,6 +12,7 @@ This guide explains what Amazon CloudFront is, why you’d use it, and the major
   - Both buckets stay private; CloudFront reads them using Origin Access Control (OAC)
 
 ### Key Concepts
+
 - **Origin**: Where CloudFront fetches the content from (e.g., private S3 bucket with OAC).
 - **Behavior**: Rules that define how CloudFront caches/serves requests (methods, cache policy, redirects, compression, etc.). You can have multiple behaviors using path patterns (e.g., `/images/*`).
 - **Alternate Domain Names (CNAMEs)**: Friendly hostnames you own, like `resume.danpa.dev` or `assets.danpa.dev`.
@@ -23,6 +25,7 @@ This guide explains what Amazon CloudFront is, why you’d use it, and the major
 ## Major Settings You’ll See
 
 ### 1) Alternate Domain Names (CNAMEs)
+
 - Purpose: So your distribution answers on `resume.danpa.dev` (site) and `assets.danpa.dev` (assets) instead of the default `dXXXX.cloudfront.net`.
 - Requirements: An ACM certificate in `us-east-1` that covers those names.
 - Steps (high-level):
@@ -33,12 +36,14 @@ This guide explains what Amazon CloudFront is, why you’d use it, and the major
 - Notes: Trailing dots in AWS examples are normal FQDN notation; Squarespace generally doesn’t require them.
 
 ### 2) Origin
+
 - Choose the S3 bucket as the origin domain (not the “static website hosting” endpoint).
 - Enable **Origin Access Control (OAC)** and attach the generated policy so only CloudFront can read from S3.
 - Keep the S3 buckets private (block public access on).
 - Region: both site and assets buckets are in `us-west-2` per our plan (it’s fine that ACM is in `us-east-1`).
 
 ### 3) Behavior
+
 - Default behavior covers all paths unless you add more specific ones.
 - Common options:
   - Allowed methods: GET, HEAD for static sites
@@ -52,6 +57,7 @@ This guide explains what Amazon CloudFront is, why you’d use it, and the major
   - Response/Origin request policies to forward specific headers/cookies/query strings when needed
 
 ### 4) Security – Web Application Firewall (WAF)
+
 - CloudFront integrates with AWS WAF to filter/mitigate attacks (e.g., common exploits, bot **traffic**, IP blocking).
 - Typical steps:
   1. Create a WAF web ACL (start with AWS Managed Rules for common protections).
@@ -64,6 +70,7 @@ This guide explains what Amazon CloudFront is, why you’d use it, and the major
   - Signed URLs/cookies (only if you need restricted content)
 
 ### 5) Continuous Deployment
+
 - You generally don’t “redeploy CloudFront.” You deploy to S3 and then invalidate cache.
 - Recommended pipeline (we provide an example workflow):
   - GitHub Actions builds the site → syncs `dist/` to the site bucket (us-west-2)
@@ -77,6 +84,7 @@ This guide explains what Amazon CloudFront is, why you’d use it, and the major
 ---
 
 ## Putting It Together for This Project
+
 - Two distributions: one for site, one for assets.
 - Two private buckets in `us-west-2` with OAC.
 - ACM certificate in `us-east-1` for `resume.danpa.dev` and `assets.danpa.dev`.
@@ -85,4 +93,3 @@ This guide explains what Amazon CloudFront is, why you’d use it, and the major
 - CI/CD: build, sync to S3, invalidate CloudFront; optional separate job for assets.
 
 For step-by-step creation and exact commands, see `instructions/deploy-aws-s3-cloudfront.md`. For automated deployments, see `instructions/github-actions-deploy.md`.
-

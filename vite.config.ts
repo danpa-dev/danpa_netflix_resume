@@ -23,20 +23,12 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false,
     minify: 'terser',
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          animations: ['framer-motion'],
-        },
-      },
-    },
-    // inline very small assets; larger ones will be separate files with cache headers via S3/CF
+    // Inline very small assets; larger files keep content-hashed URLs.
     assetsInlineLimit: 2048,
   },
   server: {
     port: 5173,
-    host: true,
+    host: '127.0.0.1',
     open: true,
   },
   optimizeDeps: {
@@ -46,6 +38,6 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/setupTests.ts',
-    css: true
+    css: true,
   },
 });

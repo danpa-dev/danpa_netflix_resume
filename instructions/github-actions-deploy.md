@@ -3,6 +3,7 @@
 This guide sets up a secure, keyless pipeline that builds the site and deploys to S3 with CloudFront invalidation using GitHub OIDC (no long‑lived AWS keys). Site in `us-east-1`; assets optional job in `us-west-2`.
 
 ### Overview
+
 - Trigger: push to `main` (prod) and PRs (preview)
 - Actions:
   - build with Node 20
@@ -26,7 +27,9 @@ This guide sets up a secure, keyless pipeline that builds the site and deploys t
   "Statement": [
     {
       "Effect": "Allow",
-      "Principal": { "Federated": "arn:aws:iam::<ACCOUNT_ID>:oidc-provider/token.actions.githubusercontent.com" },
+      "Principal": {
+        "Federated": "arn:aws:iam::<ACCOUNT_ID>:oidc-provider/token.actions.githubusercontent.com"
+      },
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
         "StringLike": {
@@ -85,6 +88,7 @@ This guide sets up a secure, keyless pipeline that builds the site and deploys t
 ## 2) Repo variables and secrets
 
 Use repo “Actions → Variables”:
+
 - `AWS_REGION` = `us-east-1` (site)
 - `ASSETS_REGION` = `us-west-2` (assets)
 - `SITE_BUCKET` = `danpa-resume-site-prod`
@@ -104,11 +108,11 @@ name: Deploy Resume Site
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
-  id-token: write   # for OIDC
+  id-token: write # for OIDC
   contents: read
 
 jobs:
@@ -194,8 +198,8 @@ If you later host images/videos on an S3 assets bucket, add another job that run
 Add to `on:` section:
 
 ```yaml
-  pull_request:
-    branches: [ main ]
+pull_request:
+  branches: [main]
 ```
 
 And modify the job to upload to `s3://$SITE_BUCKET/previews/${{ github.event.pull_request.number }}` and print a preview URL if your CloudFront is configured for origin path or Lambda@Edge rewrite. Alternatively, use GitHub Pages for previews.
@@ -213,4 +217,3 @@ And modify the job to upload to `s3://$SITE_BUCKET/previews/${{ github.event.pul
 ## 6) Rollback
 
 To rollback, re-deploy a previous artifact or restore a known-good `dist/` and push a manual “Deploy” via workflow_dispatch.
-

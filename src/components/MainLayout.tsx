@@ -19,27 +19,31 @@ const MainLayout: React.FC<MainLayoutProps> = ({
   heroBackgroundObjectPosition,
   heroBackgroundVideo,
   children,
-  className = ''
+  className = '',
 }) => {
   return (
     <>
-      <a href="#main-content" className="visually-hidden focusable">Skip to main content</a>
-      <main id="main-content" className={`main-layout ${className}`} role="main">
-      {/* Hero Section */}
-      <Hero
-        title={heroTitle}
-        subtitle={heroSubtitle}
-        backgroundImage={heroBackgroundImage}
-        backgroundObjectPosition={heroBackgroundObjectPosition}
-        backgroundVideo={heroBackgroundVideo}
-      />
-      
-      {/* Carousel Sections Container */}
+      <a href="#main-content" className="visually-hidden focusable">
+        Skip to main content
+      </a>
+      <main
+        id="main-content"
+        className={`main-layout ${className}`}
+        role="main"
+      >
+        {/* Hero Section */}
+        <Hero
+          title={heroTitle}
+          subtitle={heroSubtitle}
+          backgroundImage={heroBackgroundImage}
+          backgroundObjectPosition={heroBackgroundObjectPosition}
+          backgroundVideo={heroBackgroundVideo}
+        />
+
+        {/* Carousel Sections Container */}
         <div className="carousel-sections" aria-label="Content sections">
-        <div className="carousel-sections-container">
-          {children}
+          <div className="carousel-sections-container">{children}</div>
         </div>
-      </div>
       </main>
     </>
   );

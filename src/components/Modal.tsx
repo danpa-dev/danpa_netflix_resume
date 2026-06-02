@@ -34,7 +34,7 @@ const Modal: React.FC<ModalProps> = ({
   onBeforeClose,
   closeOnOverlayClick = true,
   closeOnEscape = true,
-  showCloseButton = true
+  showCloseButton = true,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -74,7 +74,9 @@ const Modal: React.FC<ModalProps> = ({
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey, { capture: true });
+      document.removeEventListener('keydown', handleEscapeKey, {
+        capture: true,
+      });
     };
   }, [isOpen, closeOnEscape, handleClose]);
 
@@ -91,7 +93,6 @@ const Modal: React.FC<ModalProps> = ({
       // Initialize focus trap
       focusTrapRef.current = new FocusTrap({
         container: modalRef.current,
-        onEscape: handleClose
       });
     }
 
@@ -141,43 +142,63 @@ const Modal: React.FC<ModalProps> = ({
   const overlayVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
-    exit: { opacity: 0 }
+    exit: { opacity: 0 },
   };
 
   const modalVariants = {
-    hidden: triggerPosition ? {
-      scale: 0.9,
-      opacity: 0,
-      x: (triggerPosition.x - (window.innerWidth / 2) + (triggerPosition.width / 2)) * 0.3,
-      y: (triggerPosition.y - (window.innerHeight / 2) + (triggerPosition.height / 2)) * 0.3
-    } : {
-      scale: 0.9,
-      opacity: 0,
-      y: 10
-    },
-    visible: { 
+    hidden: triggerPosition
+      ? {
+          scale: 0.9,
+          opacity: 0,
+          x:
+            (triggerPosition.x -
+              window.innerWidth / 2 +
+              triggerPosition.width / 2) *
+            0.3,
+          y:
+            (triggerPosition.y -
+              window.innerHeight / 2 +
+              triggerPosition.height / 2) *
+            0.3,
+        }
+      : {
+          scale: 0.9,
+          opacity: 0,
+          y: 10,
+        },
+    visible: {
       scale: 1,
       opacity: 1,
       x: 0,
-      y: 0
+      y: 0,
     },
-    exit: triggerPosition ? {
-      scale: 0.9,
-      opacity: 0,
-      x: (triggerPosition.x - (window.innerWidth / 2) + (triggerPosition.width / 2)) * 0.3,
-      y: (triggerPosition.y - (window.innerHeight / 2) + (triggerPosition.height / 2)) * 0.3
-    } : {
-      scale: 0.9,
-      opacity: 0,
-      y: 10
-    }
+    exit: triggerPosition
+      ? {
+          scale: 0.9,
+          opacity: 0,
+          x:
+            (triggerPosition.x -
+              window.innerWidth / 2 +
+              triggerPosition.width / 2) *
+            0.3,
+          y:
+            (triggerPosition.y -
+              window.innerHeight / 2 +
+              triggerPosition.height / 2) *
+            0.3,
+        }
+      : {
+          scale: 0.9,
+          opacity: 0,
+          y: 10,
+        },
   };
 
   // Create portal to render modal outside normal DOM hierarchy
   return createPortal(
     <AnimatePresence mode="wait">
       {isOpen && (
-        <motion.div 
+        <motion.div
           className={`modal-overlay ${className}`}
           ref={overlayRef}
           onClick={handleOverlayClick}
@@ -191,56 +212,72 @@ const Modal: React.FC<ModalProps> = ({
           exit="exit"
           transition={{
             duration: 0.2,
-            ease: [0.25, 0.46, 0.45, 0.94]
-          }}
-        >
-        <motion.div 
-          className="modal-container"
-          ref={modalRef}
-          tabIndex={-1}
-          role="document"
-          data-layout-id={layoutId}
-          variants={modalVariants}
-          layoutId={layoutId}
-          transition={{
-            duration: 0.3,
             ease: [0.25, 0.46, 0.45, 0.94],
-            delay: 0.05
           }}
         >
-        {/* Floating Close Button (no header band) */}
-        {showCloseButton && (
-          <button
-            className="modal-close-button modal-close-floating"
-            onClick={(event) => {
-              event.preventDefault();
-              handleClose();
+          <motion.div
+            className="modal-container"
+            ref={modalRef}
+            tabIndex={-1}
+            role="document"
+            data-layout-id={layoutId}
+            variants={modalVariants}
+            layoutId={layoutId}
+            transition={{
+              duration: 0.3,
+              ease: [0.25, 0.46, 0.45, 0.94],
+              delay: 0.05,
             }}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                handleClose();
-              }
-            }}
-            aria-label="Close modal"
-            type="button"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        )}
+            {/* Floating Close Button (no header band) */}
+            {showCloseButton && (
+              <button
+                className="modal-close-button modal-close-floating"
+                onClick={event => {
+                  event.preventDefault();
+                  handleClose();
+                }}
+                onKeyDown={event => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    handleClose();
+                  }
+                }}
+                aria-label="Close modal"
+                type="button"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M18 6L6 18M6 6L18 18"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            )}
 
-        {/* Modal Content */}
-        <div className="modal-content" id={descriptionId} aria-live="polite">
-          {children}
-        </div>
+            {/* Modal Content */}
+            <div
+              className="modal-content"
+              id={descriptionId}
+              aria-live="polite"
+            >
+              {children}
+            </div>
+          </motion.div>
         </motion.div>
-      </motion.div>
       )}
     </AnimatePresence>,
     document.body
   );
 };
 
-export default Modal; 
+export default Modal;

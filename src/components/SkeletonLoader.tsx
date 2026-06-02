@@ -16,13 +16,13 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
   height = '100%',
   borderRadius = '4px',
   animationDuration = 1.5,
-  ariaLabel = 'Loading...'
+  ariaLabel = 'Loading...',
 }) => {
   const style = {
     width,
     height,
     borderRadius,
-    '--animation-duration': `${animationDuration}s`
+    '--animation-duration': `${animationDuration}s`,
   } as React.CSSProperties;
 
   return (
@@ -38,4 +38,4 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
   );
 };
 
-export default SkeletonLoader; 
+export default SkeletonLoader;

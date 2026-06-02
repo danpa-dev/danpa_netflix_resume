@@ -60,8 +60,8 @@ export const useIntersectionObserver = (
     }
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           // Update state for the main ref
           if (entry.target === ref.current) {
             setIsIntersecting(entry.isIntersecting);
@@ -76,7 +76,7 @@ export const useIntersectionObserver = (
               intersectionRatio: entry.intersectionRatio,
               boundingClientRect: entry.boundingClientRect,
               rootBounds: entry.rootBounds,
-              time: entry.time
+              time: entry.time,
             });
           }
         });
@@ -84,7 +84,7 @@ export const useIntersectionObserver = (
       {
         root: options.root || null,
         rootMargin: options.rootMargin || '0px',
-        threshold: options.threshold || 0
+        threshold: options.threshold || 0,
       }
     );
 
@@ -96,7 +96,12 @@ export const useIntersectionObserver = (
     }
 
     return observer;
-  }, [options.root, options.rootMargin, options.threshold, onIntersectionChange]);
+  }, [
+    options.root,
+    options.rootMargin,
+    options.threshold,
+    onIntersectionChange,
+  ]);
 
   /**
    * Observe a specific element
@@ -144,6 +149,6 @@ export const useIntersectionObserver = (
     isIntersecting,
     intersectionRatio,
     observeElement,
-    unobserveElement
+    unobserveElement,
   };
 };

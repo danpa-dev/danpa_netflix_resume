@@ -7,20 +7,22 @@ function App() {
   const { content, loading, error, getSections } = useContent();
   const sections = getSections();
   const defaultThumbnailUrl =
-    content?.metadata?.defaults?.thumbnailUrl || content?.metadata?.defaults?.hero?.imageUrl;
+    content?.metadata?.defaults?.thumbnailUrl ||
+    content?.metadata?.defaults?.hero?.imageUrl;
 
   return (
     <div className="app">
       <Header />
-      
+
       <MainLayout
         heroTitle="Dan Park"
         heroSubtitle="Software Engineer & Technical Consultant"
         heroBackgroundImage={content?.metadata?.defaults?.hero?.imageUrl}
-        heroBackgroundObjectPosition={content?.metadata?.defaults?.hero?.objectPosition}
+        heroBackgroundObjectPosition={
+          content?.metadata?.defaults?.hero?.objectPosition
+        }
         heroBackgroundVideo={content?.metadata?.defaults?.hero?.videoUrlMp4}
       >
-
         {sections
           .filter(section => section.enabled && section.items.length > 0)
           .map(section => (
@@ -32,14 +34,14 @@ function App() {
               modalConfig={section.modal}
             />
           ))}
-        
+
         {/* Loading State */}
         {loading && (
           <div className="loading-state">
             <p>Loading content...</p>
           </div>
         )}
-        
+
         {/* Error State */}
         {error && (
           <div className="error-state">
@@ -47,7 +49,7 @@ function App() {
           </div>
         )}
       </MainLayout>
-      
+
       <Footer />
     </div>
   );

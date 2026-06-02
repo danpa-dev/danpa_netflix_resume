@@ -2,18 +2,18 @@
 // Provides robust content loading with caching, validation, and error handling
 
 // Browser-compatible content loading
-import type { 
-  IContent, 
-  IWorkExperience, 
-  IEducation, 
-  ISkill, 
-  IPersonalProject, 
-  IVolunteerWork, 
+import type {
+  IContent,
+  IWorkExperience,
+  IEducation,
+  ISkill,
+  IPersonalProject,
+  IVolunteerWork,
   ContentItem,
   IContentManifest,
   IContentSectionConfig,
   ISectionContent,
-  ContentSectionType
+  ContentSectionType,
 } from '../types/content';
 import { validateContent, getValidationSummary } from './contentValidation';
 import type { ValidationResult } from './contentValidation';
@@ -38,20 +38,28 @@ export const ContentLoadError = {
   FILE_NOT_FOUND: 'FILE_NOT_FOUND',
   JSON_PARSE_ERROR: 'JSON_PARSE_ERROR',
   VALIDATION_ERROR: 'VALIDATION_ERROR',
-  UNKNOWN_ERROR: 'UNKNOWN_ERROR'
+  UNKNOWN_ERROR: 'UNKNOWN_ERROR',
 } as const;
 
-export type ContentLoadErrorType = typeof ContentLoadError[keyof typeof ContentLoadError];
+export type ContentLoadErrorType =
+  (typeof ContentLoadError)[keyof typeof ContentLoadError];
 
 // Error messages for different error types
 const ERROR_MESSAGES = {
-  [ContentLoadError.FILE_NOT_FOUND]: 'Content file not found. Please ensure manifest and section files exist in the data directory.',
-  [ContentLoadError.JSON_PARSE_ERROR]: 'Failed to parse content JSON. Please check the JSON syntax.',
-  [ContentLoadError.VALIDATION_ERROR]: 'Content validation failed. Please check the content structure.',
-  [ContentLoadError.UNKNOWN_ERROR]: 'An unknown error occurred while loading content.'
+  [ContentLoadError.FILE_NOT_FOUND]:
+    'Content file not found. Please ensure manifest and section files exist in the data directory.',
+  [ContentLoadError.JSON_PARSE_ERROR]:
+    'Failed to parse content JSON. Please check the JSON syntax.',
+  [ContentLoadError.VALIDATION_ERROR]:
+    'Content validation failed. Please check the content structure.',
+  [ContentLoadError.UNKNOWN_ERROR]:
+    'An unknown error occurred while loading content.',
 };
 
-const sectionModules = import.meta.glob('../data/*.json');
+const sectionModules = import.meta.glob([
+  '../data/*.json',
+  '!../data/manifest.json',
+]);
 const resolveRequiredAsset = (key: string): string => resolveAsset(key) ?? key;
 
 /**
@@ -63,11 +71,15 @@ function resolveAssetsInContent(content: IContent): void {
   const d = content.metadata?.defaults;
   if (d) {
     if (d.thumbnailUrl) d.thumbnailUrl = resolveRequiredAsset(d.thumbnailUrl);
-    if (d.videoPosterUrl) d.videoPosterUrl = resolveRequiredAsset(d.videoPosterUrl);
+    if (d.videoPosterUrl)
+      d.videoPosterUrl = resolveRequiredAsset(d.videoPosterUrl);
     if (d.videoUrlMp4) d.videoUrlMp4 = resolveRequiredAsset(d.videoUrlMp4);
-    if (d.hero?.imageUrl) d.hero.imageUrl = resolveRequiredAsset(d.hero.imageUrl);
-    if (d.hero?.posterUrl) d.hero.posterUrl = resolveRequiredAsset(d.hero.posterUrl);
-    if (d.hero?.videoUrlMp4) d.hero.videoUrlMp4 = resolveRequiredAsset(d.hero.videoUrlMp4);
+    if (d.hero?.imageUrl)
+      d.hero.imageUrl = resolveRequiredAsset(d.hero.imageUrl);
+    if (d.hero?.posterUrl)
+      d.hero.posterUrl = resolveRequiredAsset(d.hero.posterUrl);
+    if (d.hero?.videoUrlMp4)
+      d.hero.videoUrlMp4 = resolveRequiredAsset(d.hero.videoUrlMp4);
   }
 
   // Walk all content items
@@ -76,19 +88,24 @@ function resolveAssetsInContent(content: IContent): void {
     content.education,
     content.skills,
     content.personalProjects,
-    content.volunteerWork
+    content.volunteerWork,
   ];
 
   for (const arr of contentGroups) {
     for (const item of arr) {
-      if (item.thumbnailUrl) item.thumbnailUrl = resolveRequiredAsset(item.thumbnailUrl);
+      if (item.thumbnailUrl)
+        item.thumbnailUrl = resolveRequiredAsset(item.thumbnailUrl);
       if (item.videoUrl) item.videoUrl = resolveRequiredAsset(item.videoUrl);
-      if (item.videoPosterUrl) item.videoPosterUrl = resolveRequiredAsset(item.videoPosterUrl);
-      if ('companyLogo' in item && item.companyLogo) item.companyLogo = resolveRequiredAsset(item.companyLogo);
-      if ('institutionLogo' in item && item.institutionLogo) item.institutionLogo = resolveRequiredAsset(item.institutionLogo);
+      if (item.videoPosterUrl)
+        item.videoPosterUrl = resolveRequiredAsset(item.videoPosterUrl);
+      if ('companyLogo' in item && item.companyLogo)
+        item.companyLogo = resolveRequiredAsset(item.companyLogo);
+      if ('institutionLogo' in item && item.institutionLogo)
+        item.institutionLogo = resolveRequiredAsset(item.institutionLogo);
       if ('seasons' in item) {
         for (const season of item.seasons || []) {
-          if (season.videoUrl) season.videoUrl = resolveRequiredAsset(season.videoUrl);
+          if (season.videoUrl)
+            season.videoUrl = resolveRequiredAsset(season.videoUrl);
           for (const ep of season.episodes || []) {
             if (ep.videoUrl) ep.videoUrl = resolveRequiredAsset(ep.videoUrl);
           }
@@ -96,7 +113,8 @@ function resolveAssetsInContent(content: IContent): void {
       }
       if ('projects' in item) {
         for (const proj of item.projects || []) {
-          if (proj.videoUrl) proj.videoUrl = resolveRequiredAsset(proj.videoUrl);
+          if (proj.videoUrl)
+            proj.videoUrl = resolveRequiredAsset(proj.videoUrl);
         }
       }
     }
@@ -108,13 +126,19 @@ function resolveAssetsInContent(content: IContent): void {
  * @param forceRefresh - Force reload even if cache is valid
  * @returns Promise<ContentLoadResult>
  */
-export const loadContent = async (forceRefresh: boolean = false): Promise<ContentLoadResult> => {
+export const loadContent = async (
+  forceRefresh: boolean = false
+): Promise<ContentLoadResult> => {
   try {
     // Check cache first (unless force refresh is requested)
-    if (!forceRefresh && contentCache && (Date.now() - lastLoadTime) < CACHE_DURATION) {
+    if (
+      !forceRefresh &&
+      contentCache &&
+      Date.now() - lastLoadTime < CACHE_DURATION
+    ) {
       return {
         success: true,
-        data: contentCache
+        data: contentCache,
       };
     }
 
@@ -137,11 +161,13 @@ export const loadContent = async (forceRefresh: boolean = false): Promise<Conten
       if (!loader) {
         return {
           success: false,
-          error: ERROR_MESSAGES[ContentLoadError.FILE_NOT_FOUND]
+          error: ERROR_MESSAGES[ContentLoadError.FILE_NOT_FOUND],
         };
       }
 
-      const sectionModule = (await loader()) as { default: ISectionContent<ContentItem> };
+      const sectionModule = (await loader()) as {
+        default: ISectionContent<ContentItem>;
+      };
       const sectionContent = sectionModule.default;
       sectionDataById.set(section.id, sectionContent);
 
@@ -156,7 +182,9 @@ export const loadContent = async (forceRefresh: boolean = false): Promise<Conten
           skills.push(...(sectionContent.items as ISkill[]));
           break;
         case 'personalProjects':
-          personalProjects.push(...(sectionContent.items as IPersonalProject[]));
+          personalProjects.push(
+            ...(sectionContent.items as IPersonalProject[])
+          );
           break;
         case 'volunteerWork':
           volunteerWork.push(...(sectionContent.items as IVolunteerWork[]));
@@ -166,12 +194,15 @@ export const loadContent = async (forceRefresh: boolean = false): Promise<Conten
       }
     }
 
-    const metadataSourceId = manifest.metadataSource || sectionsConfig.find(s => s.enabled)?.id;
-    const metadataSource = metadataSourceId ? sectionDataById.get(metadataSourceId) : undefined;
+    const metadataSourceId =
+      manifest.metadataSource || sectionsConfig.find(s => s.enabled)?.id;
+    const metadataSource = metadataSourceId
+      ? sectionDataById.get(metadataSourceId)
+      : undefined;
     if (!metadataSource) {
       return {
         success: false,
-        error: ERROR_MESSAGES[ContentLoadError.FILE_NOT_FOUND]
+        error: ERROR_MESSAGES[ContentLoadError.FILE_NOT_FOUND],
       };
     }
 
@@ -188,10 +219,10 @@ export const loadContent = async (forceRefresh: boolean = false): Promise<Conten
           education: education.length,
           skills: skills.length,
           personalProjects: personalProjects.length,
-          volunteerWork: volunteerWork.length
-        }
+          volunteerWork: volunteerWork.length,
+        },
       },
-      sectionsConfig
+      sectionsConfig,
     };
 
     // Validate the content structure
@@ -201,7 +232,7 @@ export const loadContent = async (forceRefresh: boolean = false): Promise<Conten
       return {
         success: false,
         error: ERROR_MESSAGES[ContentLoadError.VALIDATION_ERROR],
-        validationResult
+        validationResult,
       };
     }
 
@@ -216,27 +247,27 @@ export const loadContent = async (forceRefresh: boolean = false): Promise<Conten
       withDefaults.personalProjects = withDefaults.personalProjects.map(pp => ({
         ...pp,
         videoUrl: pp.videoUrl || d.videoUrlMp4,
-        thumbnailUrl: pp.thumbnailUrl || defaultThumb || pp.thumbnailUrl
+        thumbnailUrl: pp.thumbnailUrl || defaultThumb || pp.thumbnailUrl,
       }));
       withDefaults.workExperience = withDefaults.workExperience.map(we => ({
         ...we,
         videoUrl: we.videoUrl || d.videoUrlMp4,
-        thumbnailUrl: we.thumbnailUrl || defaultThumb || we.thumbnailUrl
+        thumbnailUrl: we.thumbnailUrl || defaultThumb || we.thumbnailUrl,
       }));
       withDefaults.education = withDefaults.education.map(ed => ({
         ...ed,
         videoUrl: ed.videoUrl || d.videoUrlMp4,
-        thumbnailUrl: ed.thumbnailUrl || defaultThumb || ed.thumbnailUrl
+        thumbnailUrl: ed.thumbnailUrl || defaultThumb || ed.thumbnailUrl,
       }));
       withDefaults.skills = withDefaults.skills.map(sk => ({
         ...sk,
         videoUrl: sk.videoUrl || d.videoUrlMp4,
-        thumbnailUrl: sk.thumbnailUrl || defaultThumb || sk.thumbnailUrl
+        thumbnailUrl: sk.thumbnailUrl || defaultThumb || sk.thumbnailUrl,
       }));
       withDefaults.volunteerWork = withDefaults.volunteerWork.map(vw => ({
         ...vw,
         videoUrl: vw.videoUrl || d.videoUrlMp4,
-        thumbnailUrl: vw.thumbnailUrl || defaultThumb || vw.thumbnailUrl
+        thumbnailUrl: vw.thumbnailUrl || defaultThumb || vw.thumbnailUrl,
       }));
     }
 
@@ -249,9 +280,8 @@ export const loadContent = async (forceRefresh: boolean = false): Promise<Conten
 
     return {
       success: true,
-      data: withDefaults
+      data: withDefaults,
     };
-
   } catch (error) {
     console.error('Error loading content:', error);
 
@@ -268,7 +298,7 @@ export const loadContent = async (forceRefresh: boolean = false): Promise<Conten
 
     return {
       success: false,
-      error: errorMessage
+      error: errorMessage,
     };
   }
 };
@@ -294,7 +324,7 @@ export const getSections = (content: IContent): ContentSectionView[] => {
   const configs = content.sectionsConfig || [];
   return configs.map(config => ({
     ...config,
-    items: getContentByType(content, config.type)
+    items: getContentByType(content, config.type),
   }));
 };
 
@@ -349,13 +379,16 @@ export const getVolunteerWork = (content: IContent): IVolunteerWork[] => {
  * @param id - The ID to search for
  * @returns The content item if found, undefined otherwise
  */
-export const getContentById = (content: IContent, id: string): ContentItem | undefined => {
+export const getContentById = (
+  content: IContent,
+  id: string
+): ContentItem | undefined => {
   const allContent = [
     ...content.workExperience,
     ...content.education,
     ...content.skills,
     ...content.personalProjects,
-    ...content.volunteerWork
+    ...content.volunteerWork,
   ];
 
   return allContent.find(item => item.id === id);
@@ -378,14 +411,16 @@ export const searchContent = (
     ...content.education,
     ...content.skills,
     ...content.personalProjects,
-    ...content.volunteerWork
+    ...content.volunteerWork,
   ];
 
   const term = caseSensitive ? searchTerm : searchTerm.toLowerCase();
 
   return allContent.filter(item => {
     const title = caseSensitive ? item.title : item.title.toLowerCase();
-    const description = caseSensitive ? item.description : item.description.toLowerCase();
+    const description = caseSensitive
+      ? item.description
+      : item.description.toLowerCase();
 
     return title.includes(term) || description.includes(term);
   });
@@ -417,7 +452,7 @@ export const filterContent = (
       ...content.education,
       ...content.skills,
       ...content.personalProjects,
-      ...content.volunteerWork
+      ...content.volunteerWork,
     ];
   }
 
@@ -435,7 +470,7 @@ export const filterContent = (
   if (filters.technologies && filters.technologies.length > 0) {
     filteredContent = filteredContent.filter(item => {
       if ('technologies' in item && Array.isArray(item.technologies)) {
-        return filters.technologies!.some(tech => 
+        return filters.technologies!.some(tech =>
           item.technologies.includes(tech)
         );
       }
@@ -450,7 +485,7 @@ export const filterContent = (
         const startDate = new Date(item.startDate);
         const filterStart = new Date(filters.dateRange!.start);
         const filterEnd = new Date(filters.dateRange!.end);
-        
+
         return startDate >= filterStart && startDate <= filterEnd;
       }
       return true;
@@ -485,18 +520,18 @@ export const getContentStats = (content: IContent) => {
       education: content.education.length,
       skills: content.skills.length,
       personalProjects: content.personalProjects.length,
-      volunteerWork: content.volunteerWork.length
+      volunteerWork: content.volunteerWork.length,
     },
-    totalContentItems: 
-      content.workExperience.length + 
-      content.education.length + 
-      content.skills.length + 
+    totalContentItems:
+      content.workExperience.length +
+      content.education.length +
+      content.skills.length +
       content.personalProjects.length +
       content.volunteerWork.length,
     currentPositions: content.workExperience.filter(we => we.isCurrent).length,
     activeProjects: content.personalProjects.filter(pp => pp.isActive).length,
     lastUpdated: content.metadata.lastUpdated,
-    version: content.metadata.version
+    version: content.metadata.version,
   };
 };
 
@@ -507,13 +542,13 @@ export const getContentStats = (content: IContent) => {
  */
 export const formatContentForDisplay = (content: IContent) => {
   const validationResult = validateContent(content);
-  
+
   return {
     content,
     isValid: validationResult.isValid,
     validationSummary: getValidationSummary(validationResult),
     stats: getContentStats(content),
-    errors: validationResult.errors
+    errors: validationResult.errors,
   };
 };
 
@@ -531,7 +566,7 @@ export const getContentMetadata = (content: IContent) => {
  * @returns boolean indicating if cache is still valid
  */
 export const isCacheValid = (): boolean => {
-  return contentCache !== null && (Date.now() - lastLoadTime) < CACHE_DURATION;
+  return contentCache !== null && Date.now() - lastLoadTime < CACHE_DURATION;
 };
 
 /**
@@ -552,8 +587,6 @@ export const getCacheInfo = () => {
     lastLoadTime: new Date(lastLoadTime).toISOString(),
     cacheAge: Date.now() - lastLoadTime,
     isValid: isCacheValid(),
-    cacheDuration: CACHE_DURATION
+    cacheDuration: CACHE_DURATION,
   };
 };
-
- 

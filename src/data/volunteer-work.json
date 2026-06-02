@@ -22,19 +22,11 @@
       "startDate": "2014-01-01",
       "location": "Global",
       "hoursPerWeek": 0,
-      "technologies": [
-        "English (Native)",
-        "Korean (Intermediate)"
-      ],
-      "achievements": [
-        "Professional communication across teams"
-      ],
+      "technologies": ["English (Native)", "Korean (Intermediate)"],
+      "achievements": ["Professional communication across teams"],
       "impact": "Supports collaboration across diverse teams and stakeholders.",
       "isActive": true,
-      "skills": [
-        "Communication",
-        "Bilingual Fluency"
-      ]
+      "skills": ["Communication", "Bilingual Fluency"]
     }
   ]
 }

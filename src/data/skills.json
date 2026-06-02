@@ -31,10 +31,7 @@
         "NumPy",
         "Scikit-learn"
       ],
-      "recentProjects": [
-        "Forecasting pipelines",
-        "Data processing workflows"
-      ],
+      "recentProjects": ["Forecasting pipelines", "Data processing workflows"],
       "skillLevel": 8,
       "seasons": [
         {
@@ -42,23 +39,14 @@
           "title": "Programming Languages",
           "description": "Python (Proficient), Java, SQL, JavaScript",
           "videoUrl": "language.mp4",
-          "technologies": [
-            "Python (Proficient)",
-            "Java",
-            "SQL",
-            "JavaScript"
-          ]
+          "technologies": ["Python (Proficient)", "Java", "SQL", "JavaScript"]
         },
         {
           "id": "sk-1-libraries",
           "title": "Libraries",
           "description": "Pandas, NumPy, Scikit-learn",
           "videoUrl": "language.mp4",
-          "technologies": [
-            "Pandas",
-            "NumPy",
-            "Scikit-learn"
-          ]
+          "technologies": ["Pandas", "NumPy", "Scikit-learn"]
         }
       ]
     },
@@ -79,10 +67,7 @@
         "Git",
         "Linux"
       ],
-      "recentProjects": [
-        "Forecasting API platform",
-        "Datacenter metrics ETL"
-      ],
+      "recentProjects": ["Forecasting API platform", "Datacenter metrics ETL"],
       "skillLevel": 9,
       "seasons": [
         {
@@ -111,10 +96,7 @@
         "Claude",
         "Cursor"
       ],
-      "recentProjects": [
-        "Forecasting pipelines",
-        "Internal platform tooling"
-      ],
+      "recentProjects": ["Forecasting pipelines", "Internal platform tooling"],
       "skillLevel": 9,
       "seasons": [
         {
@@ -134,11 +116,7 @@
           "title": "Agentic Coding",
           "description": "Codex, Claude, Cursor",
           "videoUrl": "spar.mp4",
-          "technologies": [
-            "Codex",
-            "Claude",
-            "Cursor"
-          ]
+          "technologies": ["Codex", "Claude", "Cursor"]
         }
       ]
     }

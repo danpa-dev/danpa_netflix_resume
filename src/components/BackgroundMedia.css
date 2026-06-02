@@ -123,12 +123,7 @@
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .background-gradient {
-    background: linear-gradient(
-      135deg,
-      #000000 0%,
-      #1a1a1a 50%,
-      #000000 100%
-    );
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
   }
 }
 
@@ -140,7 +135,7 @@
   .loading-overlay {
     transition: none;
   }
-  
+
   .loading-spinner {
     animation: none;
     border-top-color: var(--text-primary);
@@ -157,4 +152,4 @@
 .background-media:focus-within {
   outline: 2px solid var(--netflix-red);
   outline-offset: 2px;
-} 
+}

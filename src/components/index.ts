@@ -8,5 +8,3 @@ export { default as MainLayout } from './MainLayout';
 export { default as Carousel } from './Carousel';
 export { default as ItemCard } from './ItemCard';
 export { default as SkeletonLoader } from './SkeletonLoader';
-export { default as Modal } from './Modal'; 
-export { default as VideoPlayer } from './VideoPlayer';

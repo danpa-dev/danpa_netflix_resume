@@ -14,27 +14,21 @@ const TextOverlay: React.FC<TextOverlayProps> = ({
   subtitle,
   className = '',
   role,
-  'aria-label': ariaLabel
+  'aria-label': ariaLabel,
 }) => {
   return (
-    <div 
+    <div
       className={`text-overlay ${className}`}
       role={role}
       aria-label={ariaLabel || `${title}${subtitle ? ` - ${subtitle}` : ''}`}
     >
       <div className="text-overlay-content" role="presentation">
-        <h1 
-          className="text-overlay-title"
-          aria-label={title}
-        >
+        <h1 className="text-overlay-title" aria-label={title}>
           {title}
         </h1>
-        
+
         {subtitle && (
-          <h2 
-            className="text-overlay-subtitle"
-            aria-label={subtitle}
-          >
+          <h2 className="text-overlay-subtitle" aria-label={subtitle}>
             {subtitle}
           </h2>
         )}
@@ -43,4 +37,4 @@ const TextOverlay: React.FC<TextOverlayProps> = ({
   );
 };
 
-export default TextOverlay; 
+export default TextOverlay;

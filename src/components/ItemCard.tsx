@@ -45,16 +45,23 @@ const ItemCard: React.FC<ItemCardProps> = ({
   videoPosterUrl,
   seasons,
   defaultThumbnailUrl,
-  modalConfig
+  modalConfig,
 }) => {
-  const { isOpen, open, close, triggerPosition, setTriggerPosition, setIsAnimating } = useModal();
+  const {
+    isOpen,
+    open,
+    close,
+    triggerPosition,
+    setTriggerPosition,
+    setIsAnimating,
+  } = useModal();
   const cardRef = useRef<HTMLDivElement>(null);
   const [imageState, setImageState] = useState<ImageState>({
     isLoading: false,
     isLoaded: false,
     hasError: false,
     isVisible: false,
-    currentSrc: null
+    currentSrc: null,
   });
 
   const imageRef = useRef<HTMLImageElement>(null);
@@ -64,8 +71,10 @@ const ItemCard: React.FC<ItemCardProps> = ({
   const defaultThumbnail = defaultThumbnailUrl;
 
   // Derive current season overrides if provided
-  const currentSeason: SeasonLite | undefined = seasons && seasons[selectedSeasonIndex];
-  const effectiveVideoUrl = (currentSeason?.videoUrl as string | undefined) || videoMp4Url;
+  const currentSeason: SeasonLite | undefined =
+    seasons && seasons[selectedSeasonIndex];
+  const effectiveVideoUrl =
+    (currentSeason?.videoUrl as string | undefined) || videoMp4Url;
   const effectiveDescription = currentSeason?.description || description;
   const itemData = item || {};
   const modalHeading = modalConfig?.heading || 'Details';
@@ -80,11 +89,19 @@ const ItemCard: React.FC<ItemCardProps> = ({
 
   const getDateRange = () => {
     const seasonData = currentSeason as Record<string, unknown> | undefined;
-    const start = (seasonData?.startDate as string) || (itemData.startDate as string | undefined);
-    const end = (seasonData?.endDate as string) || (itemData.endDate as string | undefined);
+    const start =
+      (seasonData?.startDate as string) ||
+      (itemData.startDate as string | undefined);
+    const end =
+      (seasonData?.endDate as string) ||
+      (itemData.endDate as string | undefined);
     if (!start && !end) return '';
     const startLabel = start ? formatDate(start) : '';
-    const endLabel = end ? formatDate(end) : (itemData.isCurrent ? 'Present' : '');
+    const endLabel = end
+      ? formatDate(end)
+      : itemData.isCurrent
+        ? 'Present'
+        : '';
     if (startLabel && endLabel) return `${startLabel} - ${endLabel}`;
     return startLabel || endLabel || '';
   };
@@ -101,7 +118,9 @@ const ItemCard: React.FC<ItemCardProps> = ({
         return itemData.location;
       case 'company':
       case 'role': {
-        const sv = currentSeason ? (currentSeason as Record<string, unknown>)[key] : undefined;
+        const sv = currentSeason
+          ? (currentSeason as Record<string, unknown>)[key]
+          : undefined;
         if (sv) return sv;
         return itemData[key];
       }
@@ -119,8 +138,11 @@ const ItemCard: React.FC<ItemCardProps> = ({
       case 'challenges':
       case 'solutions':
       case 'skills': {
-        const seasonValue = currentSeason ? (currentSeason as Record<string, unknown>)[key] : undefined;
-        if (Array.isArray(seasonValue) && seasonValue.length > 0) return seasonValue;
+        const seasonValue = currentSeason
+          ? (currentSeason as Record<string, unknown>)[key]
+          : undefined;
+        if (Array.isArray(seasonValue) && seasonValue.length > 0)
+          return seasonValue;
         return Array.isArray(itemData[key]) ? itemData[key] : [];
       }
       case 'relevantCoursework':
@@ -140,7 +162,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
     if (Array.isArray(value)) {
       return (
         <ul className="modal-detail-list">
-          {value.map((entry) => (
+          {value.map(entry => (
             <li key={String(entry)}>{String(entry)}</li>
           ))}
         </ul>
@@ -165,7 +187,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
         ...prev,
         isVisible: true,
         isLoading: Boolean(initialSrc),
-        currentSrc: initialSrc
+        currentSrc: initialSrc,
       }));
       return;
     }
@@ -173,8 +195,8 @@ const ItemCard: React.FC<ItemCardProps> = ({
     const node = containerRef.current;
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             // Initialize currentSrc when item becomes visible
             const initialSrc = thumbnailUrl || defaultThumbnail || null;
@@ -182,7 +204,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
               ...prev,
               isVisible: true,
               isLoading: Boolean(initialSrc),
-              currentSrc: initialSrc
+              currentSrc: initialSrc,
             }));
             observer.unobserve(entry.target);
           }
@@ -190,7 +212,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
       },
       {
         rootMargin: '50px', // Start loading 50px before entering viewport
-        threshold: 0.1
+        threshold: 0.1,
       }
     );
 
@@ -203,10 +225,10 @@ const ItemCard: React.FC<ItemCardProps> = ({
 
   // Image load handlers
   const handleImageLoad = () => {
-    setImageState(prev => ({ 
-      ...prev, 
-      isLoading: false, 
-      isLoaded: true 
+    setImageState(prev => ({
+      ...prev,
+      isLoading: false,
+      isLoaded: true,
     }));
   };
 
@@ -221,13 +243,13 @@ const ItemCard: React.FC<ItemCardProps> = ({
           isLoading: true,
           isLoaded: false,
           hasError: false,
-          currentSrc: fallback
+          currentSrc: fallback,
         };
       }
       return {
         ...prev,
         isLoading: false,
-        hasError: true
+        hasError: true,
       };
     });
   };
@@ -236,11 +258,21 @@ const ItemCard: React.FC<ItemCardProps> = ({
   const renderImage = () => {
     if (!imageState.currentSrc) {
       return (
-        <div className="item-card-placeholder" role="img" aria-label={`No image available for ${title}`}>
+        <div
+          className="item-card-placeholder"
+          role="img"
+          aria-label={`No image available for ${title}`}
+        >
           <div className="item-card-placeholder-icon">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path 
-                d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" 
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"
                 fill="currentColor"
               />
             </svg>
@@ -251,11 +283,21 @@ const ItemCard: React.FC<ItemCardProps> = ({
 
     if (imageState.hasError) {
       return (
-        <div className="item-card-error" role="img" aria-label={`Image failed to load for ${title}`}>
+        <div
+          className="item-card-error"
+          role="img"
+          aria-label={`Image failed to load for ${title}`}
+        >
           <div className="item-card-error-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path 
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" 
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
                 fill="currentColor"
               />
             </svg>
@@ -271,7 +313,11 @@ const ItemCard: React.FC<ItemCardProps> = ({
         src={imageState.currentSrc as string}
         alt={`${title} thumbnail`}
         className={`item-card-image ${imageState.isLoaded ? 'loaded' : ''} ${imageState.isLoading ? 'loading' : ''}`}
-        style={thumbnailObjectPosition ? { objectPosition: thumbnailObjectPosition } : undefined}
+        style={
+          thumbnailObjectPosition
+            ? { objectPosition: thumbnailObjectPosition }
+            : undefined
+        }
         loading="lazy"
         onLoad={handleImageLoad}
         onError={handleImageError}
@@ -288,40 +334,40 @@ const ItemCard: React.FC<ItemCardProps> = ({
   const cardVariants = {
     initial: { scale: 1 },
     hover: { scale: 1.05 },
-    tap: { scale: 1.02 }
+    tap: { scale: 1.02 },
   };
 
   const overlayVariants = {
-    initial: { 
-      y: "100%",
-      opacity: 0
+    initial: {
+      y: '100%',
+      opacity: 0,
     },
-    hover: { 
-      y: "0%",
-      opacity: 1
-    }
+    hover: {
+      y: '0%',
+      opacity: 1,
+    },
   };
 
   const chevronVariants = {
-    initial: { 
+    initial: {
       opacity: 0,
       x: -10,
-      scale: 0.8
+      scale: 0.8,
     },
-    hover: { 
+    hover: {
       opacity: 1,
       x: 0,
-      scale: 1
-    }
+      scale: 1,
+    },
   };
 
   const imageVariants = {
-    initial: { 
-      scale: 1
+    initial: {
+      scale: 1,
     },
-    hover: { 
-      scale: 1.1
-    }
+    hover: {
+      scale: 1.1,
+    },
   };
 
   // Handle keyboard interactions
@@ -331,8 +377,6 @@ const ItemCard: React.FC<ItemCardProps> = ({
       onClick?.();
     }
   };
-
-
 
   const [videoReady, setVideoReady] = useState(false);
 
@@ -352,7 +396,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
         x: rect.left,
         y: rect.top,
         width: rect.width,
-        height: rect.height
+        height: rect.height,
       });
       setIsAnimating(true);
     }
@@ -369,7 +413,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
 
   return (
     <>
-      <motion.div 
+      <motion.div
         ref={cardRef}
         className={`item-card u-hover-lift ${className}`}
         onClick={handleCardClick}
@@ -387,176 +431,186 @@ const ItemCard: React.FC<ItemCardProps> = ({
         whileFocus="hover"
         transition={{
           duration: 0.2,
-          ease: "easeOut"
+          ease: 'easeOut',
         }}
       >
-      {/* 16:9 Aspect Ratio Container */}
-      <div className="item-card-container" ref={containerRef}>
-        {/* Image Container */}
-        <motion.div 
-          className="item-card-image-container"
-          variants={imageVariants}
-          transition={{
-            duration: 0.3,
-            ease: "easeOut"
-          }}
-        >
-          {/* Loading Skeleton */}
-          {imageState.isLoading && !imageState.isLoaded && (
-            <SkeletonLoader
-              className="item-card-skeleton"
-              ariaLabel={`Loading image for ${title}`}
-            />
-          )}
-          
-          {/* Image or Placeholder */}
-          {renderImage()}
-        </motion.div>
-
-        {/* Title Overlay */}
-        <motion.div 
-          className="item-card-overlay"
-          variants={overlayVariants}
-          transition={{
-            duration: 0.2,
-            ease: "easeOut"
-          }}
-        >
-          <div className="item-card-content">
-            <h3 className="item-card-title">{title}</h3>
-            {description && (
-              <p 
-                className="item-card-description"
-                id={`item-card-desc-${title.replace(/\s+/g, '-').toLowerCase()}`}
-              >
-                {description}
-              </p>
+        {/* 16:9 Aspect Ratio Container */}
+        <div className="item-card-container" ref={containerRef}>
+          {/* Image Container */}
+          <motion.div
+            className="item-card-image-container"
+            variants={imageVariants}
+            transition={{
+              duration: 0.3,
+              ease: 'easeOut',
+            }}
+          >
+            {/* Loading Skeleton */}
+            {imageState.isLoading && !imageState.isLoaded && (
+              <SkeletonLoader
+                className="item-card-skeleton"
+                ariaLabel={`Loading image for ${title}`}
+              />
             )}
-            {/* Screen reader only description for loading states */}
-            <div className="sr-only" aria-live="polite">
-              {imageState.isLoading && 'Loading image'}
-              {imageState.hasError && 'Image failed to load'}
-            </div>
-          </div>
-          
-          {/* More Info Chevron */}
-          <motion.div 
-            className="item-card-chevron"
-            variants={chevronVariants}
+
+            {/* Image or Placeholder */}
+            {renderImage()}
+          </motion.div>
+
+          {/* Title Overlay */}
+          <motion.div
+            className="item-card-overlay"
+            variants={overlayVariants}
             transition={{
               duration: 0.2,
-              ease: "easeOut",
-              delay: 0.1
+              ease: 'easeOut',
             }}
-            aria-hidden="true"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path 
-                d="M9 18L15 12L9 6" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-              />
-            </svg>
-          </motion.div>
-        </motion.div>
-      </div>
-    </motion.div>
-
-          {/* Detail Modal */}
-      <Suspense fallback={null}>
-      <Modal
-        isOpen={isOpen}
-        onClose={handleModalClose}
-        title={title}
-        layoutId={modalLayoutId}
-        triggerPosition={triggerPosition}
-        closeOnOverlayClick={true}
-        closeOnEscape={true}
-        showCloseButton={true}
-      >
-        <div className="modal-detail-content">
-          <div className="modal-video-section full-bleed">
-
-            {/* Animated swap for video section */}
-            <motion.div
-              key={effectiveVideoUrl || 'video-placeholder'}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              {videoReady && (effectiveVideoUrl || videoWebmUrl) ? (
-                <Suspense fallback={<div className="modal-video-placeholder" /> }>
-                  <VideoPlayer
-                    srcMp4={effectiveVideoUrl}
-                    srcWebm={videoWebmUrl}
-                    poster={videoPosterUrl || thumbnailUrl}
-                    autoPlay
-                    muted
-                    loop
-                  />
-                </Suspense>
-              ) : (
-                <div className="modal-video-placeholder">
-                  <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
-                    <path d="M8 5v14l11-7z" fill="currentColor" />
-                  </svg>
-                  <p>Video content would go here</p>
-                </div>
+            <div className="item-card-content">
+              <h3 className="item-card-title">{title}</h3>
+              {description && (
+                <p
+                  className="item-card-description"
+                  id={`item-card-desc-${title.replace(/\s+/g, '-').toLowerCase()}`}
+                >
+                  {description}
+                </p>
               )}
+              {/* Screen reader only description for loading states */}
+              <div className="sr-only" aria-live="polite">
+                {imageState.isLoading && 'Loading image'}
+                {imageState.hasError && 'Image failed to load'}
+              </div>
+            </div>
+
+            {/* More Info Chevron */}
+            <motion.div
+              className="item-card-chevron"
+              variants={chevronVariants}
+              transition={{
+                duration: 0.2,
+                ease: 'easeOut',
+                delay: 0.1,
+              }}
+              aria-hidden="true"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M9 18L15 12L9 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </motion.div>
+          </motion.div>
+        </div>
+      </motion.div>
 
-            {/* Media overlay: title only (left) */}
-            <div className="modal-media-overlay">
-              <h2 className="modal-media-title" id={modalLayoutId + '-title'}>{title}</h2>
-            </div>
-          </div>
+      {/* Detail Modal */}
+      <Suspense fallback={null}>
+        <Modal
+          isOpen={isOpen}
+          onClose={handleModalClose}
+          title={title}
+          layoutId={modalLayoutId}
+          triggerPosition={triggerPosition}
+          closeOnOverlayClick={true}
+          closeOnEscape={true}
+          showCloseButton={true}
+        >
+          <div className="modal-detail-content">
+            <div className="modal-video-section full-bleed">
+              {/* Animated swap for video section */}
+              <motion.div
+                key={effectiveVideoUrl || 'video-placeholder'}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                {videoReady && (effectiveVideoUrl || videoWebmUrl) ? (
+                  <Suspense
+                    fallback={<div className="modal-video-placeholder" />}
+                  >
+                    <VideoPlayer
+                      srcMp4={effectiveVideoUrl}
+                      srcWebm={videoWebmUrl}
+                      poster={videoPosterUrl || thumbnailUrl}
+                      autoPlay
+                      muted
+                      loop
+                    />
+                  </Suspense>
+                ) : (
+                  <div className="modal-video-placeholder">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                      <path d="M8 5v14l11-7z" fill="currentColor" />
+                    </svg>
+                    <p>Video content would go here</p>
+                  </div>
+                )}
+              </motion.div>
 
-          {/* Season selector row below the video, aligned to the right */}
-          {seasons && seasons.length > 0 && (
-            <div className="modal-season-row">
-              <SeasonSelector
-                seasons={seasons}
-                selectedIndex={selectedSeasonIndex}
-                onChange={setSelectedSeasonIndex}
-              />
+              {/* Media overlay: title only (left) */}
+              <div className="modal-media-overlay">
+                <h2 className="modal-media-title" id={modalLayoutId + '-title'}>
+                  {title}
+                </h2>
+              </div>
             </div>
-          )}
-        
-        {modalFields.length > 0 && (
-          <div className="modal-metadata-section">
-            <h3>{modalHeading}</h3>
-            {modalFields.map((field) => {
-              const value = getFieldValue(field.key);
-              const renderedValue = renderFieldValue(field.key, value);
-              if (!renderedValue) return null;
-              return (
-                <div key={field.key} className="modal-detail-field">
-                  <p><strong>{field.label || field.key}:</strong></p>
-                  {field.key === 'description' ? (
-                    <motion.p
-                      key={effectiveDescription || 'desc-empty'}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.15 }}
-                    >
-                      {renderedValue}
-                    </motion.p>
-                  ) : (
-                    renderedValue
-                  )}
-                </div>
-              );
-            })}
+
+            {/* Season selector row below the video, aligned to the right */}
+            {seasons && seasons.length > 0 && (
+              <div className="modal-season-row">
+                <SeasonSelector
+                  seasons={seasons}
+                  selectedIndex={selectedSeasonIndex}
+                  onChange={setSelectedSeasonIndex}
+                />
+              </div>
+            )}
+
+            {modalFields.length > 0 && (
+              <div className="modal-metadata-section">
+                <h3>{modalHeading}</h3>
+                {modalFields.map(field => {
+                  const value = getFieldValue(field.key);
+                  const renderedValue = renderFieldValue(field.key, value);
+                  if (!renderedValue) return null;
+                  return (
+                    <div key={field.key} className="modal-detail-field">
+                      <p>
+                        <strong>{field.label || field.key}:</strong>
+                      </p>
+                      {field.key === 'description' ? (
+                        <motion.p
+                          key={effectiveDescription || 'desc-empty'}
+                          initial={{ opacity: 0, y: 8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.15 }}
+                        >
+                          {renderedValue}
+                        </motion.p>
+                      ) : (
+                        renderedValue
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
-        )}
-        
-      </div>
-    </Modal>
-    </Suspense>
-  </>
+        </Modal>
+      </Suspense>
+    </>
   );
 };
 
-export default ItemCard; 
+export default ItemCard;

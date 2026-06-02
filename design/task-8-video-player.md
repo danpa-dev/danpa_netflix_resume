@@ -1,6 +1,7 @@
 ## Problem Statement
 
 Implement a robust HTML5 video player for the expanded detail view modal that:
+
 - Autoplays muted in compliance with browser policies
 - Provides native controls on demand (toggle)
 - Loops by default and supports multiple formats (mp4/webm)
@@ -8,6 +9,7 @@ Implement a robust HTML5 video player for the expanded detail view modal that:
 - Is accessible (keyboard, ARIA), responsive, and performs well
 
 ## Requirements Summary (from Task 8)
+
 - 8.1: HTML5 video with basic controls
 - 8.2: Autoplay (muted default) with unmute controls
 - 8.3: Multi-format support and fallbacks
@@ -18,6 +20,7 @@ Implement a robust HTML5 video player for the expanded detail view modal that:
 ## Design Overview
 
 ### Component
+
 - `src/components/VideoPlayer.tsx` + `VideoPlayer.css`
 - Props:
   - `srcMp4?: string` (mp4 source)
@@ -30,6 +33,7 @@ Implement a robust HTML5 video player for the expanded detail view modal that:
   - `onError?`, `onLoaded?`
 
 ### Behavior
+
 - Autoplay strategy: start muted, attempt `play()`. If it fails, show a play button overlay.
 - Controls: expose a minimal overlay toolbar (Play/Pause, Mute/Unmute, Show/Hide native controls). Keep native controls off by default for clean UI, allow turning them on.
 - Fallback: If webm fails, rely on mp4. If both fail, show error UI and keep poster/placeholder visible.
@@ -38,13 +42,16 @@ Implement a robust HTML5 video player for the expanded detail view modal that:
 - Responsiveness: aspect-ratio 16:9, fluid width, height via container, safe on mobile (no scroll jank).
 
 ### Integration
+
 - Replace the placeholder in `ItemCard` modal with `<VideoPlayer>` and wire example sources (stub data); guard with props so content without video still renders gracefully.
 
 ### States
+
 - Idle (loading), Playing, Paused, Error
 - Muted vs Unmuted, Controls Visible vs Hidden
 
 ## Implementation Plan
+
 1. Add `VideoPlayer.tsx` and `VideoPlayer.css` implementing:
    - HTML5 `<video>` with `<source>` elements for mp4/webm, `poster` support
    - Overlay controls (play/pause, mute/unmute, show controls)
@@ -55,6 +62,7 @@ Implement a robust HTML5 video player for the expanded detail view modal that:
 3. Document in `docs/architecture/video-player.md`.
 
 ## Test Plan
+
 - Autoplay muted succeeds on Chrome/Safari/Firefox; if blocked, play overlay appears
 - Unmute toggles sound; loop toggles respected
 - Keyboard: Space/Enter toggles play, `m` toggles mute; focusable controls with visible focus
@@ -63,5 +71,5 @@ Implement a robust HTML5 video player for the expanded detail view modal that:
 - Lighthouse: no significant regressions; a11y scores remain high
 
 ## Out of Scope
-- HLS/DASH streaming, captions/subtitles, and full analytics. Can be added later.
 
+- HLS/DASH streaming, captions/subtitles, and full analytics. Can be added later.
