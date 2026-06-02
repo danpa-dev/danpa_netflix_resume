@@ -17,13 +17,14 @@ HTML5-based video player for the modal detail view with autoplay-mute policy com
 
 ## Behavior
 
-- Attempts autoplay when allowed; shows a full-overlay play button when autoplay fails or when paused.
+- Attempts autoplay when allowed. Tapping or clicking the video surface toggles local playback and shows transient centered Play/Pause feedback for one second.
+- If autoplay fails or reduced motion disables the attempt, a persistent centered Play recovery control remains available until playback starts.
 - Single toggle for mute/unmute in the top-left; native controls stay hidden.
 - Mute state is session-scoped through `VideoPreferencesProvider`. Each fresh page load starts muted. Once the user unmutes any modal video, later modal videos inherit the unmuted preference.
 - If a browser blocks autoplay for a later unmuted video, the existing play overlay remains available.
 - Loading: `isLoading` gate fades opacity; `loadeddata` clears the loading state and triggers optional `onLoaded`.
 - Errors show a banner with a retry button that reloads and attempts playback again.
-- Keyboard: Space/Enter toggles play/pause; `m` toggles mute.
+- Keyboard: focus the video surface, then use Space/Enter to toggle play/pause or `m` to toggle mute.
 - Respects `prefers-reduced-motion` by disabling autoplay attempts.
 
 ## Integration
@@ -36,6 +37,8 @@ HTML5-based video player for the modal detail view with autoplay-mute policy com
 ## Testing Checklist
 
 - Autoplay works when muted; overlay shown when blocked
+- Tap/click pauses and resumes locally; centered feedback fades after one second
+- Mute clicks do not bubble into the playback toggle
 - Fresh visits start muted; toggling mute updates subsequently mounted players
 - Fallback to play button works; retry works after error
 - A11y: focusable controls, ARIA labels, visible focus

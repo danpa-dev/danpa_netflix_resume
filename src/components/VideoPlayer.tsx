@@ -8,6 +8,8 @@ import React, {
 import useVideoPreferences from '../hooks/useVideoPreferences';
 import './VideoPlayer.css';
 
+const FEEDBACK_DURATION_MS = 1000;
+
 export interface VideoPlayerProps {
   srcMp4?: string;
   srcWebm?: string;
@@ -40,21 +42,31 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [hasError, setHasError] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [autoplayBlocked, setAutoplayBlocked] = useState<boolean>(false);
+  const [feedbackIcon, setFeedbackIcon] = useState<'play' | 'pause' | null>(
+    null
+  );
+  const feedbackTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const canAutoplay = useMemo(
     () => autoPlay && !prefersReducedMotion(),
     [autoPlay]
   );
 
-  // Attempt autoplay on mount when allowed
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
+
+  // Attempt autoplay on mount and when the source changes.
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    video.muted = isMuted; // ensure muted aligns
     if (!canAutoplay) {
       setIsLoading(false);
       setIsPlaying(false);
+      setAutoplayBlocked(true);
       return;
     }
 
@@ -75,8 +87,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     // Start load explicitly to trigger metadata fetch
     video.load();
     // Some browsers need a tick before play
-    setTimeout(tryPlay, 0);
-  }, [canAutoplay, isMuted]);
+    const playTimeout = setTimeout(tryPlay, 0);
+    return () => clearTimeout(playTimeout);
+  }, [canAutoplay, srcMp4, srcWebm]);
 
   const handleLoadedData = () => {
     setIsLoading(false);
@@ -89,23 +102,51 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     onError?.('Video failed to load');
   };
 
+  const showFeedback = useCallback((icon: 'play' | 'pause') => {
+    if (feedbackTimeoutRef.current) {
+      clearTimeout(feedbackTimeoutRef.current);
+    }
+    setFeedbackIcon(icon);
+    feedbackTimeoutRef.current = setTimeout(() => {
+      setFeedbackIcon(null);
+      feedbackTimeoutRef.current = null;
+    }, FEEDBACK_DURATION_MS);
+  }, []);
+
+  useEffect(() => {
+    setFeedbackIcon(null);
+    return () => {
+      if (feedbackTimeoutRef.current) {
+        clearTimeout(feedbackTimeoutRef.current);
+      }
+    };
+  }, [srcMp4, srcWebm]);
+
+  const handleNativePlay = () => {
+    setIsPlaying(true);
+    setAutoplayBlocked(false);
+  };
+
+  const handleNativePause = () => {
+    setIsPlaying(false);
+  };
+
   const togglePlay = useCallback(async () => {
     const video = videoRef.current;
     if (!video) return;
     try {
       if (video.paused) {
         await video.play();
-        setIsPlaying(true);
-        setAutoplayBlocked(false);
+        showFeedback('play');
       } else {
         video.pause();
-        setIsPlaying(false);
+        showFeedback('pause');
       }
     } catch {
       setAutoplayBlocked(true);
       setIsPlaying(false);
     }
-  }, []);
+  }, [showFeedback]);
 
   const toggleMute = useCallback(() => {
     const video = videoRef.current;
@@ -127,11 +168,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   };
 
   return (
-    <div className={`video-player ${className}`} onKeyDown={onKeyDown}>
+    <div className={`video-player ${className}`}>
       <div className="video-wrapper">
         <video
           ref={videoRef}
           className={`video-element ${isLoading ? 'loading' : ''}`}
+          role="button"
+          tabIndex={0}
+          aria-label={isPlaying ? 'Pause video' : 'Play video'}
           muted={isMuted}
           loop={loop}
           playsInline
@@ -139,6 +183,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           {...({ 'webkit-playsinline': 'true' } as Record<string, unknown>)}
           poster={poster}
           controls={false}
+          onClick={togglePlay}
+          onKeyDown={onKeyDown}
+          onPlay={handleNativePlay}
+          onPause={handleNativePause}
           onLoadedData={handleLoadedData}
           onError={handleError}
         >
@@ -146,12 +194,15 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           {srcMp4 && <source src={srcMp4} type="video/mp4" />}
         </video>
 
-        {/* Central play button overlay when paused or autoplay blocked */}
-        {(!isPlaying || autoplayBlocked) && !hasError && (
+        {/* Recovery control stays visible when autoplay cannot start. */}
+        {autoplayBlocked && !hasError && (
           <button
-            className="video-overlay-play"
-            onClick={togglePlay}
-            aria-label={isPlaying ? 'Pause video' : 'Play video'}
+            className="video-recovery-play"
+            onClick={event => {
+              event.stopPropagation();
+              togglePlay();
+            }}
+            aria-label="Play video"
           >
             <svg
               width="48"
@@ -165,11 +216,29 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
           </button>
         )}
 
-        {/* Bottom-left control: Unmute only */}
+        {/* Transient playback feedback after a tap or click. */}
+        {feedbackIcon && !hasError && (
+          <div className="video-playback-feedback" aria-hidden="true">
+            {feedbackIcon === 'pause' ? (
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                <path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor" />
+              </svg>
+            ) : (
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                <path d="M8 5v14l11-7z" fill="currentColor" />
+              </svg>
+            )}
+          </div>
+        )}
+
+        {/* Top-left control: mute preference remains persistent. */}
         <div className="video-controls">
           <button
             className="video-control-btn"
-            onClick={toggleMute}
+            onClick={event => {
+              event.stopPropagation();
+              toggleMute();
+            }}
             aria-pressed={!isMuted}
             aria-label={isMuted ? 'Unmute video' : 'Mute video'}
           >
