@@ -10,6 +10,7 @@ import FathomImage from './images/FathomImage.jpeg';
 import galaxy from './images/galaxy.jpeg';
 import infra from './images/infra.jpeg';
 import language from './images/language.jpeg';
+import meta from './images/meta.avif';
 import pipelineEng from './images/pipeline_eng.webp';
 import testJpeg from './images/test.jpeg';
 
@@ -21,12 +22,12 @@ import hp1 from './videos/hp1.mp4';
 import hps2 from './videos/hps2.mp4';
 import infraVideo from './videos/infra.mp4';
 import languageVideo from './videos/language.mp4';
+import metaVideo from './videos/meta.mp4';
 import pipeline from './videos/pipeline.mp4';
 import spar from './videos/spar.mp4';
 import swat from './videos/swat.mp4';
 import testMp4 from './videos/test.mp4';
 import we1Clip from './videos/we-1-clip.mp4';
-import we3Clip from './videos/we-3-clip.mp4';
 
 /** Maps plain filename to Vite-hashed URL. Keys are the exact filenames
  *  (e.g. "FathomImage.jpeg", "hp1.mp4"). */
@@ -37,6 +38,7 @@ export const assetMap: Record<string, string> = {
   'galaxy.jpeg': galaxy,
   'infra.jpeg': infra,
   'language.jpeg': language,
+  'meta.avif': meta,
   'pipeline_eng.webp': pipelineEng,
   'test.jpeg': testJpeg,
   // videos
@@ -47,12 +49,12 @@ export const assetMap: Record<string, string> = {
   'hps2.mp4': hps2,
   'infra.mp4': infraVideo,
   'language.mp4': languageVideo,
+  'meta.mp4': metaVideo,
   'pipeline.mp4': pipeline,
   'spar.mp4': spar,
   'swat.mp4': swat,
   'test.mp4': testMp4,
   'we-1-clip.mp4': we1Clip,
-  'we-3-clip.mp4': we3Clip,
 };
 
 /**

@@ -67,7 +67,15 @@ const isValidMediaUrl = (url: string, validExtensions: string[]): boolean => {
 };
 
 export const isValidImageUrl = (url: string): boolean => {
-  const validExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'];
+  const validExtensions = [
+    '.jpg',
+    '.jpeg',
+    '.png',
+    '.gif',
+    '.webp',
+    '.svg',
+    '.avif',
+  ];
   return isValidMediaUrl(url, validExtensions);
 };
 

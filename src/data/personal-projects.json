@@ -1,7 +1,7 @@
 {
   "metadata": {
     "version": "1.0.0",
-    "lastUpdated": "2024-08-03T05:35:08.558Z",
+    "lastUpdated": "2026-06-01T23:00:00.000Z",
     "author": "Dan Park",
     "totalItems": {
       "workExperience": 0,
@@ -16,24 +16,27 @@
       "id": "pp-1",
       "title": "Netflix-Style Portfolio",
       "description": "Interactive portfolio website with Netflix-inspired UI and animations",
-      "thumbnailUrl": "pipeline_eng.webp",
+      "thumbnailUrl": "meta.avif",
       "technologies": [
         "React",
         "TypeScript",
         "Framer Motion",
-        "Styled Components"
+        "Styled Components",
+        "Google Flow Studio",
+        "Kling AI"
       ],
       "startDate": "2024-01-01",
       "endDate": "2024-06-30",
-      "githubUrl": "https://github.com/danpa-dev",
-      "liveUrl": "https://danpark.dev",
-      "videoUrl": "we-3-clip.mp4",
+      "githubUrl": "https://github.com/danpa-dev/danpa_netflix_resume",
+      "liveUrl": "https://resume.danpa.dev",
+      "videoUrl": "meta.mp4",
       "features": [
         "Netflix-inspired carousel navigation",
         "Smooth animations and transitions",
         "Responsive design for all devices",
         "Video integration with autoplay",
-        "Dark theme with professional styling"
+        "Dark theme with professional styling",
+        "Fun, AI-generated videos"
       ],
       "challenges": [
         "Implementing smooth carousel animations",
@@ -50,7 +53,7 @@
       "impact": "Created a memorable and engaging portfolio that stands out to recruiters",
       "isActive": true,
       "collaborators": [],
-      "videoPosterUrl": "pipeline_eng.webp"
+      "videoPosterUrl": "meta.avif"
     }
   ]
 }

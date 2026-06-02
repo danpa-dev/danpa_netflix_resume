@@ -14,7 +14,9 @@ describe('contentValidation', () => {
 
   it('accepts registered bare asset keys and rejects missing ones', () => {
     expect(isValidImageUrl('infra.jpeg')).toBe(true);
+    expect(isValidImageUrl('meta.avif')).toBe(true);
     expect(isValidVideoUrl('infra.mp4')).toBe(true);
+    expect(isValidVideoUrl('meta.mp4')).toBe(true);
     expect(isValidImageUrl('missing.jpeg')).toBe(false);
     expect(isValidVideoUrl('missing.mp4')).toBe(false);
   });
