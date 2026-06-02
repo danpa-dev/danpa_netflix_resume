@@ -7,6 +7,7 @@
 // Images
 import danhp from './images/danhp.webp';
 import FathomImage from './images/FathomImage.jpeg';
+import galaxy from './images/galaxy.jpeg';
 import infra from './images/infra.jpeg';
 import language from './images/language.jpeg';
 import pipelineEng from './images/pipeline_eng.webp';
@@ -19,6 +20,7 @@ import we3Thumb from './images/we-3-thumb.jpg';
 // Videos
 import cloud from './videos/cloud.mp4';
 import car from './videos/car.mp4';
+import danpardy from './videos/danpardy.mp4';
 import dataBender from './videos/data_bender.mp4';
 import FathomVid from './videos/FathomVid.mp4';
 import graduation from './videos/graduation.mp4';
@@ -28,6 +30,7 @@ import infraVideo from './videos/infra.mp4';
 import languageVideo from './videos/language.mp4';
 import mason from './videos/mason.mp4';
 import pipeline from './videos/pipeline.mp4';
+import spar from './videos/spar.mp4';
 import swat from './videos/swat.mp4';
 import testMp4 from './videos/test.mp4';
 import we1Clip from './videos/we-1-clip.mp4';
@@ -40,6 +43,7 @@ export const assetMap: Record<string, string> = {
   // images
   'danhp.webp':           danhp,
   'FathomImage.jpeg':     FathomImage,
+  'galaxy.jpeg':          galaxy,
   'infra.jpeg':           infra,
   'language.jpeg':        language,
   'pipeline_eng.webp':    pipelineEng,
@@ -50,6 +54,7 @@ export const assetMap: Record<string, string> = {
   'we-3-thumb.jpg':       we3Thumb,
   // videos
   'car.mp4':              car,
+  'danpardy.mp4':         danpardy,
   'cloud.mp4':            cloud,
   'data_bender.mp4':      dataBender,
   'FathomVid.mp4':        FathomVid,
@@ -60,6 +65,7 @@ export const assetMap: Record<string, string> = {
   'language.mp4':         languageVideo,
   'mason.mp4':            mason,
   'pipeline.mp4':         pipeline,
+  'spar.mp4':             spar,
   'swat.mp4':             swat,
   'test.mp4':             testMp4,
   'we-1-clip.mp4':        we1Clip,
