@@ -149,30 +149,18 @@
   }
 }
 
-/* Dark theme support */
-@media (prefers-color-scheme: dark) {
-  .modal-container {
-    background: var(--app-surface, #0f1115);
-    border: 1px solid #374151;
-  }
+.modal-container {
+  background: var(--app-surface, #0f1115);
+  border: 1px solid #374151;
+}
 
-  .modal-header {
-    background: #111827;
-    border-bottom-color: #374151;
-  }
+.modal-close-button {
+  color: #9ca3af;
+}
 
-  .modal-title {
-    color: #f9fafb;
-  }
-
-  .modal-close-button {
-    color: #9ca3af;
-  }
-
-  .modal-close-button:hover {
-    background: #374151;
-    color: #d1d5db;
-  }
+.modal-close-button:hover {
+  background: #374151;
+  color: #d1d5db;
 }
 
 /* High contrast mode support */
@@ -337,64 +325,6 @@
 
 .modal-description-section p:last-child {
   margin-bottom: 0;
-}
-
-/* Light theme support for modal content */
-@media (prefers-color-scheme: light) {
-  .modal-container {
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  .modal-header {
-    background: rgba(0, 0, 0, 0.05);
-    border-bottom-color: rgba(0, 0, 0, 0.1);
-  }
-
-  .modal-title {
-    color: #213547;
-  }
-
-  .modal-close-button {
-    color: rgba(0, 0, 0, 0.6);
-  }
-
-  .modal-close-button:hover {
-    background: rgba(0, 0, 0, 0.1);
-    color: rgba(0, 0, 0, 0.87);
-  }
-
-  .modal-close-button::before {
-    background: rgba(0, 0, 0, 0.1);
-  }
-
-  .modal-close-button:focus,
-  .modal-close-button:focus-visible {
-    outline-color: rgba(0, 0, 0, 0.5);
-  }
-
-  .modal-video-section {
-    background: rgba(0, 0, 0, 0.05);
-    border-color: rgba(0, 0, 0, 0.2);
-  }
-
-  .modal-video-placeholder {
-    color: rgba(0, 0, 0, 0.6);
-  }
-
-  .modal-metadata-section h3,
-  .modal-description-section h3 {
-    color: #213547;
-  }
-
-  .modal-metadata-section p,
-  .modal-description-section p {
-    color: rgba(0, 0, 0, 0.7);
-  }
-
-  .modal-detail-list {
-    color: rgba(0, 0, 0, 0.7);
-  }
 }
 
 /* Safe area support for devices with notches */

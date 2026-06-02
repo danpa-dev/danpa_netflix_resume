@@ -11,6 +11,7 @@ import galaxy from './images/galaxy.jpeg';
 import infra from './images/infra.jpeg';
 import language from './images/language.jpeg';
 import meta from './images/meta.avif';
+import metaJpeg from './images/meta.jpeg';
 import pipelineEng from './images/pipeline_eng.webp';
 import testJpeg from './images/test.jpeg';
 
@@ -39,6 +40,7 @@ export const assetMap: Record<string, string> = {
   'infra.jpeg': infra,
   'language.jpeg': language,
   'meta.avif': meta,
+  'meta.jpeg': metaJpeg,
   'pipeline_eng.webp': pipelineEng,
   'test.jpeg': testJpeg,
   // videos

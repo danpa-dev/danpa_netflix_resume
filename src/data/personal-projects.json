@@ -16,7 +16,7 @@
       "id": "pp-1",
       "title": "Netflix-Style Portfolio",
       "description": "Interactive portfolio website with Netflix-inspired UI and animations",
-      "thumbnailUrl": "meta.avif",
+      "thumbnailUrl": "meta.jpeg",
       "technologies": [
         "React",
         "TypeScript",
@@ -53,7 +53,7 @@
       "impact": "Created a memorable and engaging portfolio that stands out to recruiters",
       "isActive": true,
       "collaborators": [],
-      "videoPosterUrl": "meta.avif"
+      "videoPosterUrl": "meta.jpeg"
     }
   ]
 }

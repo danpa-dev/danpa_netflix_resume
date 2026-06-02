@@ -213,6 +213,8 @@
 @media (max-width: 480px) {
   .item-card-overlay {
     padding: 16px 12px 12px;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
   }
 
   .item-card-title {
@@ -221,6 +223,18 @@
 
   .item-card-description {
     font-size: 12px;
+    display: none;
+  }
+}
+
+@media (hover: none) {
+  .item-card-overlay {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .item-card-chevron {
+    display: none;
   }
 }
 
