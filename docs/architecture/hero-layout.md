@@ -46,6 +46,7 @@ MainLayout
 ## TextOverlay
 
 - Left-aligned overlay with a strong left-to-right gradient (`::before`) to guarantee contrast over bright imagery.
+- The overlay is absolutely pinned to the hero with `inset: 0`. Keep this explicit positioning: percentage-height flex children can size from their text content in mobile Safari and leave part of the hero image unshaded.
 - Typography uses `clamp` for responsive sizing; animations fade/slide in but are disabled when `prefers-reduced-motion` is set.
 - Accessible labels: defaults to `aria-label` composed from title/subtitle; uses semantic `h1`/`h2`.
 

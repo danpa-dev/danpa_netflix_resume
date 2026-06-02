@@ -40,14 +40,15 @@ Modal (portal)
 
 ## Responsive Behavior
 
-- Mobile-first sizing using max-width/height constraints and safe-area padding
-- Scroll within `.modal-content`, background scroll disabled via focus trap
-- `overscroll-behavior: contain` prevents scroll chaining to the page
+- Desktop modals remain centered with max-width/height constraints.
+- At mobile widths, the overlay top-aligns the modal with a 16px edge gap combined with device safe-area insets.
+- Mobile height uses a `100vh` fallback followed by a `100dvh` cap minus the top and bottom gaps. This keeps long detail surfaces inside Safari's visible viewport while browser chrome changes size.
+- Scroll stays within `.modal-content`; `overscroll-behavior: contain` prevents scroll chaining to the page.
 
 ## Animation
 
 - Framer Motion `AnimatePresence` and optional `layoutId`/`triggerPosition` provide an origin-from-card transform when available.
-- Overlay blur animates in/out; modal uses subtle scale/translate transitions.
+- Overlay blur is static while opacity animates in/out; modal uses subtle scale/translate transitions.
 - Respects `prefers-reduced-motion` (via CSS) for people who disable motion.
 
 ## Testing Checklist
@@ -62,6 +63,8 @@ Modal (portal)
 - Mobile
   - Content scrolls without background scroll
   - Safe-area insets respected; close button has adequate target size
+  - Long detail content keeps at least 16px of top and bottom viewport spacing
+  - Video controls remain visible when browser chrome expands or collapses
 
 ## Visual Details
 
