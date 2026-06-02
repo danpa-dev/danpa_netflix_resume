@@ -72,7 +72,7 @@
       "id": "volunteer",
       "type": "volunteerWork",
       "title": "Personal Interests / Other",
-      "enabled": true,
+      "enabled": false,
       "path": "volunteer-work.json",
       "modal": {
         "heading": "Details",
